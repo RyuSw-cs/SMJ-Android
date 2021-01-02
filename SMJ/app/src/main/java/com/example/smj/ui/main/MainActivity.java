@@ -1,8 +1,10 @@
-package com.example.smj;
+package com.example.smj.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.smj.R;
 
 public class MainActivity extends AppCompatActivity {
 
