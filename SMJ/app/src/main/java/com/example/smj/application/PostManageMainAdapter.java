@@ -39,13 +39,13 @@ public class PostManageMainAdapter extends RecyclerView.Adapter<PostManageMainAd
 
             super(view);
 
-            this.title = view.findViewById(R.id.postmanage_item_textView1);
+            this.title = view.findViewById(R.id.postmanage_item_title);
 
-            this.contents = view.findViewById(R.id.postmanage_item_textView2);
+            this.contents = view.findViewById(R.id.postmanage_item_context);
 
-            this.date = view.findViewById(R.id.postmanage_item_textView3);
+            this.date = view.findViewById(R.id.postmanage_item_date);
 
-            this.comment = view.findViewById(R.id.postmanage_item_textView4);
+            this.comment = view.findViewById(R.id.postmanage_item_comment);
 
         }
 
