@@ -1,4 +1,4 @@
-package com.example.smj.ui.detail;
+package com.example.smj.utill.ui.detail;
 
 public class DetailLivingTipActivity {
 }
