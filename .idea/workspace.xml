@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="62a5f7ca-5186-4a6a-87a3-1e72235f2c07" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,9 +38,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="781" y="303" key="FileChooserDialogImpl" timestamp="1609576023272">
+    <state x="781" y="303" key="FileChooserDialogImpl" timestamp="1609675714411">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="781" y="303" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609576023272" />
+    <state x="781" y="303" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609675714411" />
   </component>
 </project>
