@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.example.smj.R;
 
 public class ScheduleFragment extends Fragment {
+
     public ScheduleFragment(){
 
     }
