@@ -1,4 +1,4 @@
-package com.example.smj.utill.ui.main.fragment;
+package com.example.smj.ui.main.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

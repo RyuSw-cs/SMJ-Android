@@ -1,4 +1,4 @@
-package com.example.smj.utill.ui.main.fragment;
+package com.example.smj.ui.main.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +9,15 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smj.R;
 
-public class ConvenienceFragment extends Fragment {
-    public ConvenienceFragment(){
+public class ScheduleFragment extends Fragment {
+    public ScheduleFragment(){
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        View view = inflater.inflate(R.layout.activity_convenience,container,false);
+        //스케쥴 액티비티 나올 시 교체
+        View view = inflater.inflate(R.layout.activity_mypage,container,false);
         return view;
     }
 }

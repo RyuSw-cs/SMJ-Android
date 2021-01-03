@@ -1,4 +1,4 @@
-package com.example.smj.utill.ui.main;
+package com.example.smj.ui.main;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -8,10 +8,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.smj.R;
-import com.example.smj.utill.ui.main.fragment.ViewPagerAdapter;
+import com.example.smj.ui.main.fragment.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity {

@@ -1,4 +1,4 @@
-package com.example.smj.utill.ui.create;
+package com.example.smj.ui.create;
 
 public class CreateLivingTipActivity {
 }
