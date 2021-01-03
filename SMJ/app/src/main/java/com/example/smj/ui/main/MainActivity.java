@@ -18,7 +18,6 @@ public class MainActivity extends FragmentActivity {
     private ViewPager2 mViewPager;
     private FragmentStateAdapter pageAdapter;
     private int num_page = 5;
-    private int check_num = 0;
 
     BottomNavigationView bottomNavigationView;
 
@@ -34,7 +33,6 @@ public class MainActivity extends FragmentActivity {
         //로그인 화면 후 2초만 기달려주새오..
         mViewPager.setAdapter(pageAdapter);
         //초기에 1002으로 맞춤 -> 살립꿀팁
-        Log.d("123",String.valueOf(mViewPager.getCurrentItem()));
         mViewPager.setCurrentItem(1002);
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setUserInputEnabled(false);
