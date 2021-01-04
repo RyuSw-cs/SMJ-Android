@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/comment_more_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_comment_date"
+        app:layout_constraintEnd_toEndOf="@+id/living_tip_comment_contents"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_comment_date"
+        app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+
+    <View
+        android:id="@+id/living_tip_comment_title_contour2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/contour_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_comment_contents" />
+
+    <TextView
+        android:id="@+id/living_tip_comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="2020-12-12"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_commenter"
+        app:layout_constraintStart_toEndOf="@+id/living_tip_commenter"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_commenter" />
+
+    <TextView
+        android:id="@+id/living_tip_commenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="댓글 작성자"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/living_tip_comment_contents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:text="댓글내용"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/living_tip_commenter"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_commenter" />
+</androidx.constraintlayout.widget.ConstraintLayout>
