@@ -13,4 +13,7 @@
     <color name="orange">#eb7e4d</color>
     <color name="second_color">#f9f9f9</color>
     <color name="contour_color">#dddddd</color>
+    <color name="linecolor">#dddddd</color>
+    <color name="contextcolor">#b5b5b5</color>
+    <color name="greybackground">#f9f9f9</color>
 </resources>
