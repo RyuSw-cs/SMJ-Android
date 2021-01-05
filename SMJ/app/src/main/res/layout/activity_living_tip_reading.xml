@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/living_tip_reading_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="9sp"
+        android:text="@string/living_tip_title"
+        android:textColor="#555555"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/more_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_reading_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_reading_title"
+        app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+
+    <View
+        android:id="@+id/living_tip_reading_post_main_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/second_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_title" />
+
+    <TextView
+        android:id="@+id/living_tip_reading_post_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="청소"
+        android:textColor="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_reading_post_main_view" />
+
+    <TextView
+        android:id="@+id/living_tip_reading_post_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="청소꿀Tip! 주방 청소할때 꼭 필요한 아이템 입니다"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/living_tip_reading_post_category"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_post_category" />
+
+    <TextView
+        android:id="@+id/living_tip_reading_post_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="2020-20-12"
+        app:layout_constraintEnd_toEndOf="@+id/living_tip_reading_post_title"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_post_title" />
+
+    <TextView
+        android:id="@+id/living_tip_reading_post_writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="글쓴이"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_reading_post_date"
+        app:layout_constraintEnd_toStartOf="@+id/living_tip_reading_post_date"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_reading_post_date" />
+
+    <View
+        android:id="@+id/living_tip_reading_contour"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/contour_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_post_date" />
+
+    <View
+        android:id="@+id/living_tip_reading_title_contour"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/contour_color"
+        app:layout_constraintBottom_toTopOf="@+id/living_tip_reading_post_main_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/living_tip_reading_message_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/living_tip_reading_comment_btn"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_reading_comment_btn"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <ImageView
+        android:id="@+id/living_tip_reading_comment_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_reading_post_main_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/living_tip_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="453dp"
-        android:text="살림꿀팁"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="9sp"
+        android:text="@string/living_tip_title"
+        android:textColor="#555555"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search_text"
+        android:layout_width="240dp"
+        android:layout_height="36dp"
+        android:background="@color/gray"
+        android:ems="10"
+        android:hint="검색어를 입력하세요"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/write_btn"
+        app:layout_constraintEnd_toStartOf="@+id/write_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/search_image"
+        app:layout_constraintTop_toTopOf="@+id/write_btn" />
+
+    <android.widget.Button
+        android:id="@+id/write_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_rectangle_orange"
+        android:text="글작성"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/search_text"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_main_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/living_tip_reading_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_text" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/search_image"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_text"
+        app:layout_constraintEnd_toStartOf="@+id/search_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_text"
+        app:srcCompat="@drawable/baseline_search_black_18dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
