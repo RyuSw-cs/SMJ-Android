@@ -11,9 +11,7 @@ import com.example.smj.R;
 
 public class MyPageFragment extends Fragment {
     public MyPageFragment(){
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.activity_mypage,container,false);
