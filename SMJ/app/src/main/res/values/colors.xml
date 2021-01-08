@@ -16,4 +16,5 @@
     <color name="linecolor">#dddddd</color>
     <color name="contextcolor">#b5b5b5</color>
     <color name="greybackground">#f9f9f9</color>
+    <color name="message_view_color">#f3f3f3</color>
 </resources>
