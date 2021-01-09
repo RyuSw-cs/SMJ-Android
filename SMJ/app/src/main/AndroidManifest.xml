@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smj">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:name=".application.App"
         android:allowBackup="true"
@@ -9,7 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SMJ">
+        android:theme="@style/Theme.SMJ"
+        android:networkSecurityConfig="@xml/network_security_config"
+        >
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key_login" />
@@ -19,5 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.LivingTip.LivingTipReadingActivity"/>
+        <activity android:name=".ui.LivingTip.LivingTipCommentActivity"/>
+        <activity android:name=".ui.message.MessageActivity"/>
     </application>
 </manifest>
