@@ -17,7 +17,7 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         //스케쥴 액티비티 나올 시 교체
-        View view = inflater.inflate(R.layout.activity_mypage,container,false);
+        View view = inflater.inflate(R.layout.activity_schedule,container,false);
         return view;
     }
 }
