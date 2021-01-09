@@ -87,9 +87,9 @@ public class MainActivity extends FragmentActivity {
     }
     private void init_List(){
         list.add(convenienceFragment);
-        list.add(tradeFragment);
         list.add(livingTipFragment);
-        list.add(scheduleFragment);
         list.add(myPageFragment);
+        list.add(scheduleFragment);
+        list.add(tradeFragment);
     }
 }
