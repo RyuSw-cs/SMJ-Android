@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/message_write_contour"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/contour_color"
+        app:layout_constraintBottom_toTopOf="@+id/message_write_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/message_chatting_contour"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/contour_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_recipient_id" />
+
+    <TextView
+        android:id="@+id/message_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="9sp"
+        android:text="@string/message_title"
+        android:textColor="#555555"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/message_title_contour"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/contour_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_title" />
+
+    <ImageView
+        android:id="@+id/message_recipient_image"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_title_contour"
+        app:srcCompat="@drawable/kakao_default_profile_image" />
+
+    <TextView
+        android:id="@+id/message_recipient_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="닉네임"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/message_recipient_image"
+        app:layout_constraintStart_toEndOf="@+id/message_recipient_image"
+        app:layout_constraintTop_toTopOf="@+id/message_recipient_image" />
+
+    <TextView
+        android:id="@+id/message_recipient_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="아이디"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/message_recipient_nickname"
+        app:layout_constraintStart_toEndOf="@+id/message_recipient_nickname"
+        app:layout_constraintTop_toTopOf="@+id/message_recipient_nickname" />
+
+    <EditText
+        android:id="@+id/message_write_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="쪽지 작성"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send_btn"
+        android:layout_width="70dp"
+        android:layout_height="49dp"
+        android:background="@color/orange"
+        android:text="보내기"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/message_write_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/message_view_color"
+        app:layout_constraintBottom_toTopOf="@+id/message_write_contour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_chatting_contour" />
+</androidx.constraintlayout.widget.ConstraintLayout>

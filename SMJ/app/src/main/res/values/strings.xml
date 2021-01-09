@@ -5,6 +5,6 @@
     <string name="living_tip_title">살림 꿀팁</string>
     <string name="comment_title">댓글</string>
     <string name="postmanage">게시글 관리</string>
-
+    <string name="message_title">쪽지</string>
     <string name="schedule">알림</string>
 </resources>
