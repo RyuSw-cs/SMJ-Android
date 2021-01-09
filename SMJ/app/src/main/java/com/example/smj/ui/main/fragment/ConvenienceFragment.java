@@ -33,13 +33,7 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
         mapView.setCurrentLocationEventListener(this);
         handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-            }
-        },1000);
-
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         mapViewContainer.addView(mapView);
         return view;
     }
