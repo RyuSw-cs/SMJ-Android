@@ -2,5 +2,4 @@
     <string name="app_name">SMJ</string>
     <string name="kakao_login_text">카카오톡으로 로그인</string>
     <string name="kakao_app_key_login">878987c31a468be496a38d4e82bd47d7</string>
-    <string name="kakao_app_key_map">92ae20dbb333f02658441075a9144490</string>
 </resources>
