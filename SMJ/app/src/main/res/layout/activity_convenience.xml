@@ -20,8 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <Spinner
+        android:id="@+id/select_category"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_marginStart="4dp"
@@ -39,11 +39,11 @@
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/select_category"
         app:layout_constraintEnd_toStartOf="@+id/search_text"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/select_category"
         app:srcCompat="@drawable/baseline_search_black_18dp" />
 
     <RelativeLayout
@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" >
+        app:layout_constraintTop_toBottomOf="@+id/select_category" >
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

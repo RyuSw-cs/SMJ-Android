@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/convenience_title_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/convenience_detail_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/baseline_menu_black_18dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/convenience_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginStart="45dp"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="제목"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d1d1d1" />
+
+    <!-- Notice -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/convenience_detail_phone"
+            android:layout_width="215dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="16dp"
+            android:text="전화번호"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/convenience_detail_address"
+            android:layout_width="215dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:text="주소"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/convenience_detail_phone" />
+
+        <ImageView
+            android:id="@+id/convenience_phone_image"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="7dp"
+            android:src="@drawable/convenience_phone"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/convenience_detail_phone"
+            app:layout_constraintEnd_toStartOf="@+id/convenience_detail_phone"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/convenience_detail_phone" />
+
+        <ImageView
+            android:id="@+id/convenience_address_image"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="7dp"
+            android:src="@drawable/convenience_address"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/convenience_detail_address"
+            app:layout_constraintEnd_toStartOf="@+id/convenience_detail_address"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/convenience_detail_address" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:background="#66bdbdbd"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/convenience_close"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:onClick="mOnClose"
+            android:padding="3dp"
+            android:text="확인"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</LinearLayout>

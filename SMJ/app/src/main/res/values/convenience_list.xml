@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Category">
+        <item>대형마트</item>
+        <item>편의점</item>
+        <item>어린이집,유치원</item>
+        <item>학교</item>
+        <item>학원</item>
+        <item>주차장</item>
+        <item>주유소,충전소</item>
+        <item>지하철역</item>
+        <item>은행</item>
+        <item>문화시설</item>
+        <item>중개업소</item>
+        <item>공공기관</item>
+        <item>관광명소</item>
+        <item>숙박</item>
+        <item>음식점</item>
+        <item>카페</item>
+        <item>병원</item>
+        <item>약국</item>
+    </string-array>
+</resources>
