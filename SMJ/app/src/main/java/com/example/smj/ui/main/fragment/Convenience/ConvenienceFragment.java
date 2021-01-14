@@ -1,6 +1,7 @@
 package com.example.smj.ui.main.fragment.Convenience;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -23,6 +24,7 @@ import com.example.smj.ui.main.fragment.Convenience.remote.Document;
 import com.example.smj.ui.main.fragment.Convenience.remote.PopupInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -61,13 +63,14 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         mapView.setCurrentLocationEventListener(this);
         mapView.setPOIItemEventListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+        mapView.setZoomLevel(3,true);
         mapViewContainer.addView(mapView);
         return view;
 
     }
 
+    //스피너 초기화
     private void init_spinner(){
-        //스피너 초기 상태를 --검색어를 선택해주세요-- 이걸로는 못바꾸나?
         spinnerItem = getResources().getStringArray(R.array.Category);
         selectSpinner = (Spinner)view.findViewById(R.id.select_category);
         arrayAdapter = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, spinnerItem);
@@ -100,6 +103,7 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     public void onCurrentLocationUpdateCancelled(MapView mapView) {
 
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -107,18 +111,19 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     }
     public void onResume() {
         super.onResume();
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getActivity(),"주변 " + selectSpinner.getItemAtPosition(position) + " 검색합니다.",Toast.LENGTH_LONG).show();
         setSpinnerItem(position);
         getList.clear();
+        mapView.removeAllPOIItems();
         Entity_Convenience entityConvenience = RemoteDataSource.getInstance().create(Entity_Convenience.class);
         x = currentMapPoint.getMapPointGeoCoord().latitude;
         y = currentMapPoint.getMapPointGeoCoord().longitude;
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         Call<Category> call = entityConvenience.getSearchCategory("KakaoAK "+ getString(R.string.kakao_api_key),word,y+"",x+"",1500);
         call.enqueue(new Callback<Category>() {
             @Override
@@ -132,6 +137,9 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
                         double y = Double.parseDouble(document.getX());
                         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
                         marker.setMapPoint(mapPoint);
+                        marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+                        marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
+                        marker.setCustomImageAutoscale(false);
                         mapView.addPOIItem(marker);
                     }
                 }
