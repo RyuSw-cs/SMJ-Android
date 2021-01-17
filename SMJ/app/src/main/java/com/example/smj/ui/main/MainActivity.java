@@ -7,9 +7,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.smj.R;
-import com.example.smj.ui.main.fragment.ConvenienceFragment;
+import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.MyPageFragment;
 import com.example.smj.ui.main.fragment.ScheduleFragment;
@@ -31,8 +32,19 @@ public class MainActivity extends FragmentActivity {
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
     private TradeFragment tradeFragment;
+    private View view;
+
+    public static int getBottomNavigationWidth;
+    public static int getBottomNavigationHeight;
 
     BottomNavigationView bottomNavigationView;
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        view = (View)this.findViewById(R.id.bottomNavigationView);
+        getBottomNavigationWidth = view.getWidth();
+        getBottomNavigationHeight = view.getHeight();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
