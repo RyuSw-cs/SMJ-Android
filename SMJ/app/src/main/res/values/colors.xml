@@ -17,4 +17,8 @@
     <color name="contextcolor">#b5b5b5</color>
     <color name="greybackground">#f9f9f9</color>
     <color name="message_view_color">#f3f3f3</color>
+    <color name="alarm_list_line_color">#d1d1d1</color>
+    <color name="alarm_list_date_color">#aaaaaa</color>
+    <color name="alarm_list_switch_color">#e8e8e8</color>
+    <color name="alarmpage_color">#828282</color>
 </resources>
