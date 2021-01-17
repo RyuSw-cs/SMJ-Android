@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,9 +25,7 @@ public class LivingTipFragment extends Fragment {
     LivingTipPostAdapter adapter;
 
     public LivingTipFragment(){
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.activity_living_tip_main,container,false);
@@ -40,4 +40,5 @@ public class LivingTipFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         return view;
     }
+
 }
