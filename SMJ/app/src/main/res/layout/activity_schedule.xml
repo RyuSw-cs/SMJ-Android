@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/schedule_textView"
         tools:layout_editor_absoluteX="-16dp" />
     <!-- 메테리얼로 수정-->
-    <android.widget.CalendarView
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/schedule_calendarView"
         android:layout_width="409dp"
         android:layout_height="577dp"
