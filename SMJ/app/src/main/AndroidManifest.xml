@@ -29,8 +29,10 @@
         <activity android:name=".ui.message.MessageActivity"/>
         <activity android:name=".ui.schedule.ScheduleAlarmlistPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmPage"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmDeletePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
     </application>
 </manifest>
