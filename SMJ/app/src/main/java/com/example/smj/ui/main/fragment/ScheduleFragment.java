@@ -28,7 +28,7 @@ public class ScheduleFragment extends Fragment {
         return view;
     }
     protected void init(View view){
-        calendarView = view.findViewById(R.id.schedule_calendarView);
+        calendarView = view.findViewById(R.id.schedule_calendarview);
     }
     protected void CalendarViewEvent(View v){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
