@@ -23,6 +23,7 @@ import com.example.smj.ui.main.fragment.Convenience.remote.Category;
 import com.example.smj.ui.main.fragment.Convenience.remote.Document;
 import com.example.smj.ui.main.fragment.Convenience.remote.PopupInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPOIItem;
@@ -37,21 +38,22 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ConvenienceFragment extends Fragment implements MapView.CurrentLocationEventListener, AdapterView.OnItemSelectedListener, MapView.POIItemEventListener {
+public class ConvenienceFragment extends Fragment implements MapView.CurrentLocationEventListener, TabLayout.OnTabSelectedListener, MapView.POIItemEventListener, View.OnClickListener {
 
     private MapView mapView;
     private View view;
     private ViewGroup mapViewContainer;
     private MapPoint currentMapPoint;
-    private Spinner selectSpinner;
+    private TabLayout tabMenu;
+    private FloatingActionButton floatingActionButton;
 
     private ArrayList<Document> getList = new ArrayList<>();
     private PopupInfo popupList;
-    private String[] spinnerItem;
-    private ArrayAdapter arrayAdapter;
 
     private String word;
     private double x,y;
+    private boolean checkLocationButton= false;
+    private boolean checkToastMessage = false;
 
 
     @Override
@@ -59,24 +61,24 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         mapView = new MapView(getActivity());
         view = inflater.inflate(R.layout.activity_convenience,container,false);
         mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
-        init_spinner();
+        tabMenu = (TabLayout)view.findViewById(R.id.convenience_menu);
+        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
         mapView.setCurrentLocationEventListener(this);
         mapView.setPOIItemEventListener(this);
+        tabMenu.addOnTabSelectedListener(this);
+        floatingActionButton.setOnClickListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         mapView.setZoomLevel(3,true);
         mapViewContainer.addView(mapView);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TabLayout.Tab tab = tabMenu.getTabAt(0);
+                tabMenu.selectTab(tab);
+            }
+        },1500);
         return view;
-
-    }
-
-    //스피너 초기화
-    private void init_spinner(){
-        spinnerItem = getResources().getStringArray(R.array.Category);
-        selectSpinner = (Spinner)view.findViewById(R.id.select_category);
-        arrayAdapter = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, spinnerItem);
-        selectSpinner.setAdapter(arrayAdapter);
-        selectSpinner.setSelection(0,false);
-        selectSpinner.setOnItemSelectedListener(this);
     }
 
     //트래킹 모드 설정 시 실행됨
@@ -86,7 +88,6 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         Log.d("위치 업데이트",String.format("업데이트 됨(%f, %f)",mapPointGeo.latitude, mapPointGeo.longitude));
         currentMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
         mapView.setMapCenterPoint(currentMapPoint, true);
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
     }
 
     @Override
@@ -114,50 +115,9 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(),"주변 " + selectSpinner.getItemAtPosition(position) + " 검색합니다.",Toast.LENGTH_LONG).show();
-        setSpinnerItem(position);
-        getList.clear();
-        mapView.removeAllPOIItems();
-        Entity_Convenience entityConvenience = RemoteDataSource.getInstance().create(Entity_Convenience.class);
-        x = currentMapPoint.getMapPointGeoCoord().latitude;
-        y = currentMapPoint.getMapPointGeoCoord().longitude;
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-        Call<Category> call = entityConvenience.getSearchCategory("KakaoAK "+ getString(R.string.kakao_api_key),word,y+"",x+"",1500);
-        call.enqueue(new Callback<Category>() {
-            @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
-                if(response.isSuccessful()){
-                    getList.addAll(response.body().getDocuments());
-                    for(Document document : getList){
-                        MapPOIItem marker = new MapPOIItem();
-                        marker.setItemName(document.getPlaceName());
-                        double x = Double.parseDouble(document.getY());
-                        double y = Double.parseDouble(document.getX());
-                        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
-                        marker.setMapPoint(mapPoint);
-                        marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-                        marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
-                        marker.setCustomImageAutoscale(false);
-                        mapView.addPOIItem(marker);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Category> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-    private void setSpinnerItem(int position){
-        switch (position){
+    private void setPOIItem(int position){
+        //자취생들이 필요한 정보를 추리자.
+         switch (position){
             case 0:
                 word = "MT1";
                 break;
@@ -238,5 +198,67 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        if(!checkToastMessage)
+            checkToastMessage = true;
+        else
+            Toast.makeText(getActivity(), "주변 " + tab.getText() + " 검색합니다.", Toast.LENGTH_LONG).show();
+        setPOIItem(tab.getPosition());
+        getList.clear();
+        mapView.removeAllPOIItems();
+        Entity_Convenience entityConvenience = RemoteDataSource.getInstance().create(Entity_Convenience.class);
+        x = currentMapPoint.getMapPointGeoCoord().latitude;
+        y = currentMapPoint.getMapPointGeoCoord().longitude;
+        Call<Category> call = entityConvenience.getSearchCategory("KakaoAK "+ getString(R.string.kakao_api_key),word,y+"",x+"",1500);
+        call.enqueue(new Callback<Category>() {
+            @Override
+            public void onResponse(Call<Category> call, Response<Category> response) {
+                if(response.isSuccessful()){
+                    getList.addAll(response.body().getDocuments());
+                    for(Document document : getList){
+                        MapPOIItem marker = new MapPOIItem();
+                        marker.setItemName(document.getPlaceName());
+                        double x = Double.parseDouble(document.getY());
+                        double y = Double.parseDouble(document.getX());
+                        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
+                        marker.setMapPoint(mapPoint);
+                        marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+                        marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
+                        marker.setCustomImageAutoscale(false);
+                        mapView.addPOIItem(marker);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Category> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+        //탭 선택이 사라질 때
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+        //탭이 다시 눌릴 때
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(!checkLocationButton) {
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            checkLocationButton = true;
+        }
+        else{
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+            checkLocationButton = false;
+        }
     }
 }
