@@ -8,18 +8,19 @@
 
     <ImageButton
         android:id="@+id/comment_more_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/baseline_more_horiz_black_18dp"
         app:layout_constraintBottom_toBottomOf="@+id/living_tip_comment_date"
         app:layout_constraintEnd_toEndOf="@+id/living_tip_comment_contents"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_comment_date"
-        app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+        app:layout_constraintTop_toTopOf="@+id/living_tip_comment_date" />
 
     <View
-        android:id="@+id/living_tip_comment_title_contour2"
+        android:id="@+id/living_tip_comment_contour2"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:background="@color/contour_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
