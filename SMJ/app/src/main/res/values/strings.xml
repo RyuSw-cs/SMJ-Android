@@ -6,6 +6,7 @@
     <string name="comment_title">댓글</string>
     <string name="postmanage">게시글 관리</string>
     <string name="message_title">쪽지</string>
+    <string name="message_management_title">쪽지 관리</string>
     <string name="convenience_title">편의시설</string>
     <string name="schedule">알림</string>
     <string name="kakao_api_key">92ae20dbb333f02658441075a9144490</string>
