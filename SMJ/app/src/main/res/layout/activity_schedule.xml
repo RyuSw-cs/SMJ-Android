@@ -35,11 +35,14 @@
         android:layout_width="409dp"
         android:layout_height="577dp"
         android:background="@color/second_color"
-        android:maxDate="12/31/2021"
-        android:minDate="01/01/2021"
-        android:weekSeparatorLineColor="@color/grey"
+        app:mcv_selectionColor="@color/maincolor"
+        app:mcv_arrowColor="@color/calandar_arrow_color"
+        app:mcv_headerTextAppearance="@color/calandar_header_color"
+        app:mcv_dateTextAppearance="@color/calandar_header_color"
+        app:mcv_weekDayTextAppearance="@color/alarm_list_date_color"
+        android:weekSeparatorLineColor="@color/calandar_weekseparator_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_line" />
 </androidx.constraintlayout.widget.ConstraintLayout>
