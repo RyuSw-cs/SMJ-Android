@@ -1,9 +1,8 @@
-package com.example.smj.ui.main.fragment.Convenience.remote;
+package com.example.smj.data.entity;
 
 import java.io.Serializable;
 
 public class PopupInfo implements Serializable {
-
     private String title;
     private String phone;
     private String address;

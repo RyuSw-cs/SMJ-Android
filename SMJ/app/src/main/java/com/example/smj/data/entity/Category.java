@@ -1,4 +1,4 @@
-package com.example.smj.ui.main.fragment.Convenience.remote;
+package com.example.smj.data.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,18 +9,14 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-ui와 데이터간의 연결다리(ViewModel?)
- */
 public class Category implements Parcelable {
-
 
     @SerializedName("meta")
     @Expose
     private Meta meta;
     @SerializedName("documents")
     @Expose
-    private List<Document>documents = null;
+    private List<Document> documents = null;
 
     public Meta getMeta(){
         return meta;

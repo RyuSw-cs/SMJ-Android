@@ -6,19 +6,41 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <TextView
         android:id="@+id/convenience_title"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:lineSpacingExtra="9sp"
         android:text="@string/convenience_title"
         android:textColor="#555555"
         android:textSize="18sp"
         android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
         android:id="@+id/map_view"
@@ -26,10 +48,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/convenience_menu"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -39,48 +61,12 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="19dp"
             android:layout_marginBottom="96dp"
+            android:backgroundTint="#ffffff"
+            app:borderWidth="0dp"
             android:clickable="true"
             app:srcCompat="@drawable/convenience_address" />
 
     </RelativeLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/convenience_menu"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/convenience_title"
-        tools:layout_editor_absoluteX="-16dp">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/mart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="마트" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/convenience_store"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="편의점" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/bank"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="은행" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/public_place"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="공공기관" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/hospital"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="병원" />
-    </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

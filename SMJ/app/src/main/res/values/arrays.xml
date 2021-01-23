@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="convenienceList">
+        <item>마트</item>
+        <item>편의점</item>
+        <item>공공기관</item>
+        <item>병원</item>
+        <item>약국</item>
+        <item>주유소/충전소</item>
+        <item>은행</item>
+        <item>문화시설</item>
+        <item>공공기관</item>
+        <item>학원</item>
+        <item>주차장</item>
+        <item>음식점</item>
+    </string-array>
+</resources>
