@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="279dp"
+    android:layout_height="124dp"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/schedule_alarmdelete_popup_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="38dp"
+        android:background="@color/alarm_list_line_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/schedule_alarmdelete_popup_deletequestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="51dp"
+        android:text="알림을 삭제하시겠습니까?"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/schedule_alarmdelete_popup_cancel"
+        android:layout_width="140dp"
+        android:layout_height="37dp"
+        android:background="@drawable/button_alarm_popup_negative_click"
+        android:text="취소"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/schedule_alarmdelete_popup_delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmdelete_popup_line" />
+
+    <android.widget.Button
+        android:id="@+id/schedule_alarmdelete_popup_delete"
+        android:layout_width="140dp"
+        android:layout_height="37dp"
+        android:background="@drawable/button_alarm_popup_positive_click"
+        android:text="삭제"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/schedule_alarmdelete_popup_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmdelete_popup_line" />
+</androidx.constraintlayout.widget.ConstraintLayout>

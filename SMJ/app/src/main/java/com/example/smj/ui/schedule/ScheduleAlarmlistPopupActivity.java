@@ -3,7 +3,6 @@ package com.example.smj.ui.schedule;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ScheduleAlarmlistPopupActivity extends Activity {
     RecyclerView recyclerView;
@@ -35,7 +33,7 @@ public class ScheduleAlarmlistPopupActivity extends Activity {
     }
     protected void FabEvent(){
          fab.setOnClickListener((view) ->{
-             Intent intent = new Intent(this, ScheduleAlarmPage.class);
+             Intent intent = new Intent(this, ScheduleAlarmPageActivity.class);
              intent.putExtra("data", "Test Popup");
              startActivityForResult(intent, 1);
          });

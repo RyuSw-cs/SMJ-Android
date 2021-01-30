@@ -21,4 +21,5 @@
     <color name="alarm_list_date_color">#aaaaaa</color>
     <color name="alarm_list_switch_color">#e8e8e8</color>
     <color name="alarmpage_color">#828282</color>
+    <color name="alarmpopup_negative_color">#efefef</color>
 </resources>
