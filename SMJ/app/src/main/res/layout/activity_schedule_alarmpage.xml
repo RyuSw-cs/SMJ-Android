@@ -36,16 +36,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <View
-        android:id="@+id/schedule_alarmpage_line12"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="9dp"
-        android:background="@color/linecolor"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_noticedelete"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <View
         android:id="@+id/schedule_alarmpage_line10"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -194,18 +184,6 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line9" />
-
-    <TextView
-        android:id="@+id/schedule_alarmpage_noticedelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="알림 삭제"
-        android:textColor="@color/maincolor"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line11" />
 
     <TextView
         android:id="@+id/schedule_alarmpage_today"
@@ -430,12 +408,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line9" />
 
+    <View
+        android:id="@+id/schedule_alarmpage_line12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_allday_clicklayout"
+        tools:layout_editor_absoluteX="1dp" />
+
     <LinearLayout
         android:id="@+id/schedule_allday_clicklayout"
         android:layout_width="411dp"
         android:layout_height="43dp"
+        android:gravity="center|start|left"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/schedule_alarmpage_lineboundary6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary3"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/schedule_alarmpage_noticedelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:gravity="left"
+            android:text="알림 삭제"
+            android:textColor="@color/maincolor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/schedule_allday_iterclicklayout"
+        android:layout_width="413dp"
+        android:layout_height="44dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8"></LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

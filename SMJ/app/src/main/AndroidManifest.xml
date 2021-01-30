@@ -32,7 +32,11 @@
         <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmModifiedPopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.schedule.ScheduleAlarmDeletePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmIterPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
     </application>
 </manifest>
