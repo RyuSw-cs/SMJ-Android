@@ -187,7 +187,4 @@ public class Document implements Parcelable {
         dest.writeString(this.x);
         dest.writeString(this.y);
     }
-    public Document(){
-
-    }
 }

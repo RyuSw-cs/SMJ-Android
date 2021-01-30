@@ -155,16 +155,20 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         getList = list;
         for(Document document : list){
             MapPOIItem marker = new MapPOIItem();
+            //마커 클릭 시 이름
             marker.setItemName(document.getPlaceName());
+            //마커를 생성하는 좌표
+            //MapPoint로 변환해야함.
             double x = Double.parseDouble(document.getY());
             double y = Double.parseDouble(document.getX());
             MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
             marker.setMapPoint(mapPoint);
+            //커스텀마커 사용
             marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
             marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
             marker.setCustomImageAutoscale(false);
+            //마커 추가
             mapView.addPOIItem(marker);
         }
-
     }
 }

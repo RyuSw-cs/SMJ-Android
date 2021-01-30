@@ -71,7 +71,6 @@ public class ConvenienceUseCase implements RetrofitOnSuccess {
         if(object != null){
             list = (ArrayList<Document>)object;
             convenienceFragment.clickSuccess(list);
-            //
         }
     }
 }

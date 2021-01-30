@@ -62,7 +62,4 @@ public class Category implements Parcelable {
         dest.writeParcelable(this.meta, flags);
         dest.writeList(this.documents);
     }
-    public Category(){
-
-    }
 }
