@@ -13,14 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.smj.R;
+import com.example.smj.ui.schedule.EventDecorator;
 import com.example.smj.ui.schedule.ScheduleAlarmlistPopupActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class ScheduleFragment extends Fragment {
@@ -46,17 +49,24 @@ public class ScheduleFragment extends Fragment {
         int currentYear = startTimeCalendar.get(Calendar.YEAR);
         int currentMonth = startTimeCalendar.get(Calendar.MONTH);
         int currentDate = startTimeCalendar.get(Calendar.DATE);
-
         endTimeCalendar.set(Calendar.MONTH, currentMonth+3);
 
-
+        //점찍기 코드
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH,-2);
+        ArrayList<CalendarDay> dayList = new ArrayList<>();
+        for(int i = 0; i <30; i++){
+            CalendarDay day = CalendarDay.from(calendar);
+            dayList.add(day);
+            calendar.add(Calendar.DATE,5);
+        }
         calendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
                 .setMinimumDate(CalendarDay.from(currentYear, currentMonth, 1))
                 .setMaximumDate(CalendarDay.from(currentYear, currentMonth+11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-
+        calendarView.addDecorator(new EventDecorator(R.color.maincolor, dayList));
     }
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
