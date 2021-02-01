@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.smj.R;
 import com.example.smj.ui.main.MainActivity;
+import com.google.android.material.button.MaterialButton;
 
 public class ScheduleAlarmIterPopupActivity extends Activity {
     private Button daybutton, weekbutton, monthbutton, yearbutton;
@@ -21,6 +22,7 @@ public class ScheduleAlarmIterPopupActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_schedule_alarm_iter_popup);
         init();
+        /*
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +62,7 @@ public class ScheduleAlarmIterPopupActivity extends Activity {
         weekbutton.setOnClickListener(onClickListener);
         monthbutton.setOnClickListener(onClickListener);
         yearbutton.setOnClickListener(onClickListener);
+        */
     }
     private void setViewInvalidate(View... views) { for (View v : views) { v.invalidate(); } }
     protected  void init(){
