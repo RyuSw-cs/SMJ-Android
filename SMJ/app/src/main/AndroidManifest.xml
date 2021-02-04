@@ -32,5 +32,7 @@
         <activity android:name=".ui.schedule.ScheduleAlarmPage"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.main.fragment.mypage.AppSetting"/>
+        <activity android:name=".ui.manage.PostManageActivity"/>
     </application>
 </manifest>
