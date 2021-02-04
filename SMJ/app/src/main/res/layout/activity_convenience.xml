@@ -19,9 +19,18 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="center"
-            app:title="편의시설">
+            android:background="#ffffff"
+            app:contentInsetStart="0dp"
+            >
+            <TextView
+                android:text="편의시설"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </com.google.android.material.appbar.MaterialToolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
