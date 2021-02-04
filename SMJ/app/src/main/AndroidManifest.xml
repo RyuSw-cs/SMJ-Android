@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smj">
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -29,8 +30,10 @@
         <activity android:name=".ui.message.MessageActivity"/>
         <activity android:name=".ui.schedule.ScheduleAlarmlistPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmPage"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmDeletePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.main.fragment.mypage.AppSetting"/>
         <activity android:name=".ui.manage.PostManageActivity"/>

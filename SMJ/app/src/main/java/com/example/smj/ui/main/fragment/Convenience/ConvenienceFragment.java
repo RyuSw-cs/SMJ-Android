@@ -1,82 +1,80 @@
 package com.example.smj.ui.main.fragment.Convenience;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
-import com.example.smj.ui.main.fragment.Convenience.datasource.RemoteDataSource;
-import com.example.smj.ui.main.fragment.Convenience.entity.Entity_Convenience;
-import com.example.smj.ui.main.fragment.Convenience.remote.Category;
-import com.example.smj.ui.main.fragment.Convenience.remote.Document;
-import com.example.smj.ui.main.fragment.Convenience.remote.PopupInfo;
+import com.example.smj.callback.ConvenienceGetLocal;
+import com.example.smj.data.entity.Document;
+import com.example.smj.data.entity.PopupInfo;
+import com.example.smj.domain.usecase.ConvenienceUseCase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.app.Activity.RESULT_OK;
-
-public class ConvenienceFragment extends Fragment implements MapView.CurrentLocationEventListener, AdapterView.OnItemSelectedListener, MapView.POIItemEventListener {
+public class ConvenienceFragment extends Fragment implements MapView.CurrentLocationEventListener, MapView.POIItemEventListener, View.OnClickListener, ConvenienceGetLocal {
 
     private MapView mapView;
     private View view;
     private ViewGroup mapViewContainer;
-    private MapPoint currentMapPoint;
-    private Spinner selectSpinner;
+    public static MapPoint currentMapPoint;
+    private FloatingActionButton floatingActionButton;
+    private ArrayList<Document>getList = new ArrayList<>();
 
-    private ArrayList<Document> getList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private ConvenienceAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private PopupInfo popupList;
-    private String[] spinnerItem;
-    private ArrayAdapter arrayAdapter;
-
-    private String word;
-    private double x,y;
-
+    private ConvenienceUseCase convenienceUseCase;
+    private boolean checkLocationButton= false;
+    private String[] getItemList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         mapView = new MapView(getActivity());
         view = inflater.inflate(R.layout.activity_convenience,container,false);
         mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
-        init_spinner();
+        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true);
+        convenienceUseCase = new ConvenienceUseCase(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        getItemList = getResources().getStringArray(R.array.convenienceList);
+        adapter = new ConvenienceAdapter(getActivity() ,getItemList);
+        recyclerView.setAdapter(adapter);
+        //이벤트
+        adapter.setOnItemClickListener(new ConvenienceAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mapView.removeAllPOIItems();
+                getList.clear();
+                convenienceUseCase.sendLocalName(getItemList[position]);
+            }
+        });
+        recyclerView.scrollToPosition(10);
         mapView.setCurrentLocationEventListener(this);
         mapView.setPOIItemEventListener(this);
+        floatingActionButton.setOnClickListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         mapView.setZoomLevel(3,true);
         mapViewContainer.addView(mapView);
+
         return view;
-
-    }
-
-    //스피너 초기화
-    private void init_spinner(){
-        spinnerItem = getResources().getStringArray(R.array.Category);
-        selectSpinner = (Spinner)view.findViewById(R.id.select_category);
-        arrayAdapter = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, spinnerItem);
-        selectSpinner.setAdapter(arrayAdapter);
-        selectSpinner.setSelection(0,false);
-        selectSpinner.setOnItemSelectedListener(this);
     }
 
     //트래킹 모드 설정 시 실행됨
@@ -86,7 +84,6 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         Log.d("위치 업데이트",String.format("업데이트 됨(%f, %f)",mapPointGeo.latitude, mapPointGeo.longitude));
         currentMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
         mapView.setMapCenterPoint(currentMapPoint, true);
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
     }
 
     @Override
@@ -115,105 +112,6 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(),"주변 " + selectSpinner.getItemAtPosition(position) + " 검색합니다.",Toast.LENGTH_LONG).show();
-        setSpinnerItem(position);
-        getList.clear();
-        mapView.removeAllPOIItems();
-        Entity_Convenience entityConvenience = RemoteDataSource.getInstance().create(Entity_Convenience.class);
-        x = currentMapPoint.getMapPointGeoCoord().latitude;
-        y = currentMapPoint.getMapPointGeoCoord().longitude;
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-        Call<Category> call = entityConvenience.getSearchCategory("KakaoAK "+ getString(R.string.kakao_api_key),word,y+"",x+"",1500);
-        call.enqueue(new Callback<Category>() {
-            @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
-                if(response.isSuccessful()){
-                    getList.addAll(response.body().getDocuments());
-                    for(Document document : getList){
-                        MapPOIItem marker = new MapPOIItem();
-                        marker.setItemName(document.getPlaceName());
-                        double x = Double.parseDouble(document.getY());
-                        double y = Double.parseDouble(document.getX());
-                        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
-                        marker.setMapPoint(mapPoint);
-                        marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
-                        marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
-                        marker.setCustomImageAutoscale(false);
-                        mapView.addPOIItem(marker);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Category> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-    private void setSpinnerItem(int position){
-        switch (position){
-            case 0:
-                word = "MT1";
-                break;
-            case 1:
-                word = "CS2";
-                break;
-            case 2:
-                word = "PS3";
-                break;
-            case 3:
-                word = "SC4";
-                break;
-            case 4:
-                word = "AC5";
-                break;
-            case 5:
-                word = "PK6";
-                break;
-            case 6:
-                word = "OL7";
-                break;
-            case 7:
-                word = "SW8";
-                break;
-            case 8:
-                word = "BK9";
-                break;
-            case 9:
-                word = "CT1";
-                break;
-            case 10:
-                word = "AG2";
-                break;
-            case 11:
-                word = "PO3";
-                break;
-            case 12:
-                word = "AT4";
-                break;
-            case 13:
-                word = "AD5";
-                break;
-            case 14:
-                word = "FD6";
-                break;
-            case 15:
-                word = "CE7";
-                break;
-            case 16:
-                word = "HP8";
-                break;
-            default: word ="PM9";
-        }
-    }
-
-    @Override
     public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
 
     }
@@ -238,5 +136,39 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(!checkLocationButton) {
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            checkLocationButton = true;
+        }
+        else{
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+            checkLocationButton = false;
+        }
+    }
+
+    @Override
+    public void clickSuccess(ArrayList<Document> list) {
+        getList = list;
+        for(Document document : list){
+            MapPOIItem marker = new MapPOIItem();
+            //마커 클릭 시 이름
+            marker.setItemName(document.getPlaceName());
+            //마커를 생성하는 좌표
+            //MapPoint로 변환해야함.
+            double x = Double.parseDouble(document.getY());
+            double y = Double.parseDouble(document.getX());
+            MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
+            marker.setMapPoint(mapPoint);
+            //커스텀마커 사용
+            marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+            marker.setCustomImageResourceId(R.drawable.convenience_marker_12dp);
+            marker.setCustomImageAutoscale(false);
+            //마커 추가
+            mapView.addPOIItem(marker);
+        }
     }
 }

@@ -1,10 +1,10 @@
 package com.example.smj.ui.message;
 
-public class ChatMessage {
+public class ChatMessageData {
     String id;
     String message;
 
-    public ChatMessage(String id, String message) {
+    public ChatMessageData(String id, String message) {
         this.id = id;
         this.message = message;
     }
