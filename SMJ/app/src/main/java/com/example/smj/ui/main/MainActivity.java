@@ -32,19 +32,8 @@ public class MainActivity extends FragmentActivity {
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
     private TradeFragment tradeFragment;
-    private View view;
-
-    public static int getBottomNavigationWidth;
-    public static int getBottomNavigationHeight;
 
     BottomNavigationView bottomNavigationView;
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus){
-        view = (View)this.findViewById(R.id.bottomNavigationView);
-        getBottomNavigationWidth = view.getWidth();
-        getBottomNavigationHeight = view.getHeight();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +44,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager = findViewById(R.id.pager);
         pageAdapter = new ViewPagerAdapter(this,num_page);
         pageAdapter.addFragments(list);
-
-        //로그인 화면 후 2초만 기달려주새오..
         mViewPager.setAdapter(pageAdapter);
-        //초기에 1002으로 맞춤 -> 살립꿀팁
         mViewPager.setCurrentItem(2);
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setUserInputEnabled(false);

@@ -1,4 +1,4 @@
-package com.example.smj.ui.main.fragment.Convenience.datasource;
+package com.example.smj.data.datasource;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

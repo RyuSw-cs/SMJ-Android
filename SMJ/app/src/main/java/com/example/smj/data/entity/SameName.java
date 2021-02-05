@@ -1,4 +1,4 @@
-package com.example.smj.ui.main.fragment.Convenience.remote;
+package com.example.smj.data.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

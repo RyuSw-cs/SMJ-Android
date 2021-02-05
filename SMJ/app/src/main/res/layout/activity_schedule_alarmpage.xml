@@ -429,4 +429,13 @@
         android:track="@drawable/schedule_switch_track_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line9" />
+
+    <LinearLayout
+        android:id="@+id/schedule_allday_clicklayout"
+        android:layout_width="411dp"
+        android:layout_height="43dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/schedule_alarmpage_lineboundary6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary3"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class MessageItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<ChatMessage> myDataList = null;
+    private ArrayList<ChatMessageData> myDataList = null;
 
-    MessageItemAdapter(ArrayList<ChatMessage> dataList)
+    MessageItemAdapter(ArrayList<ChatMessageData> dataList)
     {
         myDataList = dataList;
     }

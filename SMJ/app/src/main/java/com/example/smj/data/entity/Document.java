@@ -1,4 +1,4 @@
-package com.example.smj.ui.main.fragment.Convenience.remote;
+package com.example.smj.data.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -186,8 +186,5 @@ public class Document implements Parcelable {
         dest.writeString(this.categoryGroupName);
         dest.writeString(this.x);
         dest.writeString(this.y);
-    }
-    public Document(){
-
     }
 }
