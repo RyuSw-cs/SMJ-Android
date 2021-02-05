@@ -28,6 +28,7 @@ import java.util.List;
 
 public class ScheduleFragment extends Fragment {
     MaterialCalendarView calendarView;
+    String spotColor;
     public ScheduleFragment(){
 
     }
@@ -41,6 +42,7 @@ public class ScheduleFragment extends Fragment {
         return view;
     }
     protected void init(View view){
+        spotColor = "#e86328";
         calendarView = view.findViewById(R.id.schedule_calendarView);
         calendarView.setSelectedDate(CalendarDay.today());
         Calendar startTimeCalendar = Calendar.getInstance();
@@ -66,7 +68,7 @@ public class ScheduleFragment extends Fragment {
                 .setMaximumDate(CalendarDay.from(currentYear, currentMonth+11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        calendarView.addDecorator(new EventDecorator(R.color.maincolor, dayList));
+        calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor), dayList));
     }
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
