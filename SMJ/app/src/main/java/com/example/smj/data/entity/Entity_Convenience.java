@@ -1,6 +1,4 @@
-package com.example.smj.ui.main.fragment.Convenience.entity;
-
-import com.example.smj.ui.main.fragment.Convenience.remote.Category;
+package com.example.smj.data.entity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

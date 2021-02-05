@@ -1,5 +1,6 @@
 package com.example.smj.ui.message;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,26 +12,24 @@ import com.example.smj.R;
 
 import java.util.ArrayList;
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageManagementActivity extends AppCompatActivity {
 
-    ArrayList<ChatMessageData> item = new ArrayList<>();
+    ArrayList<MessageManagementData> item = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_message_management);
 
-        item.add(new ChatMessageData("my","안녕하세요"));
-        item.add(new ChatMessageData("you","네 안녕하세요"));
-        item.add(new ChatMessageData("my","내일 거래 가능 하신가요?"));
-
-        RecyclerView messageRecyclerView = findViewById(R.id.message_recycler_view);
+        item.add(new MessageManagementData("image","미당미당님","내일 점심","2시간전",1));
+        item.add(new MessageManagementData("image","미당미당님2","내일 점심2","3시간전",2));
+        RecyclerView messageRecyclerView = findViewById(R.id.message_management_list);
 
         LinearLayoutManager manager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
         messageRecyclerView.setLayoutManager(manager);
-        messageRecyclerView.setAdapter(new MessageItemAdapter(item));
+        messageRecyclerView.setAdapter(new MessageManagementAdapter(this, item));
 
     }
 }
