@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/alarmpage_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/schedule_alarmpage_lineboundary2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알림 등록/수정"
+                android:textSize="18sp">
+
+            </TextView>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
     <View
         android:id="@+id/schedule_alarmpage_line7"
         android:layout_width="match_parent"
@@ -62,20 +85,6 @@
         android:background="@color/message_view_color"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line3"
         tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/schedule_alarmpage_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="138dp"
-        android:text="알림 등록"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/schedule_alarmpage_submit"
@@ -274,11 +283,10 @@
         android:layout_width="match_parent"
         android:layout_height="11dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="18dp"
         android:background="@color/message_view_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_title" />
+        app:layout_constraintTop_toBottomOf="@id/alarmpage_appBarLayout" />
 
     <View
         android:id="@+id/schedule_alarmpage_lineboundary3"
@@ -308,17 +316,6 @@
         android:background="@color/linecolor"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary2"
         tools:layout_editor_absoluteX="16dp" />
-
-    <View
-        android:id="@+id/schedule_alarmpage_line1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="18dp"
-        android:background="@color/linecolor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_title" />
 
     <View
         android:id="@+id/schedule_alarmpage_line"
@@ -448,5 +445,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8"></LinearLayout>
+
+    <View
+        android:id="@+id/schedule_alarmpage_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toTopOf="@id/alarmpage_appBarLayout"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
