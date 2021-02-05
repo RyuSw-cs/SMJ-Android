@@ -44,11 +44,11 @@
         android:stateListAnimator="@null"
         android:layout_width="279dp"
         android:layout_height="45dp"
-        android:background="@drawable/button_alarm_popup_negative_click"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="매년 반복"
         android:textColor="@color/black"
+        android:background="@drawable/button_alarm_popup_negative_click"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_alarmlist_popup_line4" />
 
@@ -58,10 +58,10 @@
         android:layout_width="279dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_alarm_popup_negative_click"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="매일 반복"
+        android:background="@drawable/button_alarm_popup_negative_click"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -71,8 +71,8 @@
         android:stateListAnimator="@null"
         android:layout_width="279dp"
         android:layout_height="45dp"
-        android:background="@drawable/button_alarm_popup_negative_click"
         android:gravity="center_vertical"
+        android:background="@drawable/button_alarm_popup_negative_click"
         android:paddingLeft="20dp"
         android:text="매주 반복"
         android:textColor="@color/black"
@@ -106,53 +106,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/daycheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="17dp"
-        android:translationZ="1dp"
-        app:layout_constraintEnd_toEndOf="@+id/schedule_alarm_everydayiter"
-        app:layout_constraintTop_toTopOf="@+id/schedule_alarm_everydayiter"
-        app:srcCompat="@drawable/check" />
-
-    <ImageView
-        android:id="@+id/weekcheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/schedule_alarm_everydayiter"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarm_everydayiter"
-        app:srcCompat="@drawable/check" />
-
-    <ImageView
-        android:id="@+id/monthcheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/schedule_alarm_everydayiter"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_alarm_everyweekiter"
-        app:srcCompat="@drawable/check" />
-
-    <ImageView
-        android:id="@+id/yearcheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="14dp"
+        android:layout_height="10dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/schedule_alarm_everydayiter"
-        app:layout_constraintTop_toTopOf="@+id/schedule_alarm_everyyeariter"
-        app:srcCompat="@drawable/check" />
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/checbox_schedule_itter"
+        android:button="@android:color/transparent"
+        android:checked="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/schedule_alarm_everydayiter" />
 
     <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
+        android:id="@+id/weekcheck"
+        android:layout_width="14dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/checbox_schedule_itter"
+        android:button="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmlist_popup_line2" />
+
+    <CheckBox
+        android:id="@+id/monthcheck"
+        android:layout_width="14dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/checbox_schedule_itter"
+        android:button="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarm_everyweekiter" />
+
+    <CheckBox
+        android:id="@+id/yearcheck"
+        android:layout_width="14dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/checbox_schedule_itter"
+        android:button="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarm_everymonthiter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
