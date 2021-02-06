@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -69,7 +70,7 @@ public class ScheduleFragment extends Fragment {
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmlistPopupActivity.class);
                 intent.putExtra("data", "Test Popup");
                 startActivityForResult(intent, 1);
