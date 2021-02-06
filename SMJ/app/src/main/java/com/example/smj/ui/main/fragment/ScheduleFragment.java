@@ -15,6 +15,10 @@ import com.example.smj.R;
 import com.example.smj.ui.schedule.EventDecorator;
 import com.example.smj.ui.schedule.ScheduleAlarmlistPopupActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.google.android.material.datepicker.MaterialCalendar;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -70,7 +74,7 @@ public class ScheduleFragment extends Fragment {
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmlistPopupActivity.class);
                 intent.putExtra("data", "Test Popup");
                 startActivityForResult(intent, 1);
