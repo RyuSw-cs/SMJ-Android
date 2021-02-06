@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smj.R;
 import com.example.smj.ui.schedule.ScheduleAlarmlistPopupActivity;
+import com.google.android.material.datepicker.MaterialCalendar;
 
 public class ScheduleFragment extends Fragment {
     CalendarView calendarView;
@@ -30,6 +31,7 @@ public class ScheduleFragment extends Fragment {
     protected void init(View view){
         calendarView = view.findViewById(R.id.schedule_calendarView);
     }
+
     protected void CalendarViewEvent(View v){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
