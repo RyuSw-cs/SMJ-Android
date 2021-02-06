@@ -4,111 +4,234 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f3f3f3">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="124dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/profileimage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="닉네임"
-        android:textSize="30dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            app:title="마이페이지"
+            app:titleTextColor="#555555"
+            android:layout_gravity="center">
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/myLetter"
-        android:layout_width="404dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="6dp"
+    <View
+        android:id="@+id/profileview"
+        android:layout_width="420dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/myLetter"
+        android:layout_width="398dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/white"
+        android:stateListAnimator="@null"
         android:text="쪽지 관리"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="#9a9a9a"
         android:textSize="20dp"
-        android:paddingRight="18dp"
-        android:drawablePadding="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
 
-    <Button
+    <TextView
+        android:id="@+id/letteralram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:background="@drawable/mypage_textview"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myLetter"
+        app:layout_constraintEnd_toEndOf="@+id/myLetter"
+        app:layout_constraintTop_toTopOf="@+id/myLetter"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <TextView
+        android:id="@+id/appsetting_GreaterThanSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textColor="#9a9a9a"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/settingApp"
+        app:layout_constraintEnd_toEndOf="@+id/settingApp"
+        app:layout_constraintTop_toTopOf="@+id/settingApp" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/settingApp"
-        android:layout_width="404dp"
+        android:layout_width="398dp"
         android:layout_height="48dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
+        android:stateListAnimator="@null"
         android:text="앱 관리"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="#9a9a9a"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myPost" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/memberOut"
-        android:layout_width="404dp"
+        android:layout_width="398dp"
         android:layout_height="48dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
+        android:stateListAnimator="@null"
         android:text="회원탈퇴"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="#9a9a9a"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingApp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout"
-        android:layout_width="404dp"
+        android:layout_width="398dp"
         android:layout_height="48dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
+        android:stateListAnimator="@null"
         android:text="로그아웃"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="#eb7e4d"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberOut" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/myPost"
-        android:layout_width="404dp"
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="398dp"
         android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
+        android:stateListAnimator="@null"
         android:text="내 게시글 관리"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="#9a9a9a"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myLetter" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginBottom="64dp"
+        android:src="@drawable/profileimage"
+        app:layout_constraintBottom_toBottomOf="@+id/profileview"
+        app:layout_constraintEnd_toEndOf="@+id/profileview"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/profileview"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="80dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="136dp"
+        android:text="닉네임"
+        android:textColor="#9a9a9a"
+        android:textSize="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <TextView
+        android:id="@+id/mypost_alram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/mypage_textview"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myPost"
+        app:layout_constraintEnd_toEndOf="@+id/myPost"
+        app:layout_constraintTop_toTopOf="@+id/myPost" />
+
+    <TextView
+        android:id="@+id/letter_GreaterThanSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textSize="16dp"
+        android:textColor="#9a9a9a"
+        app:layout_constraintBottom_toBottomOf="@+id/myLetter"
+        app:layout_constraintEnd_toEndOf="@+id/myLetter"
+        app:layout_constraintTop_toTopOf="@+id/myLetter" />
+
+    <TextView
+        android:id="@+id/mypost_GreaterThanSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textSize="16dp"
+        android:textColor="#9a9a9a"
+        app:layout_constraintBottom_toBottomOf="@+id/myPost"
+        app:layout_constraintEnd_toEndOf="@+id/myPost"
+        app:layout_constraintTop_toTopOf="@+id/myPost" />
+
+    <ImageButton
+        android:id="@+id/editprofile_btn"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
