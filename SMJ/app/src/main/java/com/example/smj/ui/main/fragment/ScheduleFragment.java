@@ -13,6 +13,23 @@ import androidx.fragment.app.Fragment;
 import com.example.smj.R;
 import com.example.smj.ui.schedule.EventDecorator;
 import com.example.smj.ui.schedule.ScheduleAlarmlistPopupActivity;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -66,6 +83,23 @@ public class ScheduleFragment extends Fragment {
                 .commit();
         calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor), dayList));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
