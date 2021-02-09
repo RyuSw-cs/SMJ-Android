@@ -7,14 +7,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.smj.R;
 import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.MyPageFragment;
 import com.example.smj.ui.main.fragment.ScheduleFragment;
-import com.example.smj.ui.main.fragment.TradeFragment;
+import com.example.smj.ui.main.fragment.TransactionFragment;
 import com.example.smj.ui.main.fragment.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,7 +30,7 @@ public class MainActivity extends FragmentActivity {
     private LivingTipFragment livingTipFragment;
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
-    private TradeFragment tradeFragment;
+    private TransactionFragment transactionFragment;
 
     BottomNavigationView bottomNavigationView;
 
@@ -81,13 +80,13 @@ public class MainActivity extends FragmentActivity {
         livingTipFragment = new LivingTipFragment();
         myPageFragment = new MyPageFragment();
         scheduleFragment = new ScheduleFragment();
-        tradeFragment = new TradeFragment();
+        transactionFragment = new TransactionFragment();
     }
     private void init_List(){
         list.add(convenienceFragment);
         list.add(livingTipFragment);
         list.add(myPageFragment);
         list.add(scheduleFragment);
-        list.add(tradeFragment);
+        list.add(transactionFragment);
     }
 }
