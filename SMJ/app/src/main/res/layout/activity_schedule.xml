@@ -29,17 +29,14 @@
         android:background="@color/linecolor"
         app:layout_constraintTop_toBottomOf="@+id/schedule_textView"
         tools:layout_editor_absoluteX="-16dp" />
-    <!-- 메테리얼로 수정-->
+
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/schedule_calendarView"
-        android:layout_width="409dp"
-        android:layout_height="577dp"
-        android:background="@color/second_color"
-        android:maxDate="12/31/2021"
-        android:minDate="01/01/2021"
-        android:weekSeparatorLineColor="@color/maincolor"
+        android:id="@+id/schedule_calendarview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_line" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_line"
+        app:mcv_selectionColor="@color/maincolor"
+        app:mcv_showOtherDates="all" />
 </androidx.constraintlayout.widget.ConstraintLayout>
