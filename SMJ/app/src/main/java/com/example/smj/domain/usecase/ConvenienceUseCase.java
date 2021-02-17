@@ -31,7 +31,10 @@ public class ConvenienceUseCase implements RetrofitOnSuccess {
         double y = currentMapPoint.getMapPointGeoCoord().longitude;
         String local = "";
         switch (Category){
-            case "대형마트":
+            case "음식점":
+                local = "FD6";
+                break;
+            case "마트":
                 local = "MT1";
                 break;
             case "편의점":
