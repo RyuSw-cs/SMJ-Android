@@ -123,9 +123,9 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     }
     private void init_List(){
         list.add(convenienceFragment);
-        list.add(livingTipFragment);
-        list.add(myPageFragment);
-        list.add(scheduleFragment);
         list.add(tradeFragment);
+        list.add(livingTipFragment);
+        list.add(scheduleFragment);
+        list.add(myPageFragment);
     }
 }
