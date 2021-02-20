@@ -7,29 +7,29 @@
     android:layout_centerInParent="true"
     android:background="@color/white">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/alarmpage_appBarLayout"
+    <View
+        android:id="@+id/schedule_popup_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
+        android:layout_centerInParent="true"
         android:background="@color/maincolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_gravity="center">
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="날짜"
-                android:textColor="@color/white"
-                android:textSize="14sp">
-
-            </TextView>
-        </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:id="@+id/schedule_popup_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="96dp"
+        android:text="날짜 들어갈 자리"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/schedule_popup_fab"
