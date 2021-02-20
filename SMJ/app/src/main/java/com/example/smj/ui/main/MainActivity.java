@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private LivingTipFragment livingTipFragment;
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
-    private TransactionFragment tradeFragment;
+    private TransactionFragment transactionFragment;
 
     BottomNavigationView bottomNavigationView;
 
@@ -119,11 +119,11 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         livingTipFragment = new LivingTipFragment();
         myPageFragment = new MyPageFragment();
         scheduleFragment = new ScheduleFragment();
-        tradeFragment = new TransactionFragment();
+        transactionFragment = new TransactionFragment();
     }
     private void init_List(){
         list.add(convenienceFragment);
-        list.add(tradeFragment);
+        list.add(transactionFragment);
         list.add(livingTipFragment);
         list.add(scheduleFragment);
         list.add(myPageFragment);
