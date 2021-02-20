@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.smj.R;
 import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
