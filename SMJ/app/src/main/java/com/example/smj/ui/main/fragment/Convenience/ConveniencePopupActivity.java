@@ -33,8 +33,18 @@ public class ConveniencePopupActivity extends Activity {
         address = (TextView)findViewById(R.id.convenience_detail_address);
 
         title.setText(getData.getTitle());
-        phone.setText(getData.getPhone());
-        address.setText(getData.getAddress());
+        if(getData.getPhone().equals("")){
+            phone.setText("전화번호가 제공되지 않습니다.");
+        }
+        else{
+            phone.setText(getData.getPhone());
+        }
+        if(getData.getAddress().equals("")){
+            address.setText("주소가 제공되지 않습니다.");
+        }
+        else{
+            address.setText(getData.getAddress());
+        }
     }
     public void mOnClose(View v){
         finish();
