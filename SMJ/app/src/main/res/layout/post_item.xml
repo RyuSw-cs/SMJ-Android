@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/living_tip_category"
+        android:id="@+id/post_item_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -17,62 +17,62 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/living_tip_title"
+        android:id="@+id/post_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="제목제목제목"
-        app:layout_constraintBottom_toBottomOf="@+id/living_tip_category"
-        app:layout_constraintStart_toEndOf="@+id/living_tip_category"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_category" />
+        app:layout_constraintBottom_toBottomOf="@+id/post_item_category"
+        app:layout_constraintStart_toEndOf="@+id/post_item_category"
+        app:layout_constraintTop_toTopOf="@+id/post_item_category" />
 
     <TextView
-        android:id="@+id/living_tip_contents"
+        android:id="@+id/post_item_contents"
         android:layout_width="240dp"
         android:layout_height="21dp"
         android:layout_marginTop="10dp"
         android:text="글내용글내용글내용"
-        app:layout_constraintStart_toStartOf="@+id/living_tip_category"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_category" />
+        app:layout_constraintStart_toStartOf="@+id/post_item_category"
+        app:layout_constraintTop_toBottomOf="@+id/post_item_category" />
 
     <TextView
-        android:id="@+id/living_tip_writer"
+        android:id="@+id/post_item_writer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="글쓴이"
-        app:layout_constraintStart_toStartOf="@+id/living_tip_category"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_contents" />
+        app:layout_constraintStart_toStartOf="@+id/post_item_category"
+        app:layout_constraintTop_toBottomOf="@+id/post_item_contents" />
 
     <TextView
-        android:id="@+id/living_tip_date"
+        android:id="@+id/post_item_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="2020-12-12 15:22"
-        app:layout_constraintStart_toEndOf="@+id/living_tip_writer"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_writer" />
+        app:layout_constraintStart_toEndOf="@+id/post_item_writer"
+        app:layout_constraintTop_toTopOf="@+id/post_item_writer" />
 
     <ImageView
-        android:id="@+id/living_tip_profile_image"
+        android:id="@+id/post_item_profile_image"
         android:layout_width="88dp"
         android:layout_height="77dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/living_tip_date"
+        app:layout_constraintBottom_toBottomOf="@+id/post_item_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/living_tip_contents"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_title"
+        app:layout_constraintStart_toEndOf="@+id/post_item_contents"
+        app:layout_constraintTop_toTopOf="@+id/post_item_title"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <View
-        android:id="@+id/living_tip_item_contour"
+        android:id="@+id/post_item_contour"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
         android:background="@color/second_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_date" />
+        app:layout_constraintTop_toBottomOf="@+id/post_item_date" />
 </androidx.constraintlayout.widget.ConstraintLayout>

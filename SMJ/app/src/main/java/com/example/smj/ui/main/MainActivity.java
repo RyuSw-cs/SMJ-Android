@@ -18,7 +18,7 @@ import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.MyPageFragment;
 import com.example.smj.ui.main.fragment.ScheduleFragment;
-import com.example.smj.ui.main.fragment.TradeFragment;
+import com.example.smj.ui.main.fragment.TransactionFragment;
 import com.example.smj.ui.main.fragment.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private LivingTipFragment livingTipFragment;
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
-    private TradeFragment tradeFragment;
+    private TransactionFragment tradeFragment;
 
     BottomNavigationView bottomNavigationView;
 
@@ -119,7 +119,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         livingTipFragment = new LivingTipFragment();
         myPageFragment = new MyPageFragment();
         scheduleFragment = new ScheduleFragment();
-        tradeFragment = new TradeFragment();
+        tradeFragment = new TransactionFragment();
     }
     private void init_List(){
         list.add(convenienceFragment);

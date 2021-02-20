@@ -1,4 +1,4 @@
-package com.example.smj.ui.LivingTip;
+package com.example.smj.ui.transaction;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.LivingTip.LivingTipPostData;
 
 import java.util.ArrayList;
 
-public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdapter.ViewHolder> {
+public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPostAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<LivingTipPostData> postData = null;
+    private ArrayList<TransactionPostData> postData = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView category;
@@ -39,7 +40,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         }
     }
 
-    public LivingTipPostAdapter(Context context, ArrayList<LivingTipPostData> data){
+    public TransactionPostAdapter(Context context, ArrayList<TransactionPostData> data){
         this.context = context;
         postData = data;
 
@@ -47,14 +48,14 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
 
     @NonNull
     @Override
-    public LivingTipPostAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TransactionPostAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false);
-        ViewHolder vh = new ViewHolder(view);
+        TransactionPostAdapter.ViewHolder vh = new TransactionPostAdapter.ViewHolder(view);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LivingTipPostAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TransactionPostAdapter.ViewHolder holder, int position) {
         String category = postData.get(position).getCategory();
         String title = postData.get(position).getTitle();
         String contents = postData.get(position).getContents();

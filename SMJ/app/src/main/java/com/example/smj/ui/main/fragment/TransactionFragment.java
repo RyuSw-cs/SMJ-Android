@@ -12,31 +12,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.R;
 import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 import com.example.smj.ui.LivingTip.LivingTipPostData;
+import com.example.smj.ui.transaction.TransactionPostAdapter;
+import com.example.smj.ui.transaction.TransactionPostData;
 
 import java.util.ArrayList;
 
-//홈 버튼
-public class LivingTipFragment extends Fragment {
-
-    ArrayList<LivingTipPostData> data = new ArrayList<>();
+public class TransactionFragment extends Fragment {
+    ArrayList<TransactionPostData> data = new ArrayList<>();
     RecyclerView recyclerView;
-    LivingTipPostAdapter adapter;
+    TransactionPostAdapter adapter;
 
-    public LivingTipFragment(){
+    public TransactionFragment(){
+
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        View view = inflater.inflate(R.layout.activity_living_tip_main,container,false);
+        View view = inflater.inflate(R.layout.activity_transaction_main,container,false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
-        data.add(new LivingTipPostData("청소","제목","글내용","글쓴이","날짜","이미지"));
-        data.add(new LivingTipPostData("청소2","제목2","글내용2","글쓴이2","날짜2","이미지2"));
+        recyclerView = (RecyclerView) view.findViewById(R.id.transaction_post_list);
+        data.add(new TransactionPostData("거래","제목","글내용","글쓴이","날짜","이미지"));
+        data.add(new TransactionPostData("거래2","제목2","글내용2","글쓴이2","날짜2","이미지2"));
 
         recyclerView.setHasFixedSize(true);
-        adapter = new LivingTipPostAdapter(getActivity(), data);
+        adapter = new TransactionPostAdapter(getActivity(), data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         return view;
     }
-
 }

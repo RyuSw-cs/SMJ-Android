@@ -1,4 +1,4 @@
-package com.example.smj.ui.LivingTip;
+package com.example.smj.ui.transaction;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.LivingTip.LivingTipCommentData;
 
 import java.util.ArrayList;
 
-public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipCommentAdapter.ViewHolder> {
+public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionCommentAdapter.ViewHolder> {
 
-    private ArrayList<LivingTipCommentData> commentData = null;
+    private ArrayList<TransactionCommentData> commentData = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView date;
@@ -31,24 +32,24 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
         }
     }
 
-    public LivingTipCommentAdapter(ArrayList<LivingTipCommentData> data){
+    public TransactionCommentAdapter(ArrayList<TransactionCommentData> data){
         commentData = data;
     }
 
     @NonNull
     @Override
-    public LivingTipCommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TransactionCommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.comment_item,parent,false);
-        LivingTipCommentAdapter.ViewHolder vh = new LivingTipCommentAdapter.ViewHolder(view);
+        TransactionCommentAdapter.ViewHolder vh = new TransactionCommentAdapter.ViewHolder(view);
 
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LivingTipCommentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TransactionCommentAdapter.ViewHolder holder, int position) {
         String date = commentData.get(position).getDate();
         String commenter = commentData.get(position).getCommenter();
         String contents = commentData.get(position).getContents();
@@ -63,4 +64,3 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
         return commentData.size();
     }
 }
-

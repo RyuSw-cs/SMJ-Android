@@ -26,9 +26,11 @@
 
     <View
         android:id="@+id/profileview"
-        android:layout_width="420dp"
+        android:layout_width="0dp"
         android:layout_height="190dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/myLetter"
-        android:layout_width="398dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
@@ -82,8 +84,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/settingApp"
-        android:layout_width="398dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="8dp"
@@ -100,8 +102,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/memberOut"
-        android:layout_width="398dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="8dp"
@@ -118,8 +120,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout"
-        android:layout_width="398dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="8dp"
@@ -137,8 +139,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/myPost"
         style="@style/Widget.AppCompat.TextView"
-        android:layout_width="398dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="8dp"
