@@ -1,10 +1,14 @@
 package com.example.smj.ui.main;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,14 +17,14 @@ import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.MyPageFragment;
 import com.example.smj.ui.main.fragment.ScheduleFragment;
-import com.example.smj.ui.main.fragment.TransactionFragment;
+import com.example.smj.ui.main.fragment.TradeFragment;
 import com.example.smj.ui.main.fragment.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private ViewPager2 mViewPager;
     private ViewPagerAdapter pageAdapter;
@@ -30,14 +34,17 @@ public class MainActivity extends FragmentActivity {
     private LivingTipFragment livingTipFragment;
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
-    private TransactionFragment transactionFragment;
+    private TradeFragment tradeFragment;
 
     BottomNavigationView bottomNavigationView;
+
+    private String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkPermission();
         init_Fragment();
         init_List();
         mViewPager = findViewById(R.id.pager);
@@ -75,18 +82,49 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
+    public void checkPermission(){
+        //6.0미만시 권한체크가 필요없음 -> 메소드 종료
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return;
+        for(String permission:REQUIRED_PERMISSIONS){
+            int check = checkCallingOrSelfPermission(permission);
+            if(check == PackageManager.PERMISSION_DENIED){
+                //권한요청 메시지를 나오게함.
+                requestPermissions(REQUIRED_PERMISSIONS,0);
+            }
+        }
+    }
+
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grandResults);
+        if(requestCode==0)
+        {
+            for(int i=0; i<grandResults.length; i++)
+            {
+                //허용됨
+                if(grandResults[i]==PackageManager.PERMISSION_GRANTED){
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"위치권한을 설정해주셔야 합니다.",Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
+    }
     private void init_Fragment() {
         convenienceFragment = new ConvenienceFragment();
         livingTipFragment = new LivingTipFragment();
         myPageFragment = new MyPageFragment();
         scheduleFragment = new ScheduleFragment();
-        transactionFragment = new TransactionFragment();
+        tradeFragment = new TradeFragment();
     }
     private void init_List(){
         list.add(convenienceFragment);
         list.add(livingTipFragment);
         list.add(myPageFragment);
         list.add(scheduleFragment);
-        list.add(transactionFragment);
+        list.add(tradeFragment);
     }
 }
