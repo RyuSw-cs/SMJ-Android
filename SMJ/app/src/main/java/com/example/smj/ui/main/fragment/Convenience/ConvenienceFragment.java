@@ -1,13 +1,25 @@
 package com.example.smj.ui.main.fragment.Convenience;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +54,8 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     private boolean checkLocationButton= false;
     private String[] getItemList;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         mapView = new MapView(getActivity());
@@ -70,12 +84,13 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         mapView.setCurrentLocationEventListener(this);
         mapView.setPOIItemEventListener(this);
         floatingActionButton.setOnClickListener(this);
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
         mapView.setZoomLevel(3,true);
         mapViewContainer.addView(mapView);
 
         return view;
     }
+
+
 
     //트래킹 모드 설정 시 실행됨
     @Override
@@ -84,6 +99,7 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         Log.d("위치 업데이트",String.format("업데이트 됨(%f, %f)",mapPointGeo.latitude, mapPointGeo.longitude));
         currentMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
         mapView.setMapCenterPoint(currentMapPoint, true);
+        //만약 트래킹이 계속 따라가야 하는 상황이라면?
     }
 
     @Override
@@ -106,6 +122,7 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
         super.onPause();
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
     }
+
     public void onResume() {
         super.onResume();
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
