@@ -43,5 +43,6 @@
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.main.fragment.mypage.AppSetting"/>
         <activity android:name=".ui.manage.PostManageActivity"/>
+        <activity android:name=".ui.message.MessageManagementActivity"/>
     </application>
 </manifest>

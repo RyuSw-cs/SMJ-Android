@@ -14,6 +14,7 @@ import com.example.smj.R;
 import com.example.smj.ui.main.fragment.mypage.AppSetting;
 import com.example.smj.ui.manage.PostManageActivity;
 import com.example.smj.ui.message.MessageActivity;
+import com.example.smj.ui.message.MessageManagementActivity;
 
 public class MyPageFragment extends Fragment {
 
@@ -32,7 +33,7 @@ public class MyPageFragment extends Fragment {
         letterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MessageActivity.class);//쪽지리스트액티비티로 연결
+                Intent intent = new Intent(view.getContext(), MessageManagementActivity.class);//쪽지리스트액티비티로 연결
                 startActivityForResult(intent,1);
             }
         });
@@ -67,6 +68,7 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //내 게시글 관련
+                
                 Intent intent = new Intent(view.getContext(), PostManageActivity.class); //게시글관리액티비티로 연결
                 startActivityForResult(intent,3);
             }
