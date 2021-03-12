@@ -68,7 +68,7 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //내 게시글 관련
-                
+
                 Intent intent = new Intent(view.getContext(), PostManageActivity.class); //게시글관리액티비티로 연결
                 startActivityForResult(intent,3);
             }

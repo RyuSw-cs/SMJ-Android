@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
@@ -24,6 +25,7 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <View
         android:id="@+id/profileview"
         android:layout_width="0dp"
@@ -31,9 +33,9 @@
         android:layout_marginTop="1dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/myLetter"
@@ -44,7 +46,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:stateListAnimator="@null"
-        android:text="쪽지 관리"
         android:textAlignment="textStart"
         android:textColor="#9a9a9a"
         android:textSize="20dp"
@@ -89,7 +90,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:stateListAnimator="@null"
-        android:text="앱 관리"
         android:textAlignment="textStart"
         android:textColor="#9a9a9a"
         android:textSize="20dp"
@@ -107,7 +107,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:stateListAnimator="@null"
-        android:text="회원탈퇴"
         android:textAlignment="textStart"
         android:textColor="#9a9a9a"
         android:textSize="20dp"
@@ -125,7 +124,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:stateListAnimator="@null"
-        android:text="로그아웃"
         android:textAlignment="textStart"
         android:textColor="#eb7e4d"
         android:textSize="20dp"
@@ -144,7 +142,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/white"
         android:stateListAnimator="@null"
-        android:text="내 게시글 관리"
         android:textAlignment="textStart"
         android:textColor="#9a9a9a"
         android:textSize="20dp"
@@ -222,18 +219,66 @@
         app:layout_constraintTop_toTopOf="@+id/myPost" />
 
     <ImageButton
-        android:id="@+id/editprofile_btn"
+        android:id="@+id/imageButton"
         android:layout_width="23dp"
         android:layout_height="23dp"
-        android:layout_marginStart="66dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="5dp"
-        android:scaleType="center"
+        android:background="@drawable/mypage_image_edit"
         app:layout_constraintBottom_toBottomOf="@+id/profileImage"
         app:layout_constraintEnd_toEndOf="@+id/profileImage"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="@+id/profileImage"
         app:srcCompat="@drawable/mypage_image_edit" />
+
+    <TextView
+        android:id="@+id/MyLetterText"
+        android:layout_width="60dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="쪽지 관리"
+        app:layout_constraintBottom_toBottomOf="@+id/myLetter"
+        app:layout_constraintStart_toStartOf="@+id/myLetter" />
+
+    <TextView
+        android:id="@+id/myPostText"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="내 게시글 관리"
+        app:layout_constraintBottom_toBottomOf="@+id/myPost"
+        app:layout_constraintStart_toStartOf="@+id/myPost" />
+
+    <TextView
+        android:id="@+id/settingAppText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="앱 관리"
+        app:layout_constraintBottom_toBottomOf="@+id/settingApp"
+        app:layout_constraintStart_toStartOf="@+id/settingApp" />
+
+    <TextView
+        android:id="@+id/memberOutText"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="회원 탈퇴"
+        app:layout_constraintBottom_toBottomOf="@+id/memberOut"
+        app:layout_constraintStart_toStartOf="@+id/memberOut" />
+
+    <TextView
+        android:id="@+id/logoutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="로그아웃"
+        android:textColor="#eb7e4d"
+        app:layout_constraintBottom_toBottomOf="@+id/logout"
+        app:layout_constraintStart_toStartOf="@+id/logout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
