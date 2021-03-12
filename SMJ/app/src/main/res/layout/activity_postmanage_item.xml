@@ -86,7 +86,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="19dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/comment_icon" />
+                app:srcCompat="@drawable/comment" />
 
             <TextView
                 android:id="@+id/postmanage_item_comment"
