@@ -15,8 +15,8 @@ import com.example.smj.ui.main.MainActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class ScheduleAlarmIterPopupActivity extends Activity {
-    private Button daybutton, weekbutton, monthbutton, yearbutton;
-    private CheckBox daycheck, weekcheck, monthcheck, yearcheck;
+    private Button dayButton, weekButton, monthButton, yearButton;
+    private CheckBox dayCheck, weekCheck, monthCheck, yearCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,65 +28,65 @@ public class ScheduleAlarmIterPopupActivity extends Activity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.schedule_alarm_everydayiter:
-                        if(daycheck.isChecked()){
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
+                        if(dayCheck.isChecked()){
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
                         }
                         else{
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
-                            daycheck.setChecked(true);
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
+                            dayCheck.setChecked(true);
                         }
                         break;
                     case R.id.schedule_alarm_everyweekiter:
-                        if(weekcheck.isChecked()){
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
+                        if(weekCheck.isChecked()){
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
                         }
                         else{
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
-                            weekcheck.setChecked(true);
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
+                            weekCheck.setChecked(true);
                         }
                         break;
                     case R.id.schedule_alarm_everymonthiter:
-                        if(monthcheck.isChecked()){
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
+                        if(weekCheck.isChecked()){
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
                         }
                         else{
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
-                            monthcheck.setChecked(true);
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
+                            monthCheck.setChecked(true);
                         }
                         break;
                     case R.id.schedule_alarm_everyyeariter:
-                        if(yearcheck.isChecked()){
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
+                        if(yearCheck.isChecked()){
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
                         }
                         else{
-                            setCheckFalseAll(daycheck,weekcheck,monthcheck,yearcheck);
-                            yearcheck.setChecked(true);
+                            setCheckFalseAll(dayCheck,weekCheck,monthCheck,yearCheck);
+                            yearCheck.setChecked(true);
                         }
                         break;
                 }
             }
         };
-        daybutton.setOnClickListener(onClickListener);
-        weekbutton.setOnClickListener(onClickListener);
-        monthbutton.setOnClickListener(onClickListener);
-        yearbutton.setOnClickListener(onClickListener);
+        dayButton.setOnClickListener(onClickListener);
+        weekButton.setOnClickListener(onClickListener);
+        monthButton.setOnClickListener(onClickListener);
+        yearButton.setOnClickListener(onClickListener);
 
     }
     private void setCheckFalseAll(CheckBox... checks) { for (CheckBox b : checks) {
         b.setChecked(false); }
     }
     protected  void init(){
-        daycheck = findViewById(R.id.daycheck);
-        daycheck.bringToFront();
-        weekcheck = findViewById(R.id.weekcheck);
-        weekcheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
-        monthcheck = findViewById(R.id.monthcheck);
-        monthcheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
-        yearcheck = findViewById(R.id.yearcheck);
-        yearcheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
-        daybutton = findViewById(R.id.schedule_alarm_everydayiter);
-        weekbutton = findViewById(R.id.schedule_alarm_everyweekiter);
-        monthbutton = findViewById(R.id.schedule_alarm_everymonthiter);
-        yearbutton = findViewById(R.id.schedule_alarm_everyyeariter);
+        dayCheck = findViewById(R.id.daycheck);
+        dayCheck.bringToFront();
+        weekCheck = findViewById(R.id.weekcheck);
+        weekCheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
+        monthCheck = findViewById(R.id.monthcheck);
+        monthCheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
+        yearCheck = findViewById(R.id.yearcheck);
+        yearCheck.setButtonDrawable(R.drawable.checbox_schedule_itter);
+        dayButton = findViewById(R.id.schedule_alarm_everydayiter);
+        weekButton = findViewById(R.id.schedule_alarm_everyweekiter);
+        monthButton = findViewById(R.id.schedule_alarm_everymonthiter);
+        yearButton = findViewById(R.id.schedule_alarm_everyyeariter);
     }
 }

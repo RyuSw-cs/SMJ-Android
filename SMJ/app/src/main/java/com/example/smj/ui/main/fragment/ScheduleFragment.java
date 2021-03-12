@@ -6,33 +6,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.smj.R;
+import com.example.smj.callback.ScheduleGetData;
+import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.ui.schedule.EventDecorator;
 import com.example.smj.ui.schedule.ScheduleAlarmlistPopupActivity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.google.android.material.datepicker.MaterialCalendar;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-public class ScheduleFragment extends Fragment {
+public class ScheduleFragment extends Fragment implements ScheduleGetData {
     MaterialCalendarView calendarView;
     String spotColor;
-    public ScheduleFragment(){
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -43,6 +36,9 @@ public class ScheduleFragment extends Fragment {
         return view;
     }
     protected void init(View view){
+
+        //여기에 서버통신 준비
+
         spotColor = "#e86328";
         calendarView = view.findViewById(R.id.schedule_calendarView);
         calendarView.setSelectedDate(CalendarDay.today());
@@ -82,4 +78,8 @@ public class ScheduleFragment extends Fragment {
         });
     }
 
+    @Override
+    public void clickSuccess(ArrayList<Alarm> list) {
+        //데이터를 여기에 받았습니다.
+    }
 }

@@ -18,13 +18,13 @@ import com.example.smj.utill.UiHelper;
 
 public class ScheduleAlarmPageActivity extends AppCompatActivity {
     private ViewGroup alarmDelete, alarmIter;
-    private TextView submitmodified;
+    private TextView submitModified;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_schedule_alarmpage);
         init();
-        submitmodified.setOnClickListener((view) ->{
+        submitModified.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmModifiedPopupActivity.class);
             intent.putExtra("data", "Test Popup");
             startActivityForResult(intent, 1);
@@ -43,7 +43,7 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
     protected void init(){
         alarmIter = findViewById(R.id.schedule_allday_iterclicklayout);
         alarmDelete = findViewById(R.id.schedule_allday_clicklayout);
-        submitmodified = findViewById(R.id.schedule_alarmpage_submit_modified);
-        submitmodified.bringToFront();
+        submitModified = findViewById(R.id.schedule_alarmpage_submit_modified);
+        submitModified.bringToFront();
     }
 }
