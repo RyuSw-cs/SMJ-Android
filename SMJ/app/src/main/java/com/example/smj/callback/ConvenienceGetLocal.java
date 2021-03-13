@@ -1,8 +1,6 @@
 package com.example.smj.callback;
 
-import androidx.annotation.NonNull;
-
-import com.example.smj.data.entity.Document;
+import com.example.smj.data.entity.Convenience.Document;
 
 import java.util.ArrayList;
 

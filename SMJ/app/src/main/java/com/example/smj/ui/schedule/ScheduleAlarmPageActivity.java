@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,13 +20,15 @@ import com.example.smj.utill.UiHelper;
 
 public class ScheduleAlarmPageActivity extends AppCompatActivity {
     private ViewGroup alarmDelete, alarmIter;
-    private TextView submitmodified;
+    private TextView submitModified;
+    private EditText title, content;
+    private Boolean checkFocus1 = true, checkFocus2 = true;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_schedule_alarmpage);
         init();
-        submitmodified.setOnClickListener((view) ->{
+        submitModified.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmModifiedPopupActivity.class);
             intent.putExtra("data", "Test Popup");
             startActivityForResult(intent, 1);
@@ -43,7 +47,27 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
     protected void init(){
         alarmIter = findViewById(R.id.schedule_allday_iterclicklayout);
         alarmDelete = findViewById(R.id.schedule_allday_clicklayout);
-        submitmodified = findViewById(R.id.schedule_alarmpage_submit_modified);
-        submitmodified.bringToFront();
+        submitModified = findViewById(R.id.schedule_alarmpage_submit_modified);
+        title = findViewById(R.id.schedule_alarmpage_alarmsubmit);
+        title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(checkFocus1) {
+                    title.setText("");
+                    checkFocus1 = false;
+                }
+            }
+        });
+        content = findViewById(R.id.schedule_alarmpage_context);
+        content.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(checkFocus2) {
+                    content.setText("");
+                    checkFocus2 = false;
+                }
+            }
+        });
+        submitModified.bringToFront();
     }
 }

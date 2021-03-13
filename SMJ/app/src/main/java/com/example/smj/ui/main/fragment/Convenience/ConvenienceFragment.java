@@ -1,32 +1,20 @@
 package com.example.smj.ui.main.fragment.Convenience;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.callback.ConvenienceGetLocal;
-import com.example.smj.data.entity.Document;
-import com.example.smj.data.entity.PopupInfo;
+import com.example.smj.data.entity.Convenience.Document;
+import com.example.smj.data.entity.Convenience.PopupInfo;
 import com.example.smj.domain.usecase.ConvenienceUseCase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

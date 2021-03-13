@@ -1,4 +1,4 @@
-package com.example.smj.data.entity;
+package com.example.smj.data.entity.Convenience;
 
 import java.io.Serializable;
 

@@ -7,13 +7,17 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.smj.R;
+import com.example.smj.callback.JWTGetLocal;
+import com.example.smj.domain.usecase.JWTUseCase;
 import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.MyPageFragment;
@@ -25,8 +29,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
-
+public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, JWTGetLocal {
+    private String at;
+    public static String jwt;
     private ViewPager2 mViewPager;
     private ViewPagerAdapter pageAdapter;
     private int num_page = 5;
@@ -36,7 +41,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private MyPageFragment myPageFragment;
     private ScheduleFragment scheduleFragment;
     private TransactionFragment transactionFragment;
-
+    private JWTUseCase jwtUseCase;
     BottomNavigationView bottomNavigationView;
 
     private String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -48,6 +53,8 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         checkPermission();
         init_Fragment();
         init_List();
+        jwtUseCase = new JWTUseCase(this);
+        getJWT();
         mViewPager = findViewById(R.id.pager);
         pageAdapter = new ViewPagerAdapter(this,num_page);
         pageAdapter.addFragments(list);
@@ -55,7 +62,6 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         mViewPager.setCurrentItem(2);
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setUserInputEnabled(false);
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.tab3);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,6 +87,8 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
                 }
             }
         });
+
+
     }
 
     public void checkPermission(){
@@ -97,7 +105,6 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     }
 
     @Override
-
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grandResults);
         if(requestCode==0)
@@ -127,5 +134,13 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         list.add(livingTipFragment);
         list.add(scheduleFragment);
         list.add(myPageFragment);
+    }
+    public void getJWT(){
+        Intent intent = getIntent(); /*데이터 수신*/
+        at = intent.getExtras().getString("accessToken"); /*String형*/
+        jwtUseCase.sendAT(at);
+    }
+    public void clickSuccess(String jwt){
+        this.jwt = jwt;
     }
 }

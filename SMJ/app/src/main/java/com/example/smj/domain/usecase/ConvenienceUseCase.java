@@ -1,12 +1,6 @@
 package com.example.smj.domain.usecase;
 
-import android.content.Context;
-import android.util.Log;
-
-import androidx.fragment.app.Fragment;
-
-import com.example.smj.callback.RefreshView;
-import com.example.smj.data.entity.Document;
+import com.example.smj.data.entity.Convenience.Document;
 import com.example.smj.data.repository.ConvenienceMarkerApi;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;

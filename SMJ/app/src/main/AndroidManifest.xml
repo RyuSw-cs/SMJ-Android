@@ -19,16 +19,17 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key_login" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.LivingTip.LivingTipReadingActivity"/>
         <activity android:name=".ui.LivingTip.LivingTipCommentActivity"/>
         <activity android:name=".ui.message.MessageActivity"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmlistPopupActivity"
+        <activity android:name=".ui.schedule.ScheduleAlarmListPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
