@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.smj.R;
 import com.example.smj.callback.JWTGetLocal;
-import com.example.smj.data.entity.Document;
 import com.example.smj.domain.usecase.JWTUseCase;
 import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
@@ -31,7 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, JWTGetLocal {
-    private String at, jwt;
+    private String at;
+    public static String jwt;
     private ViewPager2 mViewPager;
     private ViewPagerAdapter pageAdapter;
     private int num_page = 5;

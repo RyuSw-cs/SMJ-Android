@@ -1,9 +1,8 @@
 package com.example.smj.callback;
 
 import com.example.smj.data.entity.Schedule.Alarm;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ScheduleGetData {
-    void clickSuccess(ArrayList<Alarm> list);
+    void clickSuccess(List<Alarm> list);
 }

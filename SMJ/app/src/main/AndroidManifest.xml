@@ -29,7 +29,7 @@
         <activity android:name=".ui.LivingTip.LivingTipReadingActivity"/>
         <activity android:name=".ui.LivingTip.LivingTipCommentActivity"/>
         <activity android:name=".ui.message.MessageActivity"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmlistPopupActivity"
+        <activity android:name=".ui.schedule.ScheduleAlarmListPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"

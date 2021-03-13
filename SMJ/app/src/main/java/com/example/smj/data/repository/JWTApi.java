@@ -3,15 +3,10 @@ package com.example.smj.data.repository;
 import android.util.Log;
 
 import com.example.smj.data.datasource.JWTRemoteDataSource;
-import com.example.smj.data.datasource.RemoteDataSource;
-import com.example.smj.data.entity.Category;
-import com.example.smj.data.entity.Document;
-import com.example.smj.data.entity.Entitiy_JWT;
-import com.example.smj.data.entity.Entity_Convenience;
-import com.example.smj.domain.usecase.ConvenienceUseCase;
+import com.example.smj.data.entity.Entity_JWT;
 import com.example.smj.domain.usecase.JWTUseCase;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +15,7 @@ import retrofit2.Response;
 public class JWTApi {
     private String jwt;
     public void retrieveLocals(String at, JWTUseCase jwtUseCase){
-        Entitiy_JWT entityJWT = JWTRemoteDataSource.getInstance().create(Entitiy_JWT.class);
+        Entity_JWT entityJWT = JWTRemoteDataSource.getInstance().create(Entity_JWT.class);
         Call<String> call = entityJWT.getAuthorizationKey(at);
         call.enqueue(new Callback<String>() {
             @Override
