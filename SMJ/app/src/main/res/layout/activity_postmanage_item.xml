@@ -82,15 +82,21 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="19dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+
             <TextView
                 android:id="@+id/postmanage_item_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
                 android:layout_marginRight="4dp"
-                android:layout_weight="1"
                 android:text="2"
                 android:textAlignment="textEnd"
                 android:textSize="12sp" />
+
         </LinearLayout>
 
 
