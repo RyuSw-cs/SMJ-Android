@@ -9,7 +9,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.example.smj.R;
-import com.example.smj.data.entity.PopupInfo;
+import com.example.smj.data.entity.Convenience.PopupInfo;
 
 public class ConveniencePopupActivity extends Activity {
 

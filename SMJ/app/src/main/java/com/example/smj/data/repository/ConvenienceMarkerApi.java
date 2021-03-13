@@ -1,9 +1,9 @@
 package com.example.smj.data.repository;
 
-import com.example.smj.data.datasource.RemoteDataSource;
-import com.example.smj.data.entity.Category;
-import com.example.smj.data.entity.Document;
-import com.example.smj.data.entity.Entity_Convenience;
+import com.example.smj.data.datasource.KakaoRemoteDataSource;
+import com.example.smj.data.entity.Convenience.Category;
+import com.example.smj.data.entity.Convenience.Document;
+import com.example.smj.data.entity.Convenience.Entity_Convenience;
 import com.example.smj.domain.usecase.ConvenienceUseCase;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ConvenienceMarkerApi {
     private ArrayList<Document>localList = new ArrayList<>();
 
     public void retrieveLocals(String local, double x, double y,  ConvenienceUseCase convenienceUseCase){
-        Entity_Convenience entityConvenience = RemoteDataSource.getInstance().create(Entity_Convenience.class);
+        Entity_Convenience entityConvenience = KakaoRemoteDataSource.getInstance().create(Entity_Convenience.class);
         Call<Category> call = entityConvenience.getSearchCategory("KakaoAK 92ae20dbb333f02658441075a9144490",local,y+"",x+"",1500);
         call.enqueue(new Callback<Category>() {
             @Override
