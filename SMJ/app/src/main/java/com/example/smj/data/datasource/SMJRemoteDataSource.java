@@ -1,13 +1,12 @@
 package com.example.smj.data.datasource;
 
+import com.google.gson.Gson;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/*
-레트로핏 객체를 생성해주는 곳
- */
-public class RemoteDataSource {
-    private static final String URL ="https://dapi.kakao.com/";
+public class SMJRemoteDataSource {
+    private static final String URL ="https://smj-server-heroku.herokuapp.com";
     private static Retrofit retrofit;
 
     public static Retrofit getInstance(){

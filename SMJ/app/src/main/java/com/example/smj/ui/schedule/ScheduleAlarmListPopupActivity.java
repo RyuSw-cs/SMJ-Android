@@ -5,18 +5,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.data.entity.Schedule.Alarm;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ScheduleAlarmlistPopupActivity extends Activity {
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
-    FloatingActionButton fab;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ScheduleAlarmListPopupActivity extends Activity {
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
+    private FloatingActionButton fab;
+    private TextView main;
+    private List<Alarm>list = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +38,7 @@ public class ScheduleAlarmlistPopupActivity extends Activity {
     protected void init(){
         fab = findViewById(R.id.schedule_popup_fab);
         recyclerView = findViewById(R.id.schedule_popup_recyclerView);
+        main = findViewById(R.id.schedule_popup_date);
     }
     protected void FabEvent(){
          fab.setOnClickListener((view) ->{
@@ -41,14 +50,13 @@ public class ScheduleAlarmlistPopupActivity extends Activity {
     protected void setRecyclerView(){
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        String[] title =  {"제목","제목","제목","제목"};
-        String[] date =  {"날짜","날짜","날짜","날짜"};
-        adapter = new ScheduleAlarmlistAdapter(title,date);
+        adapter = new ScheduleAlarmListAdapter(list);
         recyclerView.setAdapter(adapter);
     }
     protected void getData(){
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
+        main.setText(data);
     }
     protected void setData(){
         Intent intent = new Intent();
