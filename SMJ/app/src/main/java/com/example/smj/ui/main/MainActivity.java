@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, JWTGetLocal {
     private String at;
-    public static String jwt;
+    private String jwt;
     private ViewPager2 mViewPager;
     private ViewPagerAdapter pageAdapter;
     private int num_page = 5;
@@ -43,7 +44,8 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private TransactionFragment transactionFragment;
     private JWTUseCase jwtUseCase;
     BottomNavigationView bottomNavigationView;
-
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Override
@@ -140,7 +142,15 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         at = intent.getExtras().getString("accessToken"); /*String형*/
         jwtUseCase.sendAT(at);
     }
+    public void prefSave(){
+        pref = getPreferences(MODE_PRIVATE); //공유 환경설정 파일 핸들 불러오기
+        editor = pref.edit(); //에디터 생성
+        editor.putString(getString(R.string.saved_JWT), jwt); //save_JWT 키 와 jwt값 쌍을 만들어 저장
+        editor.apply(); //적용
+    }
     public void clickSuccess(String jwt){
         this.jwt = jwt;
+        Log.d("JWT값 메인", jwt);
+        prefSave();
     }
 }

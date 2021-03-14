@@ -1,6 +1,8 @@
 package com.example.smj.ui.main.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +38,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
     private String spotColor;
     private ArrayList<Alarm>getList = new ArrayList<>();
     private ScheduleUseCase scheduleUseCase;
-
+    SharedPreferences pref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         //스케쥴 액티비티 나올 시 교체
@@ -47,6 +49,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
     }
 
     protected void init(View view){
+
         //여기에 서버통신 준비
         getList.clear();
         scheduleUseCase = new ScheduleUseCase(this);
@@ -94,7 +97,6 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
             }
         });
     }
-
     @Override
     public void clickSuccess(List<Alarm> list) {
         //점찍기 코드
@@ -120,5 +122,10 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 e.printStackTrace();
             }
         }
+    }
+    public String prefLoad(){
+        pref =  getActivity().getPreferences(Context.MODE_PRIVATE); //공유 환경설정 파일로부터 핸들 불러오기
+        String result = pref.getString(getString(R.string.saved_JWT),""); //핸들에서 저장했던 Key로 값 불러옴
+        return result;
     }
 }
