@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.JWTGetLocal;
 import com.example.smj.domain.usecase.JWTUseCase;
@@ -44,8 +45,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private TransactionFragment transactionFragment;
     private JWTUseCase jwtUseCase;
     BottomNavigationView bottomNavigationView;
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+
     private String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Override
@@ -142,15 +142,9 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         at = intent.getExtras().getString("accessToken"); /*String형*/
         jwtUseCase.sendAT(at);
     }
-    public void prefSave(){
-        pref = getPreferences(MODE_PRIVATE); //공유 환경설정 파일 핸들 불러오기
-        editor = pref.edit(); //에디터 생성
-        editor.putString(getString(R.string.saved_JWT), jwt); //save_JWT 키 와 jwt값 쌍을 만들어 저장
-        editor.apply(); //적용
-    }
+
     public void clickSuccess(String jwt){
         this.jwt = jwt;
-        Log.d("JWT값 메인", jwt);
-        prefSave();
+        JWTManager.putSharedPreference(this,getString(R.string.saved_JWT),jwt);
     }
 }

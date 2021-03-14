@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.ScheduleGetData;
 import com.example.smj.data.entity.Schedule.Alarm;
@@ -88,6 +89,8 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmListPopupActivity.class);
+                String s = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
+                Log.d("ㅋㅋㅋ", s);
                 int year = date.getYear();
                 int month = date.getMonth()+1;
                 int day = date.getDay();
@@ -122,10 +125,5 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 e.printStackTrace();
             }
         }
-    }
-    public String prefLoad(){
-        pref =  getActivity().getPreferences(Context.MODE_PRIVATE); //공유 환경설정 파일로부터 핸들 불러오기
-        String result = pref.getString(getString(R.string.saved_JWT),""); //핸들에서 저장했던 Key로 값 불러옴
-        return result;
     }
 }
