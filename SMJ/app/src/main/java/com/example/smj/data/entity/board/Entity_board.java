@@ -1,6 +1,4 @@
-package com.example.smj.data.entity;
-
-import com.example.smj.data.entity.Schedule.Alarm;
+package com.example.smj.data.entity.board;
 
 import java.util.List;
 
@@ -13,23 +11,23 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface LivingTipRetrofitService {
+public interface Entity_board {
 
     @GET("api/boards")
-    Call<List<LivingTipDTO>> getLivingTIp(
+    Call<List<boardData>> getLivingTIp(
             @Header("Authorization") String token
     );
 
     @POST("api/boards")
-    Call<LivingTipDTO> postLivingTip(
+    Call<boardData> postLivingTip(
             @Header("Authorization") String token,
-            @Body LivingTipDTO post
+            @Body boardData post
     );
 
     @PUT("api/boards")
-    Call<LivingTipDTO> putLivingTip(
+    Call<boardData> putLivingTip(
             @Header("Authorization") String token,
-            @Body LivingTipDTO put,
+            @Body boardData put,
             @Path("id") String id
     );
 
@@ -40,7 +38,7 @@ public interface LivingTipRetrofitService {
     );
 
     @GET("api/boards/my")
-    Call<List<LivingTipDTO>> getMyLivingTip(
+    Call<List<boardData>> getMyLivingTip(
             @Header("Authorization") String token
     );
 }
