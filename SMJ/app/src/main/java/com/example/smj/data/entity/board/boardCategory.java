@@ -1,10 +1,10 @@
-package com.example.smj.data.entity;
+package com.example.smj.data.entity.board;
 
-public class LivingTipCategory {
+public class boardCategory {
     int id;
     String name;
 
-    public LivingTipCategory(int id, String name) {
+    public boardCategory(int id, String name) {
         this.id = id;
         this.name = name;
     }
