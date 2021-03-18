@@ -1,6 +1,8 @@
 package com.example.smj.ui.main.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.ScheduleGetData;
 import com.example.smj.data.entity.Schedule.Alarm;
@@ -36,7 +39,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
     private String spotColor;
     private ArrayList<Alarm>getList = new ArrayList<>();
     private ScheduleUseCase scheduleUseCase;
-
+    SharedPreferences pref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         //스케쥴 액티비티 나올 시 교체
@@ -47,6 +50,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
     }
 
     protected void init(View view){
+
         //여기에 서버통신 준비
         getList.clear();
         scheduleUseCase = new ScheduleUseCase(this);
@@ -85,6 +89,8 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmListPopupActivity.class);
+                String s = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
+                Log.d("ㅋㅋㅋ", s);
                 int year = date.getYear();
                 int month = date.getMonth()+1;
                 int day = date.getDay();
@@ -94,7 +100,6 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
             }
         });
     }
-
     @Override
     public void clickSuccess(List<Alarm> list) {
         //점찍기 코드

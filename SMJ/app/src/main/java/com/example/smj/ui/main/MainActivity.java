@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.JWTGetLocal;
 import com.example.smj.domain.usecase.JWTUseCase;
@@ -31,7 +33,7 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, JWTGetLocal {
     private String at;
-    public static String jwt;
+    private String jwt;
     private ViewPager2 mViewPager;
     private ViewPagerAdapter pageAdapter;
     private int num_page = 5;
@@ -140,7 +142,9 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         at = intent.getExtras().getString("accessToken"); /*String형*/
         jwtUseCase.sendAT(at);
     }
+
     public void clickSuccess(String jwt){
         this.jwt = jwt;
+        JWTManager.putSharedPreference(this,getString(R.string.saved_JWT),jwt);
     }
 }
