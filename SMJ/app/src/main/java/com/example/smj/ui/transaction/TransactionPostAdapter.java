@@ -1,6 +1,8 @@
 package com.example.smj.ui.transaction;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.data.repository.TransactionApi;
 import com.example.smj.ui.LivingTip.LivingTipPostData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPostAdapter.ViewHolder> {
 
@@ -30,7 +35,6 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
         ViewHolder(View itemView){
             super(itemView);
-
             category = itemView.findViewById(R.id.post_item_category);
             title = itemView.findViewById(R.id.post_item_title);
             contents = itemView.findViewById(R.id.post_item_contents);
@@ -40,10 +44,9 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         }
     }
 
-    public TransactionPostAdapter(Context context, ArrayList<TransactionPostData> data){
+    public TransactionPostAdapter(Context context, List<TransactionPostData> data){
         this.context = context;
-        postData = data;
-
+        postData = (ArrayList) data;
     }
 
     @NonNull
@@ -69,6 +72,16 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         holder.writer.setText(writer);
         holder.date.setText(date);
         //holder.category.setText(profileImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //리사이클러뷰 해당 아이템의 값 전달
+                Context context = v.getContext();
+                Intent intent = new Intent(context,TransactionReadingActivity.class);
+                intent.putExtra("data", postData.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

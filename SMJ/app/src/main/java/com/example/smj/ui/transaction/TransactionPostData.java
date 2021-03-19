@@ -1,6 +1,8 @@
 package com.example.smj.ui.transaction;
 
-public class TransactionPostData {
+import java.io.Serializable;
+
+public class TransactionPostData implements Serializable {
     private String category;
     private String title;
     private String contents;
