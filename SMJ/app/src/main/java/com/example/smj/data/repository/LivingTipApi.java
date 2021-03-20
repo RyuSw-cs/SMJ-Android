@@ -31,8 +31,8 @@ public class LivingTipApi {
                 if(response.isSuccessful()){
                     Log.d("살림 팁 게시판 데이터 GET 성공","살림 팁 게시판 데이터 GET 성공");
                     livingTipList = response.body();
-                    LivingTipFragment livingTipFragment = new LivingTipFragment();
-                    //livingTipFragment.getData(livingTipList);
+                    livingTipUseCase.onSuccess(livingTipList);
+                    Log.d("살림 팁 게시판 데이터 GET 성공",Integer.toString(livingTipList.size()));
                 }
             }
 
