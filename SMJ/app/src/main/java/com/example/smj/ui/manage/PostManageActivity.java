@@ -30,7 +30,7 @@ public class PostManageActivity extends AppCompatActivity {
         String[] title =  {"제목","제목","제목","제목"};
         String[] contents =  {"내용","내용","내용","내용"};
         String[] date =  {"날짜","날짜","날짜","날짜"};
-        String[] comment =  {"댓글 수","댓글 수","댓글 수","댓글 수"};
+        String[] comment =  {"30","100","댓글 수","댓글 수"};
         adapter = new PostManageMainAdapter(title,contents,date,comment);
         recyclerView.setAdapter(adapter);
     }

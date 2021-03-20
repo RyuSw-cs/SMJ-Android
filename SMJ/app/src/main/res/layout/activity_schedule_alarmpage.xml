@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/alarmpage_appBarLayout"
+        android:stateListAnimator="@null"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/schedule_alarmpage_lineboundary2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알림 등록/수정"
+                android:textSize="18sp">
+
+            </TextView>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <View
+        android:id="@+id/schedule_alarmpage_line7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        tools:layout_editor_absoluteX="-33dp" />
+    <TextView
+        android:id="@+id/schedule_alarmpage_submit_modified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="14dp"
+        android:text="등록"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/schedule_alarmpage_line8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_allday6"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="11dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_repeat"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line10"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_allday_notichswitch"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary3"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_lineboundary1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_centerInParent="true"
+        android:background="@color/message_view_color"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line3"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/schedule_alarmpage_alarmsubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="알림 등록"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line2" />
+
+    <EditText
+        android:id="@+id/schedule_alarmpage_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="세부 내용"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_allday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:text="하루 종일"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line4" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_startdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="시작시간"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line5" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_allday6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="종료시간"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line7" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="종료시간"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line7" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_repeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="반복"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="알림"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line9" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="2021.01.01"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/schedule_alarmpage_starttime"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line5" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_starttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:text="PM:04:20"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/schedule_alarmpage_startpass"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line5" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_finishitime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="PM:05:20"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/schedule_alarmpage_finishpass"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line7" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_repeatcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:text="매달 반복"
+        android:textColor="@color/alarmpage_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/schedule_alarmpage_finishpass"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_startpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textColor="#9a9a9a"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line5" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_finishpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textColor="#9a9a9a"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line7" />
+
+    <TextView
+        android:id="@+id/schedule_alarmpage_repeatpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text=">"
+        android:textColor="#9a9a9a"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_lineboundary2"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:layout_centerInParent="true"
+        android:background="@color/message_view_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alarmpage_appBarLayout" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_lineboundary3"
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
+        android:layout_centerInParent="true"
+        android:background="@color/message_view_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line10" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_lineboundary6"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:background="@color/message_view_color"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line12"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary2"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="11dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_alarmsubmit"
+        tools:layout_editor_absoluteX="-14dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="11dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_context"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="11dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_allday"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="11dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_startdate"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line6" />
+
+    <Switch
+        android:id="@+id/schedule_allday_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:checked="false"
+        android:textOff=""
+        android:textOn=""
+        android:thumb="@drawable/schedule_switch_thumb"
+        android:track="@drawable/schedule_switch_track_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line4" />
+
+    <Switch
+        android:id="@+id/schedule_allday_notichswitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:checked="false"
+        android:textOff=""
+        android:textOn=""
+        android:thumb="@drawable/schedule_switch_thumb"
+        android:track="@drawable/schedule_switch_track_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line9" />
+
+    <View
+        android:id="@+id/schedule_alarmpage_line12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_allday_clicklayout"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <LinearLayout
+        android:id="@+id/schedule_allday_clicklayout"
+        android:layout_width="411dp"
+        android:layout_height="43dp"
+        android:gravity="center|start|left"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/schedule_alarmpage_lineboundary6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_lineboundary3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/schedule_alarmpage_noticedelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:gravity="left"
+            android:text="알림 삭제"
+            android:textColor="@color/maincolor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/schedule_allday_iterclicklayout"
+        android:layout_width="413dp"
+        android:layout_height="44dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_alarmpage_line8"></LinearLayout>
+
+    <View
+        android:id="@+id/schedule_alarmpage_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:background="@color/linecolor"
+        app:layout_constraintTop_toTopOf="@id/alarmpage_appBarLayout"
+        tools:layout_editor_absoluteX="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

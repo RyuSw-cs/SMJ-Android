@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smj">
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -18,14 +19,38 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key_login" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.LivingTip.LivingTipReadingActivity"/>
         <activity android:name=".ui.LivingTip.LivingTipCommentActivity"/>
         <activity android:name=".ui.message.MessageActivity"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmListPopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
+        <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmModifiedPopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmDeletePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.schedule.ScheduleAlarmIterPopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.main.fragment.mypage.AppSetting"/>
+        <activity android:name=".ui.manage.PostManageActivity"/>
+        <activity android:name=".ui.message.MessageManagementActivity"/>
+        <activity android:name=".ui.transaction.TransactionReadingActivity"/>
+        <activity android:name=".ui.transaction.TransactionDeletePopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.transaction.TransactionModifyPopupActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.transaction.TransactionModifyActivity"/>
+        <activity android:name=".ui.transaction.TransactionMoreInfo"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ui.create.CreateTradeActivity"/>
     </application>
 </manifest>

@@ -8,36 +8,37 @@
 
     <ImageButton
         android:id="@+id/comment_more_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/living_tip_comment_date"
-        app:layout_constraintEnd_toEndOf="@+id/living_tip_comment_contents"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_comment_date"
-        app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/baseline_more_horiz_black_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_date"
+        app:layout_constraintEnd_toEndOf="@+id/comment_contents"
+        app:layout_constraintTop_toTopOf="@+id/comment_date" />
 
     <View
-        android:id="@+id/living_tip_comment_title_contour2"
+        android:id="@+id/comment_contour"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:background="@color/contour_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_comment_contents" />
+        app:layout_constraintTop_toBottomOf="@+id/comment_contents" />
 
     <TextView
-        android:id="@+id/living_tip_comment_date"
+        android:id="@+id/comment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:text="2020-12-12"
-        app:layout_constraintBottom_toBottomOf="@+id/living_tip_commenter"
-        app:layout_constraintStart_toEndOf="@+id/living_tip_commenter"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_commenter" />
+        app:layout_constraintBottom_toBottomOf="@+id/commenter"
+        app:layout_constraintStart_toEndOf="@+id/commenter"
+        app:layout_constraintTop_toTopOf="@+id/commenter" />
 
     <TextView
-        android:id="@+id/living_tip_commenter"
+        android:id="@+id/commenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -47,13 +48,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/living_tip_comment_contents"
+        android:id="@+id/comment_contents"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:text="댓글내용"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/living_tip_commenter"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_commenter" />
+        app:layout_constraintStart_toStartOf="@+id/commenter"
+        app:layout_constraintTop_toBottomOf="@+id/commenter" />
 </androidx.constraintlayout.widget.ConstraintLayout>

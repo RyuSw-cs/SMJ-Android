@@ -8,21 +8,36 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.message.MessageManagementAdapter;
+
+import java.util.ArrayList;
 
 
 public class CreateLivingTipActivity extends AppCompatActivity {
     Spinner spinner;
     ImageButton gallerybtn;
+    RecyclerView photolist;
+    ArrayList<PhotoData> photoData = new ArrayList<>();
+
     private static int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_living_tip);
+        photolist = findViewById(R.id.photo_recyclerView);
 
         category();
         gallery();
+
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        photolist.setLayoutManager(manager);
+        photolist.setAdapter(new CreatephotoAdapter(this,photoData));
+
+        photoData.add(new PhotoData(R.drawable.profileimage));
     }
 
     public void category(){

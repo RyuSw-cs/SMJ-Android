@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <android.widget.Button
+        android:id="@+id/modified_comment"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -18,6 +19,7 @@
         android:background="@color/black" />
 
     <android.widget.Button
+        android:id="@+id/delete_comment"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:paddingRight="120dp"

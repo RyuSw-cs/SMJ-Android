@@ -6,28 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/living_tip_reading_title"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:lineSpacingExtra="9sp"
-        android:text="@string/living_tip_title"
-        android:textColor="#555555"
-        android:textSize="18sp"
-        android:textStyle="normal"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/living_tip_title"
+            android:layout_gravity="center">
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/more_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/living_tip_reading_title"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/living_tip_reading_title"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
         app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
 
     <View
@@ -39,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_title" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/living_tip_reading_post_category"
@@ -106,10 +109,9 @@
         android:id="@+id/living_tip_reading_message_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toStartOf="@+id/living_tip_reading_comment_btn"
         app:layout_constraintTop_toTopOf="@+id/living_tip_reading_comment_btn"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/message_icon" />
 
     <ImageView
         android:id="@+id/living_tip_reading_comment_btn"
@@ -119,6 +121,6 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/living_tip_reading_post_main_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/comment_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
