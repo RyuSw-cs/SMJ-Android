@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.TransactionGetData;
 import com.example.smj.data.entity.Convenience.Category;
@@ -33,6 +34,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     TransactionPostAdapter adapter;
     TransactionUseCase transactionUseCase;
     private Button writeButton;
+    private String token;
 
     public TransactionFragment(){
 
@@ -44,8 +46,10 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         View view = inflater.inflate(R.layout.activity_transaction_main,container,false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.transaction_post_list);
+
+        token =  JWTManager.getSharedPreference(getContext(),getString(R.string.saved_JWT));
         //데이터 받아오기
-        transactionUseCase.getData("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNjA5NzI4MiwiZXhwIjoxNjE2MDk5MDgyfQ.iUtb8FI96ioOFjLSClCwnpS7m-tgf2KT6xJL-LwhzqA");
+        transactionUseCase.getData(token);
         writeButton = (Button) view.findViewById(R.id.write_btn);
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override

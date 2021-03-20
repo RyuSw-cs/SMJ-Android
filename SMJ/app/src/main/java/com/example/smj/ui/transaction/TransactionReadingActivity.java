@@ -32,6 +32,13 @@ public class TransactionReadingActivity extends AppCompatActivity{
         init();
     }
 
+    private void check_person(){
+        //서버 통신을 해줘야하네
+        if(writer.equals("234")){
+
+        }
+    }
+
     private void init(){
 
         moreBtn = findViewById(R.id.more_btn);
