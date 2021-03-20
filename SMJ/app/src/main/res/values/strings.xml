@@ -18,4 +18,6 @@
     <string name="schedule_iter">반복</string>
     <string name="transaction_title">거래 게시판</string>
     <string name="saved_JWT">SMJJWT</string>
+    <string name="board_modify">글을 수정하시겠습니까?</string>
+    <string name="board_delete">글을 삭제하시겠습니까?</string>
 </resources>
