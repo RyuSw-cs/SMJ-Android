@@ -36,18 +36,18 @@
 
     <EditText
         android:id="@+id/sample_EditText"
-        android:layout_width="400dp"
-        android:layout_height="527dp"
+        android:layout_width="418dp"
+        android:layout_height="386dp"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Sample EditText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_title"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.079" />
 
     <EditText
         android:id="@+id/post_title"
@@ -82,5 +82,15 @@
         android:src="@drawable/create_post_image"
         app:layout_constraintBottom_toBottomOf="@+id/sample_EditText"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photo_recyclerView"
+        android:layout_width="408dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
