@@ -2,10 +2,12 @@ package com.example.smj.ui.LivingTip;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.Window;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.R;
