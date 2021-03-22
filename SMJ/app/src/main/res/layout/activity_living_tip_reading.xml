@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/living_tip_title"
-            android:textstyle="bold"
+            android:textStyle="bold"
             app:title="@string/living_tip_title"
             android:textSize="20sp">
         </TextView>
