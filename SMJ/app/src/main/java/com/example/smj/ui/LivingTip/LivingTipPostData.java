@@ -1,6 +1,7 @@
 package com.example.smj.ui.LivingTip;
 
 public class LivingTipPostData {
+    private int id;
     private String category;
     private String title;
     private String contents;
@@ -8,7 +9,9 @@ public class LivingTipPostData {
     private String date;
     private String profileImage;
 
-    public LivingTipPostData(String category, String title, String contents, String writer, String date, String profileImage) {
+
+    public LivingTipPostData(int id, String category, String title, String contents, String writer, String date, String profileImage) {
+        this.id = id;
         this.category = category;
         this.title = title;
         this.contents = contents;
@@ -63,5 +66,13 @@ public class LivingTipPostData {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
