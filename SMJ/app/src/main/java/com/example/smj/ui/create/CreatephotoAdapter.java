@@ -1,9 +1,13 @@
 package com.example.smj.ui.create;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -18,47 +22,48 @@ import com.example.smj.ui.message.MessageManagementData;
 
 import java.util.ArrayList;
 
-public class CreatephotoAdapter extends RecyclerView.Adapter<CreatephotoAdapter.ViewHolder>{
+public class CreatephotoAdapter extends RecyclerView.Adapter<CreatephotoAdapter.ViewHolder> {
 
+    private ArrayList<Drawable> photoData = null;
     private Context context;
-    private ArrayList<PhotoData> PhotoData = null;
+    private ImageView imageView;
 
-    public CreatephotoAdapter(Context context, ArrayList<PhotoData> data){
+    public CreatephotoAdapter(Context context, ImageView imageView){
         this.context = context;
-        PhotoData = data;
+        this.imageView = imageView;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+    public CreatephotoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.activity_photolist_item,parent,false);
-        CreatephotoAdapter.ViewHolder viewHolder = new CreatephotoAdapter.ViewHolder(view);
+        CreatephotoAdapter.ViewHolder vh = new CreatephotoAdapter.ViewHolder(view);
 
-        return viewHolder;
+        return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        int photo = PhotoData.get(position).getPhoto();
-
+    public void onBindViewHolder(@NonNull CreatephotoAdapter.ViewHolder holder, int position) {
+        holder.photo.setImageDrawable(context.getDrawable(R.drawable.profileimage));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 7;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView photo;
+        private Button button;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             photo = itemView.findViewById(R.id.photo);
+            button = itemView.findViewById(R.id.deletebutton);
         }
     }
 }
