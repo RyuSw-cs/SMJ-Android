@@ -35,9 +35,7 @@ public class CreateLivingTipActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
         photolist.setLayoutManager(manager);
-        photolist.setAdapter(new CreatephotoAdapter(this,photoData));
-
-        photoData.add(new PhotoData(R.drawable.profileimage));
+        photolist.setAdapter(new CreatephotoAdapter(this));
     }
 
     public void category(){
