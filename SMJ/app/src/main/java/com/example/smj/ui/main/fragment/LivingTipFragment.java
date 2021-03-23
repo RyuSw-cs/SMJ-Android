@@ -50,7 +50,9 @@ public class LivingTipFragment extends Fragment {
     public void onSuccess(List<boardData> list) {
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
-            data.add(new LivingTipPostData(board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreateAt(),"이미지"));
+            if(board.getType().equals("LIVE")){
+                data.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreateAt(),"이미지"));
+            }
         }
 
         recyclerView.setHasFixedSize(true);

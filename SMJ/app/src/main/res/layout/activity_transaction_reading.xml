@@ -6,42 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/transaction_title"
-            android:layout_gravity="center">
-        </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/more_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
-        app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+        <TextView
+            android:id="@+id/transaction_reading_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="@string/transaction_title"
+            app:title="@string/transaction_title"
+            android:textSize="20sp"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/more_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:layout_gravity="right|center"
+            app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
 
     <View
         android:id="@+id/transaction_reading_post_main_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="28dp"
         android:background="@color/second_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintVertical_bias="0.0" />
