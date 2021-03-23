@@ -2,8 +2,6 @@ package com.example.smj.ui.create;
 
 import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +14,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CreateTradeActivity extends AppCompatActivity {
@@ -30,8 +27,11 @@ public class CreateTradeActivity extends AppCompatActivity {
     ImageButton gallerybtn;
     RecyclerView photolist;
     ImageView image;
-    ArrayList<PhotoData> photoData = new ArrayList<>();
+    ArrayList<Uri> photoData = new ArrayList<>();
+    private CreatePhotoAdapter adapter;
+
     private static int PICK_IMAGE_REQUEST = 7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +43,14 @@ public class CreateTradeActivity extends AppCompatActivity {
         photolist = findViewById(R.id.photo_recyclerView);
         image = findViewById(R.id.photo);
 
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         photolist.setLayoutManager(manager);
-        photolist.setAdapter(new CreatephotoAdapter(this));
+        photolist.setHasFixedSize(true);
+        adapter = new CreatePhotoAdapter(this, photoData);
+        photolist.setAdapter(adapter);
     }
 
-    public void category(){
+    public void category() {
         spinner = findViewById(R.id.category_spinner);
 
         ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_dropdown_item);
@@ -69,7 +71,7 @@ public class CreateTradeActivity extends AppCompatActivity {
         });
     }
 
-    public void gallery(){
+    public void gallery() {
         gallerybtn = findViewById(R.id.gallerybtn);
         gallerybtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,43 +83,31 @@ public class CreateTradeActivity extends AppCompatActivity {
             }
         });
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PICK_IMAGE_REQUEST) {
-            if(data == null){
-                Toast.makeText(this,"다중선택이 불가한 기기입니다.",Toast.LENGTH_LONG).show();
-            }
-            else{
+            if (data == null) {
+                Toast.makeText(this, "다중선택이 불가한 기기입니다.", Toast.LENGTH_LONG).show();
+            } else {
                 //ClipData 또는 Uri를 가져온다
                 Uri uri = data.getData();
                 ClipData clipData = data.getClipData();
 
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
-                if(clipData!=null)
-                {
-                    for(int i = 0; i < 7; i++)
-                    {
-                        if(i<clipData.getItemCount()){
-                            Uri urione =  clipData.getItemAt(i).getUri();
-                            switch (i){
-                                case 0:
-                                    image.setImageURI(urione);
-                                    break;
-                                case 1:
-                                    image.setImageURI(urione);
-                                    break;
-                                case 2:
-                                    image.setImageURI(urione);
-                                    break;
-                            }
-                        }
+                if (clipData != null) {
+                    Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
+                    for (int i = 0; i < clipData.getItemCount(); i++) {
+                        Uri urione = clipData.getItemAt(i).getUri();
+                        image.setImageURI(urione);
+                        photoData.add(urione);
                     }
                     photolist.setVisibility(View.VISIBLE);
-                }
-                else if(uri != null)
-                {
-                    image.setImageURI(uri);
+                } else if (uri != null) {
+                    photoData.add(uri);
+                    photolist.setVisibility(View.VISIBLE);
                 }
             }
         }
