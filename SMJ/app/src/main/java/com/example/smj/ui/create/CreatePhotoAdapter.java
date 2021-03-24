@@ -1,64 +1,63 @@
 package com.example.smj.ui.create;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
-import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
-import com.example.smj.ui.LivingTip.LivingTipPostData;
-import com.example.smj.ui.message.MessageManagementAdapter;
-import com.example.smj.ui.message.MessageManagementData;
 
 import java.util.ArrayList;
 
-public class CreatephotoAdapter extends RecyclerView.Adapter<CreatephotoAdapter.ViewHolder>{
+public class CreatePhotoAdapter extends RecyclerView.Adapter<CreatePhotoAdapter.ViewHolder> {
 
+    private ArrayList<Uri> photoData = null;
     private Context context;
-    private ArrayList<PhotoData> PhotoData = null;
 
-    public CreatephotoAdapter(Context context, ArrayList<PhotoData> data){
+    public CreatePhotoAdapter(Context context, ArrayList<Uri> photoData){
         this.context = context;
-        PhotoData = data;
+        this.photoData = photoData;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+    public CreatePhotoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.activity_photolist_item,parent,false);
-        CreatephotoAdapter.ViewHolder viewHolder = new CreatephotoAdapter.ViewHolder(view);
+        CreatePhotoAdapter.ViewHolder vh = new CreatePhotoAdapter.ViewHolder(view);
 
-        return viewHolder;
+        return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        int photo = PhotoData.get(position).getPhoto();
-
+    public void onBindViewHolder(@NonNull CreatePhotoAdapter.ViewHolder holder, int position) {
+        holder.photo.setImageURI(photoData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return photoData.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView photo;
+        private Button button;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             photo = itemView.findViewById(R.id.photo);
+            button = itemView.findViewById(R.id.deletebutton);
         }
     }
 }

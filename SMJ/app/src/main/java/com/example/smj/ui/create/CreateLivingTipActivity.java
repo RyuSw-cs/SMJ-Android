@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
-import com.example.smj.ui.message.MessageManagementAdapter;
 
 import java.util.ArrayList;
 
@@ -35,9 +33,7 @@ public class CreateLivingTipActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
         photolist.setLayoutManager(manager);
-        photolist.setAdapter(new CreatephotoAdapter(this,photoData));
-
-        photoData.add(new PhotoData(R.drawable.profileimage));
+        //photolist.setAdapter(new CreatePhotoAdapter(this));
     }
 
     public void category(){

@@ -1,16 +1,15 @@
 package com.example.smj.ui.create;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 public class PhotoData {
-    private int photo;
+    private Drawable photo;
 
-    public PhotoData(int photo){
-        this.photo = photo;
-    }
-
-    public int getPhoto(){
+    public Drawable getPhoto(){
         return photo;
     }
-    public void setPhoto(int photo){
+    public void setPhoto(Drawable photo){
         this.photo = photo;
     }
 }

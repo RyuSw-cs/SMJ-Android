@@ -1,6 +1,7 @@
 package com.example.smj.ui.LivingTip;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.message.MessageActivity;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,23 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
             profileImage = itemView.findViewById(R.id.profileImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        Intent intent = new Intent(context, LivingTipReadingActivity.class);
+                        intent.putExtra("id",postData.get(pos).getId());
+                        intent.putExtra("category",postData.get(pos).getCategory());
+                        intent.putExtra("title",postData.get(pos).getTitle());
+                        intent.putExtra("writer",postData.get(pos).getWriter());
+                        intent.putExtra("date",postData.get(pos).getDate());
+                        intent.putExtra("content",postData.get(pos).getContents());
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
