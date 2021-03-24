@@ -28,14 +28,14 @@ public class TransactionApi {
             @Override
             public void onResponse(Call<List<boardData>> call, Response<List<boardData>> response) {
                 if(response.isSuccessful()){
-                    Log.d("살림 팁 게시판 데이터 GET 성공","살림 팁 게시판 데이터 GET 성공");
+                    Log.d("거래 게시판 데이터 GET 성공","거래 게시판 데이터 GET 성공");
                     transactionUseCase.onSuccess(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<boardData>> call, Throwable t) {
-                Log.d("살림 팁 게시판 데이터 GET 실패","살림 팁 게시판 데이터 GET 실패");
+                Log.d("거래 게시판 데이터 GET 실패","거래 팁 게시판 데이터 GET 실패");
             }
         });
     }

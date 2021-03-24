@@ -2,7 +2,9 @@ package com.example.smj.data.entity.board;
 
 import com.google.gson.annotations.SerializedName;
 
-public class boardData {
+import java.io.Serializable;
+
+public class boardData implements Serializable {
 
     @SerializedName("category")
     private boardCategory category;

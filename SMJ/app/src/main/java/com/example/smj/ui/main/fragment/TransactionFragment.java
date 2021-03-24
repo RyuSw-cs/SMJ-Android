@@ -72,7 +72,10 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         for(int i = 0; i<list.size(); i++) {
             //id와 profileimage, createAt 변경 해야함.
             //id값이 int인데 어떻게 표시해야할지 모르겠음
-            data.add(new TransactionPostData(list.get(i).getCategory().getName(), list.get(i).getTitle(), list.get(i).getContent(), String.valueOf(list.get(i).getId()), list.get(i).getCreateAt(), "123"));
+            if(list.get(i).getType().equals("TRADE")) {
+                data.add(new TransactionPostData(list.get(i).getCategory().getName(), list.get(i).getTitle(), list.get(i).getContent(), "글쓴이를 추가해주세요",
+                        "날짜입니다.", "이미지입니다", list.get(i).getId()));
+            }
         }
         recyclerView.setHasFixedSize(true);
         adapter = new TransactionPostAdapter(getActivity(), data);
