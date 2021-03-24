@@ -34,7 +34,7 @@ public interface Entity_board {
     @DELETE("api/boards/{id}")
     Call<Void> deleteLivingTip(
             @Header("Authorization")String token,
-            @Path("id")String id
+            @Path("id")int id
     );
 
     @GET("api/boards/my")

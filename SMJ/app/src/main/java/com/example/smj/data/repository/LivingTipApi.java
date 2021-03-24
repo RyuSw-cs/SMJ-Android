@@ -43,7 +43,7 @@ public class LivingTipApi {
         });
     }
 
-    public void deleteData(String key, String id){
+    public void deleteData(String key, int id){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
