@@ -20,6 +20,8 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.domain.usecase.LivingTipUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.main.MainActivity;
+import com.example.smj.ui.main.fragment.LivingTipFragment;
 
 public class LivingTipReadingActivity extends AppCompatActivity {
 
@@ -79,6 +81,8 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                 Log.d("확인","클릭 확인");
                 LivingTipUseCase livingTipUseCase = new LivingTipUseCase();
                 livingTipUseCase.deleteData(key,id);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
