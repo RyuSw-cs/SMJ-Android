@@ -9,7 +9,6 @@ import com.example.smj.data.repository.LivingTipApi;
 import com.example.smj.data.repository.TransactionApi;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.TransactionFragment;
-import com.example.smj.ui.transaction.TransactionDeletePopupActivity;
 
 import java.util.ArrayList;
 import java.util.List;

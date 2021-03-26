@@ -24,8 +24,8 @@ import java.util.ArrayList;
 
 public class CreateTradeActivity extends AppCompatActivity {
     Spinner spinner;
-    ImageButton gallerybtn;
-    RecyclerView photolist;
+    ImageButton galleryBtn;
+    RecyclerView photoList;
     ImageView image;
     ArrayList<Uri> photoData = new ArrayList<>();
     private CreatePhotoAdapter adapter;
@@ -40,21 +40,20 @@ public class CreateTradeActivity extends AppCompatActivity {
         category();
         gallery();
 
-        photolist = findViewById(R.id.photo_recyclerView);
+        photoList = findViewById(R.id.photo_recyclerView);
         image = findViewById(R.id.photo);
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        photolist.setLayoutManager(manager);
-        photolist.setHasFixedSize(true);
+        photoList.setLayoutManager(manager);
+        photoList.setHasFixedSize(true);
         adapter = new CreatePhotoAdapter(this, photoData);
-        photolist.setAdapter(adapter);
+        photoList.setAdapter(adapter);
     }
 
     public void category() {
         spinner = findViewById(R.id.category_spinner);
 
         ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_dropdown_item);
-
         category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(category);
 
@@ -72,8 +71,8 @@ public class CreateTradeActivity extends AppCompatActivity {
     }
 
     public void gallery() {
-        gallerybtn = findViewById(R.id.gallerybtn);
-        gallerybtn.setOnClickListener(new View.OnClickListener() {
+        galleryBtn = findViewById(R.id.gallerybtn);
+        galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -104,10 +103,10 @@ public class CreateTradeActivity extends AppCompatActivity {
                         image.setImageURI(urione);
                         photoData.add(urione);
                     }
-                    photolist.setVisibility(View.VISIBLE);
+                    photoList.setVisibility(View.VISIBLE);
                 } else if (uri != null) {
                     photoData.add(uri);
-                    photolist.setVisibility(View.VISIBLE);
+                    photoList.setVisibility(View.VISIBLE);
                 }
             }
         }

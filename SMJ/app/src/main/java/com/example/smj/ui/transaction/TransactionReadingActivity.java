@@ -31,15 +31,12 @@ public class TransactionReadingActivity extends AppCompatActivity{
     private Button deleteBtn;
     private int id;
     private String key;
+    private Boolean check = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_reading);
-
-        key = JWTManager.getSharedPreference(this, getString(R.string.saved_JWT));
-
-
         init();
         check_person();
     }
@@ -51,7 +48,16 @@ public class TransactionReadingActivity extends AppCompatActivity{
         }
     }
 
+    private void check(){
+        if(check){
+            finish();
+            check = false;
+        }
+    }
+
     private void init(){
+
+        key = JWTManager.getSharedPreference(this, getString(R.string.saved_JWT));
 
         moreBtn = findViewById(R.id.more_btn);
         category = findViewById(R.id.transaction_reading_post_category);
@@ -81,6 +87,8 @@ public class TransactionReadingActivity extends AppCompatActivity{
             public void onClick(View v) {
                 transactionUseCase = new TransactionUseCase();
                 transactionUseCase.deleteData(key, String.valueOf(data.getId()),getApplicationContext());
+                check = true;
+                check();
             }
         });
     }

@@ -21,7 +21,6 @@ import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 import com.example.smj.ui.LivingTip.LivingTipPostData;
 import com.example.smj.ui.create.CreateTradeActivity;
-import com.example.smj.ui.transaction.TransactionModifyActivity;
 import com.example.smj.ui.transaction.TransactionPostAdapter;
 import com.example.smj.ui.transaction.TransactionPostData;
 
@@ -81,5 +80,11 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         adapter = new TransactionPostAdapter(getActivity(), data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        data.clear();
+        transactionUseCase.getData(token);
     }
 }
