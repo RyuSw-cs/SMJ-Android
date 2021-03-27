@@ -91,7 +91,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 transactionUseCase = new TransactionUseCase();
-                transactionUseCase.deleteData(key, String.valueOf(data.getId()),getApplicationContext());
+                transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
                 check = true;
                 check();
             }

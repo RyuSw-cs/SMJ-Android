@@ -29,7 +29,7 @@ public interface Entity_board {
     Call<boardData> putLivingTip(
             @Header("Authorization") String token,
             @Body boardPostData put,
-            @Path("id") String id
+            @Path("id") int id
     );
 
     @DELETE("api/boards/{id}")

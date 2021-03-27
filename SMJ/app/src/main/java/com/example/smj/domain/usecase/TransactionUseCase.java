@@ -39,12 +39,12 @@ public class TransactionUseCase implements RetrofitOnSuccess {
     }
 
     //PUT
-    public void putData(boardPostData data, String key, String id, Context context){
+    public void putData(boardPostData data, String key, int id, Context context){
         transactionApi.putData(data, key, id, context);
     }
 
     //DELETE
-    public void deleteData(String key, String id, Context context){
+    public void deleteData(String key, int id, Context context){
         transactionApi.deleteData(key, id, context);
     }
 
