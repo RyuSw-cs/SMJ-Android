@@ -52,7 +52,7 @@ public class CreateTradeActivity extends AppCompatActivity {
 
         photoList = findViewById(R.id.photo_recyclerView);
         image = findViewById(R.id.photo);
-        upload = findViewById(R.id.upload);
+        upload = findViewById(R.id.trade_upload);
         title = findViewById(R.id.trade_title);
         content = findViewById(R.id.trade_content);
 
