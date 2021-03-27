@@ -7,11 +7,11 @@ public class TransactionPostData implements Serializable {
     private String title;
     private String contents;
     private String writer;
-    private String date;
+    private String[] date;
     private String profileImage;
     private int id;
 
-    public TransactionPostData(String category, String title, String contents, String writer, String date, String profileImage, int id) {
+    public TransactionPostData(String category, String title, String contents, String writer, String[] date, String profileImage, int id) {
         this.category = category;
         this.title = title;
         this.contents = contents;
@@ -53,11 +53,11 @@ public class TransactionPostData implements Serializable {
         this.writer = writer;
     }
 
-    public String getDate() {
+    public String[] getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String[] date) {
         this.date = date;
     }
 

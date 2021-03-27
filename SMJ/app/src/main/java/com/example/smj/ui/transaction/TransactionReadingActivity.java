@@ -78,7 +78,12 @@ public class TransactionReadingActivity extends AppCompatActivity{
         category.setText(data.getCategory());
         title.setText(data.getTitle());
         writer.setText(data.getWriter());
-        date.setText(data.getDate());
+        String []getDate = data.getDate();
+
+        String dateInfo = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
+
+        date.setText(dateInfo);
+
         content.setText(data.getContents());
 
         moreBtn.setOnClickListener(v -> showMoreView());

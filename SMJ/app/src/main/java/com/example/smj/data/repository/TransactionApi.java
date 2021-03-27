@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.smj.data.datasource.SMJRemoteDataSource;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
+import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
@@ -57,13 +58,14 @@ public class TransactionApi {
         });
     }
 
-    public void putData(boardData data, String key, String id){
+    public void putData(boardPostData data, String key, String id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
+                Toast.makeText(context,"게시글이 수정됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -73,13 +75,14 @@ public class TransactionApi {
         });
     }
 
-    public void postData(boardData data, String key){
+    public void postData(boardPostData data, String key, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
+                Toast.makeText(context,"게시글이 등록됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -69,11 +69,10 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     public void onSuccess(List<boardData> list) {
         //list를 받았을때 값을 add, 리사이클러뷰에 뿌림
         for(int i = 0; i<list.size(); i++) {
-            //id와 profileimage, createAt 변경 해야함.
-            //id값이 int인데 어떻게 표시해야할지 모르겠음
+            //profile이미지 변경
             if(list.get(i).getType().equals("TRADE")) {
-                data.add(new TransactionPostData(list.get(i).getCategory().getName(), list.get(i).getTitle(), list.get(i).getContent(), "글쓴이를 추가해주세요",
-                        "날짜입니다.", "이미지입니다", list.get(i).getId()));
+                data.add(new TransactionPostData(list.get(i).getCategory().getName(), list.get(i).getTitle(), list.get(i).getContent(), list.get(i).getWriter(),
+                        list.get(i).getCreatedAt(), "프로필이미지입니다", list.get(i).getId()));
             }
         }
         recyclerView.setHasFixedSize(true);

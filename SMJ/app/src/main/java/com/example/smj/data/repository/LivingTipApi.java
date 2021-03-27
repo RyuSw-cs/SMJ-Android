@@ -7,6 +7,7 @@ import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
+import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
 import com.example.smj.domain.usecase.ScheduleUseCase;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
@@ -59,7 +60,7 @@ public class LivingTipApi {
         });
     }
 
-    public void putData(boardData data, String key, String id){
+    public void putData(boardPostData data, String key, String id){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
@@ -75,7 +76,7 @@ public class LivingTipApi {
         });
     }
 
-    public void postData(boardData data, String key){
+    public void postData(boardPostData data, String key){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {

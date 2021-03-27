@@ -47,7 +47,7 @@
 
 
     <EditText
-        android:id="@+id/post_title"
+        android:id="@+id/trade_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_title">
+        app:layout_constraintTop_toBottomOf="@+id/trade_title">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photo_recyclerView"
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/sample_EditText"
+            android:id="@+id/trade_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"

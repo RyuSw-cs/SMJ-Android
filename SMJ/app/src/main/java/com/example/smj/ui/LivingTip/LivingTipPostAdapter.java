@@ -78,7 +78,10 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         String title = postData.get(position).getTitle();
         String contents = postData.get(position).getContents();
         String writer = postData.get(position).getWriter();
-        String date = postData.get(position).getDate();
+
+        String []getDate = postData.get(position).getDate();
+
+        String date = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
         //String profileImage = postData.get(position).getProfileImage();
 
         holder.category.setText(category);

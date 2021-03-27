@@ -22,13 +22,13 @@ public interface Entity_board {
     @POST("api/boards")
     Call<boardData> postLivingTip(
             @Header("Authorization") String token,
-            @Body boardData post
+            @Body boardPostData post
     );
 
     @PUT("api/boards")
     Call<boardData> putLivingTip(
             @Header("Authorization") String token,
-            @Body boardData put,
+            @Body boardPostData put,
             @Path("id") String id
     );
 
