@@ -136,7 +136,6 @@ public class CreateTradeActivity extends AppCompatActivity {
                     Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri urione = clipData.getItemAt(i).getUri();
-                        image.setImageURI(urione);
                         photoData.add(urione);
                     }
                     photoList.setVisibility(View.VISIBLE);

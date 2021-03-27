@@ -1,5 +1,6 @@
 package com.example.smj.domain.usecase;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.smj.callback.RetrofitOnSuccess;
@@ -23,6 +24,10 @@ public class LivingTipUseCase implements RetrofitOnSuccess {
         this.livingTipFragment = livingTipFragment;
     }
 
+    public LivingTipUseCase(){
+        livingTipApi = new LivingTipApi();
+    }
+
     //GET
     public void getData(String key){
         Log.d("살림팁 getData", "살림팁 getData");
@@ -38,7 +43,7 @@ public class LivingTipUseCase implements RetrofitOnSuccess {
     public void putData(boardPostData data, String key, String id){ livingTipApi.putData(data, key, id); }
 
     //DELETE
-    public void deleteData(String key, String id){
+    public void deleteData(String key, int id){
         livingTipApi.deleteData(key, id);
     }
 

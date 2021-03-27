@@ -56,7 +56,8 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         init_Fragment();
         init_List();
         jwtUseCase = new JWTUseCase(this);
-        getJWT();
+        /*다른 액티비티 갔다가 다시 메인으로 돌아올때 오류
+        getJWT();*/
         mViewPager = findViewById(R.id.pager);
         pageAdapter = new ViewPagerAdapter(this,num_page);
         pageAdapter.addFragments(list);
