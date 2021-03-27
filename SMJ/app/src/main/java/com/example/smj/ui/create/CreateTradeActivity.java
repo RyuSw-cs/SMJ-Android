@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
-import com.example.smj.callback.TransactionPostData;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
@@ -29,7 +28,7 @@ import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 
 import java.util.ArrayList;
 
-public class CreateTradeActivity extends AppCompatActivity implements TransactionPostData {
+public class CreateTradeActivity extends AppCompatActivity{
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
@@ -67,7 +66,10 @@ public class CreateTradeActivity extends AppCompatActivity implements Transactio
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    postSuccess();
+                    transactionUseCase = new TransactionUseCase();
+                    transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
+                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                    finish();
                 }
             }
         });
@@ -138,13 +140,5 @@ public class CreateTradeActivity extends AppCompatActivity implements Transactio
                 }
             }
         }
-    }
-
-    @Override
-    public void postSuccess() {
-        transactionUseCase = new TransactionUseCase();
-        transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
-                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-        finish();
     }
 }
