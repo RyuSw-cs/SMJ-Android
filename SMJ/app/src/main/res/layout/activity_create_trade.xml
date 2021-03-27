@@ -29,7 +29,7 @@
         </TextView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/writingBtn"
+            android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center"
@@ -114,7 +114,7 @@
             android:gravity="top"
             android:inputType="textMultiLine"
             android:scrollHorizontally="false"
-            android:text="글 입력"
+            android:hint="글 입력"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
