@@ -48,7 +48,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
 
         token =  JWTManager.getSharedPreference(getContext(),getString(R.string.saved_JWT));
         //데이터 받아오기
-        transactionUseCase.getData(token);
+        transactionUseCase.getData("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNjgyNDQ3MywiZXhwIjoxNjE2ODI2MjczfQ.hsV4PcqOAWCM9930-p9FLAIII2bDJOgijwOIsREaA_4");
         writeButton = (Button) view.findViewById(R.id.write_btn);
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override

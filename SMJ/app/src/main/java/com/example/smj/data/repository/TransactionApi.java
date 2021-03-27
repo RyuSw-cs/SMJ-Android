@@ -41,7 +41,7 @@ public class TransactionApi {
         });
     }
 
-    public void deleteData(String key, String id, Context context){
+    public void deleteData(String key, int id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
@@ -58,7 +58,7 @@ public class TransactionApi {
         });
     }
 
-    public void putData(boardPostData data, String key, String id, Context context){
+    public void putData(boardPostData data, String key, int id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {

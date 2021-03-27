@@ -40,7 +40,7 @@ public class LivingTipUseCase implements RetrofitOnSuccess {
     }
 
     //PUT
-    public void putData(boardPostData data, String key, String id){ livingTipApi.putData(data, key, id); }
+    public void putData(boardPostData data, String key, int id){ livingTipApi.putData(data, key, id); }
 
     //DELETE
     public void deleteData(String key, int id){

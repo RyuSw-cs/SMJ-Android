@@ -60,7 +60,7 @@ public class LivingTipApi {
         });
     }
 
-    public void putData(boardPostData data, String key, String id){
+    public void putData(boardPostData data, String key, int id){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
