@@ -14,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.LivingTip.LivingTipReadingActivity;
 
 import java.util.ArrayList;
@@ -24,12 +26,19 @@ public class TransactionReadingActivity extends AppCompatActivity{
     private ImageButton moreBtn;
     private TransactionPostData data;
     private TextView category, title, writer, date, content;
+    private TransactionUseCase transactionUseCase;
+    private Dialog moreView;
+    private Button deleteBtn;
+    private int id;
+    private String key;
+    private Boolean check = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_reading);
         init();
+        check_person();
     }
 
     private void check_person(){
@@ -39,7 +48,16 @@ public class TransactionReadingActivity extends AppCompatActivity{
         }
     }
 
+    private void check(){
+        if(check){
+            finish();
+            check = false;
+        }
+    }
+
     private void init(){
+
+        key = JWTManager.getSharedPreference(this, getString(R.string.saved_JWT));
 
         moreBtn = findViewById(R.id.more_btn);
         category = findViewById(R.id.transaction_reading_post_category);
@@ -48,6 +66,11 @@ public class TransactionReadingActivity extends AppCompatActivity{
         date = findViewById(R.id.transaction_reading_post_date);
         content = findViewById(R.id.transaction_reading_post_content);
 
+        moreView = new Dialog(TransactionReadingActivity.this);
+        moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        moreView.setContentView(R.layout.reading_view_more);
+        deleteBtn = (Button) moreView.findViewById(R.id.reading_delete);
+
         //표시할 값 객체로 받기
         Intent intent = getIntent();
         data = (TransactionPostData)intent.getSerializableExtra("data");
@@ -55,16 +78,27 @@ public class TransactionReadingActivity extends AppCompatActivity{
         category.setText(data.getCategory());
         title.setText(data.getTitle());
         writer.setText(data.getWriter());
-        date.setText(data.getDate());
+        String []getDate = data.getDate();
+
+        String dateInfo = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
+
+        date.setText(dateInfo);
+
         content.setText(data.getContents());
 
         moreBtn.setOnClickListener(v -> showMoreView());
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transactionUseCase = new TransactionUseCase();
+                transactionUseCase.deleteData(key, String.valueOf(data.getId()),getApplicationContext());
+                check = true;
+                check();
+            }
+        });
     }
 
     public void showMoreView(){
-        //삭제를 위해 id값 인텐트로 전달
-        Intent intent = new Intent(this, TransactionMoreInfo.class);
-        intent.putExtra("id",data.getWriter());
-        startActivity(intent);
+        moreView.show();
     }
 }

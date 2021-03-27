@@ -2,57 +2,39 @@ package com.example.smj.data.entity.board;
 
 import com.google.gson.annotations.SerializedName;
 
-public class boardData {
+import java.io.Serializable;
 
-    @SerializedName("category")
-    private boardCategory category;
-
-    @SerializedName("content")
-    private String content;
-
-    @SerializedName("createAt")
-    private String createAt;
+public class boardData implements Serializable {
 
     @SerializedName("id")
     private int id;
 
-    @SerializedName("title")
-    private String title;
+    @SerializedName("writer")
+    private String writer;
 
     @SerializedName("type")
     private String type;
 
-    public boardData(boardCategory category, String content, String createAt, int id, String title, String type) {
-        this.category = category;
-        this.content = content;
-        this.createAt = createAt;
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("content")
+    private String content;
+
+    @SerializedName("category")
+    private boardCategory category;
+
+    @SerializedName("createdAt")
+    private String[] createdAt;
+
+    public boardData(int id, String writer, String type, String title, String content, boardCategory category, String[] createdAt) {
         this.id = id;
-        this.title = title;
+        this.writer = writer;
         this.type = type;
-    }
-
-    public boardCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(boardCategory category) {
-        this.category = category;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+        this.title = title;
         this.content = content;
-    }
-
-    public String getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+        this.category = category;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -63,12 +45,12 @@ public class boardData {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getWriter() {
+        return writer;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 
     public String getType() {
@@ -77,6 +59,38 @@ public class boardData {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boardCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(boardCategory category) {
+        this.category = category;
+    }
+
+    public String[] getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String[] createdAt) {
+        this.createdAt = createdAt;
     }
 }
 
