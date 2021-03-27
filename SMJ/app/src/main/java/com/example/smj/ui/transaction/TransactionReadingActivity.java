@@ -3,6 +3,7 @@ package com.example.smj.ui.transaction;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -92,8 +93,14 @@ public class TransactionReadingActivity extends AppCompatActivity{
             public void onClick(View v) {
                 transactionUseCase = new TransactionUseCase();
                 transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
-                check = true;
-                check();
+                Handler mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        check = true;
+                        check();
+                    }
+                },500);
             }
         });
     }

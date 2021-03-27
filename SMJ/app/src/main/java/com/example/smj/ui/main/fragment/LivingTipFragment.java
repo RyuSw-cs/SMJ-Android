@@ -42,7 +42,7 @@ public class LivingTipFragment extends Fragment {
 
         livingTipUseCase.getData(key);
 
-        Log.d("JWT",key);
+        //Log.d("JWT",key);
 
         return view;
     }
