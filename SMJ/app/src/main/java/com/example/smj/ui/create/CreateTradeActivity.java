@@ -69,6 +69,7 @@ public class CreateTradeActivity extends AppCompatActivity {
                     transactionUseCase = new TransactionUseCase();
                     transactionUseCase.postData(new boardPostData(3,"TRADE",title.getText().toString(),content.getText().toString()),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                    finish();
                 }
             }
         });
