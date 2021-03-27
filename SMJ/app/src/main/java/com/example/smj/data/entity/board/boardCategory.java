@@ -1,8 +1,8 @@
 package com.example.smj.data.entity.board;
 
 public class boardCategory {
-    int id;
-    String name;
+    private int id;
+    private String name;
 
     public boardCategory(int id, String name) {
         this.id = id;

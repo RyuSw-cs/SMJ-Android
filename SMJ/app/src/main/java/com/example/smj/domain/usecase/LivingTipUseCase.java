@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
+import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.data.repository.LivingTipApi;
 import com.example.smj.data.repository.ScheduleApi;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
@@ -34,12 +35,12 @@ public class LivingTipUseCase implements RetrofitOnSuccess {
     }
 
     //POST
-    public void postData(boardData data, String key){
+    public void postData(boardPostData data, String key){
         livingTipApi.postData(data, key);
     }
 
     //PUT
-    public void putData(boardData data, String key, String id){ livingTipApi.putData(data, key, id); }
+    public void putData(boardPostData data, String key, String id){ livingTipApi.putData(data, key, id); }
 
     //DELETE
     public void deleteData(String key, int id){

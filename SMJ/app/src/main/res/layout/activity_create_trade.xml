@@ -22,6 +22,13 @@
             android:layout_gravity="center"
             app:title="글쓰기"
             app:titleTextColor="#555555"></com.google.android.material.appbar.MaterialToolbar>
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:layout_height="1dp" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -31,6 +38,7 @@
         android:background="@color/white"
         android:text="글등록"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,19 +50,33 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:spinnerMode="dropdown"
+        android:paddingLeft="14dp"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/trade_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/post_title"
+        android:id="@+id/trade_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="글제목"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:hint="제목"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,19 +88,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_title">
+        app:layout_constraintTop_toBottomOf="@+id/trade_title">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photo_recyclerView"
             android:layout_width="408dp"
             android:layout_height="71dp"
-            android:visibility="gone"
+            android:background="#f9f9f9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/sample_EditText"
+            android:id="@+id/trade_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -91,6 +113,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#dddddd"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

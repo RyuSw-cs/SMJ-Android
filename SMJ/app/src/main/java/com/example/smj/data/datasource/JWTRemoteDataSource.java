@@ -22,5 +22,4 @@ public class JWTRemoteDataSource {
         }
         return retrofit;
     }
-
 }

@@ -5,11 +5,11 @@ import android.content.Context;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
+import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.data.repository.LivingTipApi;
 import com.example.smj.data.repository.TransactionApi;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.TransactionFragment;
-import com.example.smj.ui.transaction.TransactionDeletePopupActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +34,14 @@ public class TransactionUseCase implements RetrofitOnSuccess {
     }
 
     //POST
-    public void postData(boardData data, String key){
-        transactionApi.postData(data, key);
+    public void postData(boardPostData data, String key, Context context){
+        transactionApi.postData(data, key, context);
     }
 
     //PUT
-    public void putData(boardData data, String key, String id){ transactionApi.putData(data, key, id); }
+    public void putData(boardPostData data, String key, String id, Context context){
+        transactionApi.putData(data, key, id, context);
+    }
 
     //DELETE
     public void deleteData(String key, String id, Context context){

@@ -6,11 +6,11 @@ public class LivingTipPostData {
     private String title;
     private String contents;
     private String writer;
-    private String date;
+    private String[] date;
     private String profileImage;
 
 
-    public LivingTipPostData(int id, String category, String title, String contents, String writer, String date, String profileImage) {
+    public LivingTipPostData(int id, String category, String title, String contents, String writer, String[] date, String profileImage) {
         this.id = id;
         this.category = category;
         this.title = title;
@@ -18,6 +18,14 @@ public class LivingTipPostData {
         this.writer = writer;
         this.date = date;
         this.profileImage = profileImage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCategory() {
@@ -52,11 +60,11 @@ public class LivingTipPostData {
         this.writer = writer;
     }
 
-    public String getDate() {
+    public String[] getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String[] date) {
         this.date = date;
     }
 
@@ -66,13 +74,5 @@ public class LivingTipPostData {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
