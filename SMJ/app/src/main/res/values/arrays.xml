@@ -15,8 +15,10 @@
         <item>음식점</item>
     </string-array>
     <string-array name="category">
-        <item>카테고리</item>
-        <item>살림꿀팁</item>
-        <item>거래게시판</item>
+        <item>주방</item>
+        <item>생활용품</item>
+        <item>운동기구</item>
+        <item>주방용품</item>
+        <item>기타</item>
     </string-array>
 </resources>

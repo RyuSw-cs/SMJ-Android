@@ -75,7 +75,7 @@ public class TransactionApi {
         });
     }
 
-    public void postData(boardPostData data, String key, Context context){
+    public void postData(boardPostData data, String key, Context context, TransactionUseCase transactionUseCase){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {

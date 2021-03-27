@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.TransactionPostData;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
@@ -28,7 +29,7 @@ import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 
 import java.util.ArrayList;
 
-public class CreateTradeActivity extends AppCompatActivity {
+public class CreateTradeActivity extends AppCompatActivity implements TransactionPostData {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
@@ -37,8 +38,8 @@ public class CreateTradeActivity extends AppCompatActivity {
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
     private EditText title, content;
-    private Boolean checkSpinner = false;
     private TransactionUseCase transactionUseCase;
+    private int selectSpinner;
 
     private static int PICK_IMAGE_REQUEST = 7;
 
@@ -61,15 +62,12 @@ public class CreateTradeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //카테고리의 값이 있어야함.
                 //제목, 글 내용이 있어야함.
-                if(title.getText().equals("")||content.getText().equals("")||!(checkSpinner)){
+                if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    transactionUseCase = new TransactionUseCase();
-                    transactionUseCase.postData(new boardPostData(3,"TRADE",title.getText().toString(),content.getText().toString()),
-                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                    finish();
+                    postSuccess();
                 }
             }
         });
@@ -88,16 +86,10 @@ public class CreateTradeActivity extends AppCompatActivity {
         category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(category);
 
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
-                    checkSpinner = true;
-                }
-                else{
-                    checkSpinner = false;
-                }
+                selectSpinner = position +1;
             }
 
             @Override
@@ -146,5 +138,13 @@ public class CreateTradeActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void postSuccess() {
+        transactionUseCase = new TransactionUseCase();
+        transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
+                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+        finish();
     }
 }
