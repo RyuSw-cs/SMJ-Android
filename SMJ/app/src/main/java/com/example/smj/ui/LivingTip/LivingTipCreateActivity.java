@@ -1,4 +1,4 @@
-package com.example.smj.ui.create;
+package com.example.smj.ui.LivingTip;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -21,14 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
-import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
+import com.example.smj.ui.transaction.CreatePhotoAdapter;
 
 import java.util.ArrayList;
 
-public class CreateLivingTipActivity extends AppCompatActivity {
+public class LivingTipCreateActivity extends AppCompatActivity {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
@@ -45,7 +44,7 @@ public class CreateLivingTipActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_living_tip);
+        setContentView(R.layout.activity_living_tip_create);
 
         category();
         gallery();
@@ -83,7 +82,7 @@ public class CreateLivingTipActivity extends AppCompatActivity {
     public void category() {
         spinner = findViewById(R.id.category_spinner);
 
-        ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.transaction_category, android.R.layout.simple_spinner_dropdown_item);
         category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(category);
 

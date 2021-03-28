@@ -14,13 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.TransactionGetData;
-import com.example.smj.data.entity.Convenience.Category;
-import com.example.smj.data.entity.board.boardCategory;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
-import com.example.smj.ui.LivingTip.LivingTipPostData;
-import com.example.smj.ui.create.CreateTradeActivity;
+import com.example.smj.ui.transaction.TransactionCreateActivity;
 import com.example.smj.ui.transaction.TransactionPostAdapter;
 import com.example.smj.ui.transaction.TransactionPostData;
 
@@ -53,7 +49,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateTradeActivity.class);
+                Intent intent = new Intent(getActivity(), TransactionCreateActivity.class);
                 startActivity(intent);
             }
         });
