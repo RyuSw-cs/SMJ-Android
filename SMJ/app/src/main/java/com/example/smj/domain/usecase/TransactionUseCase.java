@@ -3,7 +3,6 @@ package com.example.smj.domain.usecase;
 import android.content.Context;
 
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.callback.TransactionPostData;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
