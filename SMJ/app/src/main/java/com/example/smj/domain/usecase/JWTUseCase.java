@@ -24,4 +24,5 @@ public class JWTUseCase implements RetrofitOnSuccess {
             mainActivity.clickSuccess(jwt);
         }
     }
+
 }

@@ -17,19 +17,20 @@ import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.BoardIdGetData;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.LivingTip.LivingTipReadingActivity;
 
 import java.util.ArrayList;
 
-public class TransactionReadingActivity extends AppCompatActivity{
+public class TransactionReadingActivity extends AppCompatActivity implements BoardIdGetData {
 
     private ImageButton moreBtn;
     private TransactionPostData data;
     private TextView category, title, writer, date, content;
     private TransactionUseCase transactionUseCase;
     private Dialog moreView;
-    private Button deleteBtn;
+    private Button deleteBtn, modifyBtn;
     private int id;
     private String key;
     private Boolean check = false;
@@ -39,14 +40,6 @@ public class TransactionReadingActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_reading);
         init();
-        check_person();
-    }
-
-    private void check_person(){
-        //서버 통신을 해줘야하네
-        if(writer.equals("234")){
-
-        }
     }
 
     private void check(){
@@ -57,6 +50,8 @@ public class TransactionReadingActivity extends AppCompatActivity{
     }
 
     private void init(){
+
+        transactionUseCase = new TransactionUseCase(this);
 
         key = JWTManager.getSharedPreference(this, getString(R.string.saved_JWT));
 
@@ -71,6 +66,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
         moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
         moreView.setContentView(R.layout.reading_view_more);
         deleteBtn = (Button) moreView.findViewById(R.id.reading_delete);
+        modifyBtn = (Button) moreView.findViewById(R.id.reading_modified);
 
         //표시할 값 객체로 받기
         Intent intent = getIntent();
@@ -91,7 +87,6 @@ public class TransactionReadingActivity extends AppCompatActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transactionUseCase = new TransactionUseCase();
                 transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
                 Handler mHandler = new Handler();
                 mHandler.postDelayed(new Runnable() {
@@ -103,9 +98,33 @@ public class TransactionReadingActivity extends AppCompatActivity{
                 },500);
             }
         });
+
+        modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TransactionModifyActivity.class);
+                intent.putExtra("modifyData",data);
+                startActivity(intent);
+            }
+        });
+
+        transactionUseCase.getMyData(key);
     }
 
     public void showMoreView(){
         moreView.show();
     }
+
+
+    //내 게시글 데이터를 다 가져오고~
+    @Override
+    public void onSuccess(ArrayList<Integer>list) {
+        for(int i = 0; i<list.size(); i++){
+            if(data.getId() == list.get(i)) {
+                moreBtn.setVisibility(View.VISIBLE);
+                moreBtn.setEnabled(true);
+            }
+        }
+    }
 }
+

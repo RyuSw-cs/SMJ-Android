@@ -91,4 +91,22 @@ public class TransactionApi {
             }
         });
     }
+    public void getMyData(String key, TransactionUseCase transactionUseCase){
+        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        Call <List<boardData>> call = entityBoard.getMyLivingTip(key);
+        call.enqueue(new Callback<List<boardData>>() {
+            @Override
+            public void onResponse(Call<List<boardData>> call, Response<List<boardData>> response) {
+                if(response.isSuccessful()){
+                    Log.d("내 거래 게시판 데이터 GET 성공","거래 게시판 데이터 GET 성공");
+                    transactionUseCase.onSuccessData(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<boardData>> call, Throwable t) {
+                Log.d("거래 게시판 데이터 GET 실패","거래 팁 게시판 데이터 GET 실패");
+            }
+        });
+    }
 }

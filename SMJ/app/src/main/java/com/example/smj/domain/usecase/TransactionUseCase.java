@@ -2,6 +2,7 @@ package com.example.smj.domain.usecase;
 
 import android.content.Context;
 
+import com.example.smj.callback.MyBoardGetData;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
@@ -10,15 +11,20 @@ import com.example.smj.data.repository.LivingTipApi;
 import com.example.smj.data.repository.TransactionApi;
 import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.TransactionFragment;
+import com.example.smj.ui.transaction.TransactionModifyActivity;
+import com.example.smj.ui.transaction.TransactionReadingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionUseCase implements RetrofitOnSuccess {
+public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
 
     private TransactionApi transactionApi;
     private TransactionFragment transactionFragment;
+    private TransactionReadingActivity transactionReadingActivity;
+    private TransactionModifyActivity transactionModifyActivity;
     private List<boardData> list = new ArrayList<>();
+    private ArrayList<Integer> idList = new ArrayList<>();
 
     public TransactionUseCase(TransactionFragment transactionFragment){
         transactionApi = new TransactionApi();
@@ -26,6 +32,15 @@ public class TransactionUseCase implements RetrofitOnSuccess {
     }
     public TransactionUseCase(){
         transactionApi = new TransactionApi();
+    }
+
+    public TransactionUseCase(TransactionReadingActivity transactionReadingActivity){
+        transactionApi = new TransactionApi();
+        this.transactionReadingActivity = transactionReadingActivity;
+    }
+    public TransactionUseCase(TransactionModifyActivity transactionModifyActivity){
+        transactionApi = new TransactionApi();
+        this.transactionModifyActivity = transactionModifyActivity;
     }
 
     //GET
@@ -48,11 +63,31 @@ public class TransactionUseCase implements RetrofitOnSuccess {
         transactionApi.deleteData(key, id, context);
     }
 
+    //MY_DATA
+    public void getMyData(String key){
+        transactionApi.getMyData(key, this);
+    }
+
     @Override
     public void onSuccess(Object object) {
         if(object != null){
             list = (List<boardData>)object;
             transactionFragment.onSuccess(list);
+        }
+    }
+
+    @Override
+    public void onSuccessData(Object object) {
+        if(object != null){
+            //내 게시글 가져옴 -> 전처리 해야함. -> id값만 필요함
+            list.clear();
+            list = (List<boardData>)object;
+            idList.clear();
+            //idList에 id값 추가함
+            for(int i = 0; i<list.size(); i++){
+                idList.add(list.get(i).getId());
+            }
+            transactionReadingActivity.onSuccess(idList);
         }
     }
 }
