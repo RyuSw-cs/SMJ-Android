@@ -29,7 +29,9 @@ import com.example.smj.ui.transaction.TransactionPostData;
 
 import java.util.ArrayList;
 
-public class CreateTradeActivity extends AppCompatActivity {
+
+public class CreateTradeActivity extends AppCompatActivity{
+
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
