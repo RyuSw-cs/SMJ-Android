@@ -24,7 +24,6 @@
             android:layout_gravity="center"
             android:text="글쓰기"
             android:textStyle="bold"
-            app:title="@string/living_tip_title"
             android:textSize="20sp">
         </TextView>
 

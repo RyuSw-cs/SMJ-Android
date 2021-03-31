@@ -1,4 +1,4 @@
-package com.example.smj.ui.create;
+package com.example.smj.ui.LivingTip;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -21,17 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
-import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
-import com.example.smj.ui.transaction.TransactionPostData;
+import com.example.smj.ui.transaction.CreatePhotoAdapter;
 
 import java.util.ArrayList;
 
-
-public class CreateTradeActivity extends AppCompatActivity{
-
+public class LivingTipCreateActivity extends AppCompatActivity {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
@@ -40,39 +36,38 @@ public class CreateTradeActivity extends AppCompatActivity{
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
     private EditText title, content;
+    private Boolean checkSpinner = false;
     private TransactionUseCase transactionUseCase;
-    private int selectSpinner;
 
     private static int PICK_IMAGE_REQUEST = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_trade);
+        setContentView(R.layout.activity_living_tip_create);
 
         category();
         gallery();
 
         photoList = findViewById(R.id.photo_recyclerView);
         image = findViewById(R.id.photo);
-        upload = findViewById(R.id.trade_upload);
-        title = findViewById(R.id.trade_title);
-        content = findViewById(R.id.trade_content);
+        upload = findViewById(R.id.living_tip_upload);
+        title = findViewById(R.id.living_tip_title);
+        content = findViewById(R.id.living_tip_content);
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //카테고리의 값이 있어야함.
                 //제목, 글 내용이 있어야함.
-                if(title.getText().equals("")||content.getText().equals("")){
+                if(title.getText().equals("")||content.getText().equals("")||!(checkSpinner)){
                     //임시 토스트
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
                     transactionUseCase = new TransactionUseCase();
-                    transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
+                    transactionUseCase.postData(new boardPostData(3,"TRADE",title.getText().toString(),content.getText().toString()),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                    finish();
                 }
             }
         });
@@ -87,14 +82,20 @@ public class CreateTradeActivity extends AppCompatActivity{
     public void category() {
         spinner = findViewById(R.id.category_spinner);
 
-        ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> category = ArrayAdapter.createFromResource(this, R.array.transaction_category, android.R.layout.simple_spinner_dropdown_item);
         category.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(category);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectSpinner = position +1;
+                if(position != 0){
+                    checkSpinner = true;
+                }
+                else{
+                    checkSpinner = false;
+                }
             }
 
             @Override

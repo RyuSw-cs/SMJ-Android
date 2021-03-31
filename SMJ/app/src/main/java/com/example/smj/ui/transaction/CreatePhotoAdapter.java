@@ -1,9 +1,7 @@
-package com.example.smj.ui.create;
+package com.example.smj.ui.transaction;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
