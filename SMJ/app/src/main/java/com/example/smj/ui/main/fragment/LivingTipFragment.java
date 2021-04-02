@@ -1,12 +1,10 @@
 package com.example.smj.ui.main.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import com.example.smj.R;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
-import com.example.smj.ui.LivingTip.LivingTipCreateActivity;
 import com.example.smj.ui.LivingTip.LivingTipPostAdapter;
 import com.example.smj.ui.LivingTip.LivingTipPostData;
 import com.example.smj.ui.main.MainActivity;
@@ -32,9 +29,6 @@ public class LivingTipFragment extends Fragment {
     ArrayList<LivingTipPostData> data = new ArrayList<>();
     RecyclerView recyclerView;
     LivingTipPostAdapter adapter;
-    Button writeBtn;
-    LivingTipUseCase livingTipUseCase = new LivingTipUseCase(this);
-    String key;
 
     public LivingTipFragment(){
     }
@@ -44,20 +38,11 @@ public class LivingTipFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_living_tip_main,container,false);
         LivingTipUseCase livingTipUseCase = new LivingTipUseCase(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
-        writeBtn = view.findViewById(R.id.write_btn);
-        key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
+        String key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
 
         livingTipUseCase.getData(key);
 
         Log.d("JWT",key);
-
-        writeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LivingTipCreateActivity.class);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
@@ -75,14 +60,4 @@ public class LivingTipFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        data.clear();
-        key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
-        Log.d("JWT",key);
-        livingTipUseCase.getData(key);
-    }
-
 }
