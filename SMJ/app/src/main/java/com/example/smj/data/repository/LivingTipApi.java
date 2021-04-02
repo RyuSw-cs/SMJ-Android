@@ -1,6 +1,8 @@
 package com.example.smj.data.repository;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.smj.data.datasource.SMJRemoteDataSource;
 import com.example.smj.data.entity.Schedule.Alarm;
@@ -44,13 +46,14 @@ public class LivingTipApi {
         });
     }
 
-    public void deleteData(String key, int id){
+    public void deleteData(String key, int id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("데이터 전송 성공","성공");
+                Toast.makeText(context,"게시글이 삭제됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -60,13 +63,14 @@ public class LivingTipApi {
         });
     }
 
-    public void putData(boardPostData data, String key, int id){
+    public void putData(boardPostData data, String key, int id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
-        Call<boardData>call = entityBoard.putLivingTip(key, data, id);
+        Call<boardData> call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
+                Toast.makeText(context,"게시글이 등록됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -76,13 +80,14 @@ public class LivingTipApi {
         });
     }
 
-    public void postData(boardPostData data, String key){
+    public void postData(boardPostData data, String key, Context context, LivingTipUseCase livingTipUseCase){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
+                Toast.makeText(context,"게시글이 등록됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override
