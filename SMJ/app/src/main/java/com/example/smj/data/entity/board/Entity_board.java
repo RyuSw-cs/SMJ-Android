@@ -25,7 +25,7 @@ public interface Entity_board {
             @Body boardPostData post
     );
 
-    @PUT("api/boards/{id}")
+    @PUT("api/boards")
     Call<boardData> putLivingTip(
             @Header("Authorization") String token,
             @Body boardPostData put,
