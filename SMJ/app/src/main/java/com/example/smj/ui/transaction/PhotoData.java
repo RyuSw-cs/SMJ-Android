@@ -1,4 +1,4 @@
-package com.example.smj.ui.create;
+package com.example.smj.ui.transaction;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;

@@ -3,6 +3,7 @@ package com.example.smj.ui.LivingTip;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LivingTipReadingActivity extends AppCompatActivity {
     Dialog moreView;
     ImageButton moreBtn;
     Button deleteBtn;
+    Button modifyBtn;
     int id;
     String category;
     String title;
@@ -39,6 +41,7 @@ public class LivingTipReadingActivity extends AppCompatActivity {
     TextView writerView;
     TextView dateView;
     TextView contentView;
+    private boolean check = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class LivingTipReadingActivity extends AppCompatActivity {
         moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
         moreView.setContentView(R.layout.reading_view_more);
         deleteBtn = (Button) moreView.findViewById(R.id.reading_delete);
+        modifyBtn = (Button) moreView.findViewById(R.id.reading_modified);
 
         categoryView = findViewById(R.id.living_tip_reading_post_category);
         titleView = findViewById(R.id.living_tip_reading_post_title);
@@ -75,14 +79,37 @@ public class LivingTipReadingActivity extends AppCompatActivity {
 
         moreBtn.setOnClickListener(v -> showMoreView());
 
+        //수정버튼 클릭
+        modifyBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LivingTipModifyActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("category",category);
+                intent.putExtra("title",title);
+                intent.putExtra("content",content);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //삭제버튼 클릭
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("확인","클릭 확인");
                 LivingTipUseCase livingTipUseCase = new LivingTipUseCase();
-                livingTipUseCase.deleteData(key,id);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                livingTipUseCase.deleteData(key,id,getApplicationContext());
+
+                Handler mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        check = true;
+                        check();
+                    }
+                },500);
             }
         });
     }
@@ -90,4 +117,12 @@ public class LivingTipReadingActivity extends AppCompatActivity {
     public void showMoreView(){
         moreView.show();
     }
+
+    private void check(){
+        if(check){
+            finish();
+            check = false;
+        }
+    }
+
 }

@@ -51,6 +51,8 @@
         <activity android:name=".ui.transaction.TransactionModifyActivity"/>
         <activity android:name=".ui.transaction.TransactionMoreInfo"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.create.CreateTradeActivity"/>
+        <activity android:name=".ui.transaction.TransactionCreateActivity"/>
+        <activity android:name=".ui.LivingTip.LivingTipModifyActivity"/>
+        <activity android:name=".ui.LivingTip.LivingTipCreateActivity"/>
     </application>
 </manifest>

@@ -35,7 +35,7 @@ public class TransactionUseCase implements RetrofitOnSuccess {
 
     //POST
     public void postData(boardPostData data, String key, Context context){
-        transactionApi.postData(data, key, context);
+        transactionApi.postData(data, key, context,this);
     }
 
     //PUT
