@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center"
             android:background="@color/white"
-            android:text="글등록"
+            android:text="글수정"
             tools:layout_editor_absoluteX="307dp"
             tools:layout_editor_absoluteY="4dp" />
 
@@ -132,7 +132,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
-        android:id="@+id/galleryBtn"
+        android:id="@+id/trade_galleryBtn"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginEnd="32dp"

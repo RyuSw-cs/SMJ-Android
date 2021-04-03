@@ -1,5 +1,6 @@
 package com.example.smj.ui.transaction;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,14 +32,15 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
     private TransactionUseCase transactionUseCase;
     private Dialog moreView;
     private Button deleteBtn, modifyBtn;
-    private int id;
     private String key;
     private Boolean check = false;
+    public static ArrayList<Activity>stack = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_reading);
+        stack.add(this);
         init();
     }
 
@@ -48,6 +50,8 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
             check = false;
         }
     }
+
+    //상세보기 -> 수정 왜 onCreate가?
 
     private void init(){
 
@@ -104,10 +108,10 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TransactionModifyActivity.class);
                 intent.putExtra("modifyData",data);
+                intent.putExtra("spinner",data.getCategory());
                 startActivity(intent);
             }
         });
-
         transactionUseCase.getMyData(key);
     }
 

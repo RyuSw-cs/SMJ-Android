@@ -53,16 +53,12 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
                 startActivity(intent);
             }
         });
-        /*
-        boardCategory BC = new boardCategory(1,"운동기구");
-        boardData bd = new boardData(BC,"내용","123",0,"title","TRADE");
-        transactionUseCase.postData(bd,"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNjA4ODg3NiwiZXhwIjoxNjE2MDkwNjc2fQ.kaRqb9rTn4giz2Yz15AVXtx0FVrFnEsa3wj7BNbcEqg");
-         */
         return view;
     }
 
     @Override
     public void onSuccess(List<boardData> list) {
+        data.clear();
         //list를 받았을때 값을 add, 리사이클러뷰에 뿌림
         for(int i = 0; i<list.size(); i++) {
             //profile이미지 변경
@@ -79,7 +75,10 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     @Override
     public void onResume(){
         super.onResume();
-        data.clear();
         transactionUseCase.getData(token);
+        recyclerView.setHasFixedSize(true);
+        adapter = new TransactionPostAdapter(getActivity(), data);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
     }
 }
