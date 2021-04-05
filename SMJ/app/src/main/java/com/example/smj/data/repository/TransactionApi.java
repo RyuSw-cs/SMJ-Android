@@ -8,11 +8,8 @@ import com.example.smj.data.datasource.SMJRemoteDataSource;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
-import com.example.smj.domain.usecase.LivingTipUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

@@ -4,12 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.data.repository.LivingTipApi;
-import com.example.smj.data.repository.ScheduleApi;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
+import com.example.smj.ui.Boards.LivingTip.LivingTipFragment;
 
 import java.util.ArrayList;
 import java.util.List;

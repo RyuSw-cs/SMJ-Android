@@ -3,7 +3,7 @@ package com.example.smj.domain.usecase;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.repository.ScheduleApi;
-import com.example.smj.ui.main.fragment.ScheduleFragment;
+import com.example.smj.ui.Alarms.ScheduleFragment;
 
 import java.util.ArrayList;
 import java.util.List;

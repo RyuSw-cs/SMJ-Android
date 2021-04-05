@@ -5,14 +5,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.smj.data.datasource.SMJRemoteDataSource;
-import com.example.smj.data.entity.Schedule.Alarm;
-import com.example.smj.data.entity.Schedule.Entity_Schedule;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
-import com.example.smj.domain.usecase.ScheduleUseCase;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
 
 import java.util.ArrayList;
 import java.util.List;

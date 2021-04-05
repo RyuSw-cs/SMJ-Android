@@ -3,11 +3,11 @@ package com.example.smj.domain.usecase;
 import com.example.smj.data.entity.Convenience.Document;
 import com.example.smj.data.repository.ConvenienceMarkerApi;
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
+import com.example.smj.ui.Convenience.ConvenienceFragment;
 
 import java.util.ArrayList;
 
-import static com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment.currentMapPoint;
+import static com.example.smj.ui.Convenience.ConvenienceFragment.currentMapPoint;
 
 public class ConvenienceUseCase implements RetrofitOnSuccess {
 
