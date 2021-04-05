@@ -34,13 +34,13 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
     private Button deleteBtn, modifyBtn;
     private String key;
     private Boolean check = false;
-    public static ArrayList<Activity>stack = new ArrayList<>();
+    public static ArrayList<Activity>activityStack = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_reading);
-        stack.add(this);
+        activityStack.add(this);
         init();
     }
 
@@ -108,7 +108,6 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TransactionModifyActivity.class);
                 intent.putExtra("modifyData",data);
-                intent.putExtra("spinner",data.getCategory());
                 startActivity(intent);
             }
         });
@@ -123,7 +122,8 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
     //내 게시글 데이터를 다 가져오고~
     @Override
     public void onSuccess(ArrayList<Integer>list) {
-        for(int i = 0; i<list.size(); i++){
+        int getListSize = list.size();
+        for(int i = 0; i<getListSize; i++){
             if(data.getId() == list.get(i)) {
                 moreBtn.setVisibility(View.VISIBLE);
                 moreBtn.setEnabled(true);

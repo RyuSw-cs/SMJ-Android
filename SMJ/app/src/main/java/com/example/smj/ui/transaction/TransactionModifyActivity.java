@@ -54,7 +54,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
         category();
         gallery();
 
-        TransactionReadingActivity.stack.add(this);
+        TransactionReadingActivity.activityStack.add(this);
 
         photoList = findViewById(R.id.trade_photo_recyclerView);
         image = findViewById(R.id.photo);
@@ -64,7 +64,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
-        spinnerItem = (String)intent.getStringExtra("spinner");
+        spinnerItem = transactionPostData.getCategory();
 
         title.setText(transactionPostData.getTitle());
         content.setText(transactionPostData.getContents());
@@ -98,8 +98,8 @@ public class TransactionModifyActivity extends AppCompatActivity {
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            for(int i = 0; i< TransactionReadingActivity.stack.size(); i++){
-                                TransactionReadingActivity.stack.get(i).finish();
+                            for(int i = 0; i< TransactionReadingActivity.activityStack.size(); i++){
+                                TransactionReadingActivity.activityStack.get(i).finish();
                             }
                         }
                     },1000);

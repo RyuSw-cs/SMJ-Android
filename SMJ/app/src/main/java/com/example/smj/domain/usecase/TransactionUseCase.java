@@ -84,7 +84,8 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
             list = (List<boardData>)object;
             idList.clear();
             //idList에 id값 추가함
-            for(int i = 0; i<list.size(); i++){
+            int getListSize = list.size();
+            for(int i = 0; i<getListSize; i++){
                 idList.add(list.get(i).getId());
             }
             transactionReadingActivity.onSuccess(idList);
