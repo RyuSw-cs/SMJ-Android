@@ -57,6 +57,8 @@ public class TransactionCreateActivity extends AppCompatActivity{
         title = findViewById(R.id.trade_title);
         content = findViewById(R.id.trade_content);
 
+        transactionUseCase = new TransactionUseCase();
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +69,6 @@ public class TransactionCreateActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    transactionUseCase = new TransactionUseCase();
                     transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
                     finish();

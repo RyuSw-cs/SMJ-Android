@@ -70,5 +70,4 @@ public class ConvenienceUseCase implements RetrofitOnSuccess {
             convenienceFragment.clickSuccess(list);
         }
     }
-
 }

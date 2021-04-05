@@ -2,6 +2,7 @@ package com.example.smj.ui.main.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionFragment extends Fragment implements TransactionGetData {
-    List<TransactionPostData> data = new ArrayList<>();
-    RecyclerView recyclerView;
-    TransactionPostAdapter adapter;
-    TransactionUseCase transactionUseCase;
+    private List<TransactionPostData> data = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private TransactionPostAdapter adapter;
+    private TransactionUseCase transactionUseCase;
     private Button writeButton;
     private String token;
 
@@ -60,7 +61,8 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     public void onSuccess(List<boardData> list) {
         data.clear();
         //list를 받았을때 값을 add, 리사이클러뷰에 뿌림
-        for(int i = 0; i<list.size(); i++) {
+        int getListSize = list.size();
+        for(int i = 0; i<getListSize; i++) {
             //profile이미지 변경
             if(list.get(i).getType().equals("TRADE")) {
                 data.add(new TransactionPostData(list.get(i).getCategory().getName(), list.get(i).getTitle(), list.get(i).getContent(), list.get(i).getWriter(),
@@ -68,7 +70,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
             }
         }
         recyclerView.setHasFixedSize(true);
-        adapter = new TransactionPostAdapter(getActivity(), data);
+        adapter = new TransactionPostAdapter(getActivity(), data, transactionUseCase);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
@@ -76,8 +78,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     public void onResume(){
         super.onResume();
         transactionUseCase.getData(token);
-        recyclerView.setHasFixedSize(true);
-        adapter = new TransactionPostAdapter(getActivity(), data);
+        adapter = new TransactionPostAdapter(getActivity(), data,transactionUseCase);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

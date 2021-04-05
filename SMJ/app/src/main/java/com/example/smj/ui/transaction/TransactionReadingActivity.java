@@ -51,9 +51,9 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
         }
     }
 
-    //상세보기 -> 수정 왜 onCreate가?
-
     private void init(){
+
+        Intent intent = getIntent();
 
         transactionUseCase = new TransactionUseCase(this);
 
@@ -73,9 +73,7 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
         modifyBtn = (Button) moreView.findViewById(R.id.reading_modified);
 
         //표시할 값 객체로 받기
-        Intent intent = getIntent();
         data = (TransactionPostData)intent.getSerializableExtra("data");
-
         category.setText(data.getCategory());
         title.setText(data.getTitle());
         writer.setText(data.getWriter());

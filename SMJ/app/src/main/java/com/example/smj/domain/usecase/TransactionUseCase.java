@@ -2,6 +2,7 @@ package com.example.smj.domain.usecase;
 
 import android.content.Context;
 
+import com.example.smj.callback.ModifyOnSuccess;
 import com.example.smj.callback.MyBoardGetData;
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
@@ -13,11 +14,13 @@ import com.example.smj.ui.main.fragment.LivingTipFragment;
 import com.example.smj.ui.main.fragment.TransactionFragment;
 import com.example.smj.ui.transaction.TransactionModifyActivity;
 import com.example.smj.ui.transaction.TransactionReadingActivity;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
+public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData, ModifyOnSuccess {
 
     private TransactionApi transactionApi;
     private TransactionFragment transactionFragment;
@@ -38,6 +41,7 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
         transactionApi = new TransactionApi();
         this.transactionReadingActivity = transactionReadingActivity;
     }
+
     public TransactionUseCase(TransactionModifyActivity transactionModifyActivity){
         transactionApi = new TransactionApi();
         this.transactionModifyActivity = transactionModifyActivity;
@@ -55,7 +59,7 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
 
     //PUT
     public void putData(boardPostData data, String key, int id, Context context){
-        transactionApi.putData(data, key, id, context);
+        transactionApi.putData(data, key, id, context, this);
     }
 
     //DELETE
@@ -90,5 +94,11 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData {
             }
             transactionReadingActivity.onSuccess(idList);
         }
+    }
+
+    @Override
+    public void onSuccess() {
+        //수정완료 -> 액티비티 종료
+        transactionModifyActivity.modifySuccess();
     }
 }

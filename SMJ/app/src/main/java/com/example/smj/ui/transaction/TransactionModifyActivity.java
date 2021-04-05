@@ -1,5 +1,6 @@
 package com.example.smj.ui.transaction;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,7 +42,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private TransactionPostData transactionPostData;
     private String spinnerItem;
     private String[] item;
-    private int selectSpinner;
+    private int selectSpinner, getItemCount;
 
 
     private static int PICK_IMAGE_REQUEST = 7;
@@ -63,16 +64,19 @@ public class TransactionModifyActivity extends AppCompatActivity {
         content = findViewById(R.id.trade_content);
 
         Intent intent = getIntent();
+        transactionUseCase = new TransactionUseCase(this);
         transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
         spinnerItem = transactionPostData.getCategory();
 
         title.setText(transactionPostData.getTitle());
         content.setText(transactionPostData.getContents());
 
-
         item = getResources().getStringArray(R.array.transaction_category);
-        for(int i = 0; i<item.length; i++){
-            if(item[i].equals(spinnerItem)){
+
+        getItemCount = item.length;
+
+        for(int i = 0; i<getItemCount; i++){
+            if(item[i].contains(spinnerItem)){
                 selectSpinner = i;
                 break;
             }
@@ -90,19 +94,9 @@ public class TransactionModifyActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    transactionUseCase = new TransactionUseCase();
                     transactionUseCase.putData(new boardPostData(selectSpinner+1,"TRADE",title.getText().toString(),content.getText().toString()),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),transactionPostData.getId(),getApplicationContext());
-                    //딜레이좀..
-                    Handler mHandler = new Handler();
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            for(int i = 0; i< TransactionReadingActivity.activityStack.size(); i++){
-                                TransactionReadingActivity.activityStack.get(i).finish();
-                            }
-                        }
-                    },1000);
+                    //서버통신시간으로 인터페이스를 정의
                 }
             }
         });
@@ -112,6 +106,13 @@ public class TransactionModifyActivity extends AppCompatActivity {
         photoList.setHasFixedSize(true);
         adapter = new CreatePhotoAdapter(this, photoData);
         photoList.setAdapter(adapter);
+    }
+
+    public void modifySuccess(){
+        int getActivitySize = TransactionReadingActivity.activityStack.size();
+        for(int i = 0; i<getActivitySize; i++){
+            TransactionReadingActivity.activityStack.get(i).finish();
+        }
     }
 
     public void category() {

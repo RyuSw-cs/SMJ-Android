@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.data.repository.TransactionApi;
+import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.LivingTip.LivingTipPostData;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
     private Context context;
     private ArrayList<TransactionPostData> postData = null;
+    private TransactionUseCase transactionUseCase;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView category;
@@ -44,9 +46,10 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         }
     }
 
-    public TransactionPostAdapter(Context context, List<TransactionPostData> data){
+    public TransactionPostAdapter(Context context, List<TransactionPostData> data, TransactionUseCase transactionUseCase){
         this.context = context;
         postData = (ArrayList) data;
+        this.transactionUseCase = transactionUseCase;
     }
 
     @NonNull

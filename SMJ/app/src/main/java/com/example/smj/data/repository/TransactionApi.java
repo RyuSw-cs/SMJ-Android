@@ -58,7 +58,7 @@ public class TransactionApi {
         });
     }
 
-    public void putData(boardPostData data, String key, int id, Context context){
+    public void putData(boardPostData data, String key, int id, Context context, TransactionUseCase transactionUseCase){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
@@ -66,6 +66,7 @@ public class TransactionApi {
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"게시글이 수정됐습니다.",Toast.LENGTH_LONG).show();
+                transactionUseCase.onSuccess();
             }
 
             @Override
