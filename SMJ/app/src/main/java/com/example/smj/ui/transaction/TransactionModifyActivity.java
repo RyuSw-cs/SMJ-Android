@@ -87,7 +87,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
                 //제목, 글 내용이 있어야함.
                 if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
-                    Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
                     transactionUseCase = new TransactionUseCase();
