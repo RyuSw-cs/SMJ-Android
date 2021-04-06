@@ -5,24 +5,19 @@ import android.content.Context;
 import com.example.smj.callback.ModifyOnSuccess;
 import com.example.smj.callback.MyBoardGetData;
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
-import com.example.smj.data.repository.LivingTipApi;
-import com.example.smj.data.repository.TransactionApi;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
-import com.example.smj.ui.main.fragment.TransactionFragment;
-import com.example.smj.ui.transaction.TransactionModifyActivity;
-import com.example.smj.ui.transaction.TransactionReadingActivity;
-import com.google.gson.annotations.SerializedName;
+import com.example.smj.data.repository.TransactionRepository;
+import com.example.smj.ui.Boards.Transaction.TransactionFragment;
+import com.example.smj.ui.Boards.Transaction.TransactionModifyActivity;
+import com.example.smj.ui.Boards.Transaction.TransactionReadingActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData, ModifyOnSuccess {
 
-    private TransactionApi transactionApi;
+    private TransactionRepository transactionRepository;
     private TransactionFragment transactionFragment;
     private TransactionReadingActivity transactionReadingActivity;
     private TransactionModifyActivity transactionModifyActivity;
@@ -30,46 +25,46 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData, Mo
     private ArrayList<Integer> idList = new ArrayList<>();
 
     public TransactionUseCase(TransactionFragment transactionFragment){
-        transactionApi = new TransactionApi();
+        transactionRepository = new TransactionRepository();
         this.transactionFragment = transactionFragment;
     }
     public TransactionUseCase(){
-        transactionApi = new TransactionApi();
+        transactionRepository = new TransactionRepository();
     }
 
     public TransactionUseCase(TransactionReadingActivity transactionReadingActivity){
-        transactionApi = new TransactionApi();
+        transactionRepository = new TransactionRepository();
         this.transactionReadingActivity = transactionReadingActivity;
     }
 
     public TransactionUseCase(TransactionModifyActivity transactionModifyActivity){
-        transactionApi = new TransactionApi();
+        transactionRepository = new TransactionRepository();
         this.transactionModifyActivity = transactionModifyActivity;
     }
 
     //GET
     public void getData(String key){
-        transactionApi.getData(key, this);
+        transactionRepository.getData(key, this);
     }
 
     //POST
     public void postData(boardPostData data, String key, Context context){
-        transactionApi.postData(data, key, context,this);
+        transactionRepository.postData(data, key, context,this);
     }
 
     //PUT
     public void putData(boardPostData data, String key, int id, Context context){
-        transactionApi.putData(data, key, id, context, this);
+        transactionRepository.putData(data, key, id, context,this);
     }
 
     //DELETE
     public void deleteData(String key, int id, Context context){
-        transactionApi.deleteData(key, id, context);
+        transactionRepository.deleteData(key, id, context);
     }
 
     //MY_DATA
     public void getMyData(String key){
-        transactionApi.getMyData(key, this);
+        transactionRepository.getMyData(key, this);
     }
 
     @Override

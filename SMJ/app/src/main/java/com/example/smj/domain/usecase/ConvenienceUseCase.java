@@ -1,22 +1,22 @@
 package com.example.smj.domain.usecase;
 
 import com.example.smj.data.entity.Convenience.Document;
-import com.example.smj.data.repository.ConvenienceMarkerApi;
+import com.example.smj.data.repository.ConvenienceMarkerRepository;
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
+import com.example.smj.ui.Convenience.ConvenienceFragment;
 
 import java.util.ArrayList;
 
-import static com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment.currentMapPoint;
+import static com.example.smj.ui.Convenience.ConvenienceFragment.currentMapPoint;
 
 public class ConvenienceUseCase implements RetrofitOnSuccess {
 
-    private ConvenienceMarkerApi convenienceMarkerApi;
+    private ConvenienceMarkerRepository convenienceMarkerRepository;
     private ConvenienceFragment convenienceFragment;
     private ArrayList<Document> list = new ArrayList<>();
 
     public ConvenienceUseCase(ConvenienceFragment convenienceFragment){
-        convenienceMarkerApi = new ConvenienceMarkerApi();
+        convenienceMarkerRepository = new ConvenienceMarkerRepository();
         this.convenienceFragment = convenienceFragment;
     }
 
@@ -60,7 +60,7 @@ public class ConvenienceUseCase implements RetrofitOnSuccess {
                 break;
             default: break;
         }
-        convenienceMarkerApi.retrieveLocals(local,x,y, this);
+        convenienceMarkerRepository.retrieveLocals(local,x,y, this);
     }
 
     @Override
