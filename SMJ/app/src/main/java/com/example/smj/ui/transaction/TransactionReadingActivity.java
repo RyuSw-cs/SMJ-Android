@@ -24,7 +24,7 @@ import com.example.smj.ui.LivingTip.LivingTipReadingActivity;
 
 import java.util.ArrayList;
 
-public class TransactionReadingActivity extends AppCompatActivity implements BoardIdGetData {
+public class TransactionReadingActivity extends AppCompatActivity {
 
     private ImageButton moreBtn;
     private TransactionPostData data;
@@ -118,8 +118,7 @@ public class TransactionReadingActivity extends AppCompatActivity implements Boa
 
 
     //내 게시글 데이터를 다 가져오고~
-    @Override
-    public void onSuccess(ArrayList<Integer>list) {
+    public void onSuccessMyData(ArrayList<Integer>list) {
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
             if(data.getId() == list.get(i)) {

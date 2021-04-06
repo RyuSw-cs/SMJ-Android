@@ -92,7 +92,7 @@ public class TransactionUseCase implements RetrofitOnSuccess, MyBoardGetData, Mo
             for(int i = 0; i<getListSize; i++){
                 idList.add(list.get(i).getId());
             }
-            transactionReadingActivity.onSuccess(idList);
+            transactionReadingActivity.onSuccessMyData(idList);
         }
     }
 
