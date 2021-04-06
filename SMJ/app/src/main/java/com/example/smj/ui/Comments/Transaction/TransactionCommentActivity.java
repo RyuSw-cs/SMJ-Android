@@ -1,4 +1,4 @@
-package com.example.smj.ui.Comments.LivingTip.Transaction;
+package com.example.smj.ui.Comments.Transaction;
 
 import android.os.Bundle;
 

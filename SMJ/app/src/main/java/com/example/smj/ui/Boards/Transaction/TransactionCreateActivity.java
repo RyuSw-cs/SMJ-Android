@@ -1,4 +1,4 @@
-package com.example.smj.ui.Boards.LivingTip.Transaction;
+package com.example.smj.ui.Boards.Transaction;
 
 import android.content.ClipData;
 import android.content.Intent;

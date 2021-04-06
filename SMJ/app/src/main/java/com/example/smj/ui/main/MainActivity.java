@@ -22,7 +22,7 @@ import com.example.smj.ui.Convenience.ConvenienceFragment;
 import com.example.smj.ui.Boards.LivingTip.LivingTipFragment;
 import com.example.smj.ui.Member.MyPageFragment;
 import com.example.smj.ui.Alarms.ScheduleFragment;
-import com.example.smj.ui.Boards.LivingTip.TransactionFragment;
+import com.example.smj.ui.Boards.Transaction.TransactionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

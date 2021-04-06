@@ -16,9 +16,6 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
-import com.example.smj.ui.Boards.LivingTip.LivingTipCreateActivity;
-import com.example.smj.ui.Boards.LivingTip.LivingTipPostAdapter;
-import com.example.smj.ui.Boards.LivingTip.LivingTipPostData;
 
 import java.util.ArrayList;
 import java.util.List;

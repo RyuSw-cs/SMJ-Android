@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ScheduleApi {
+public class ScheduleRepository {
     private List<Alarm> localList = new ArrayList<>();
     private Entity_Schedule entitySchedule;
     public void retrieveLocals(String key, ScheduleUseCase scheduleUseCase){

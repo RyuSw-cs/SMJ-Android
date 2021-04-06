@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class JWTApi {
+public class JwtRepository {
     private String jwt;
     public void retrieveLocals(String at, JWTUseCase jwtUseCase){
         Entity_JWT entityJWT = JWTRemoteDataSource.getInstance().create(Entity_JWT.class);

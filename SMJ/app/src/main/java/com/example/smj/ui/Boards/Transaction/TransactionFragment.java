@@ -1,4 +1,4 @@
-package com.example.smj.ui.Boards.LivingTip;
+package com.example.smj.ui.Boards.Transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,6 @@ import com.example.smj.R;
 import com.example.smj.callback.TransactionGetData;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.Boards.LivingTip.Transaction.TransactionCreateActivity;
-import com.example.smj.ui.Boards.LivingTip.Transaction.TransactionPostAdapter;
-import com.example.smj.ui.Boards.LivingTip.Transaction.TransactionPostData;
 
 import java.util.ArrayList;
 import java.util.List;

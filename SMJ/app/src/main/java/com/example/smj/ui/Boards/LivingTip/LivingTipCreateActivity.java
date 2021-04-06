@@ -23,7 +23,7 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.LivingTipUseCase;
-import com.example.smj.ui.Boards.LivingTip.Transaction.CreatePhotoAdapter;
+import com.example.smj.ui.Boards.Transaction.CreatePhotoAdapter;
 
 import java.util.ArrayList;
 

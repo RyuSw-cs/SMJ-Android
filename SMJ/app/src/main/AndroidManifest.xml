@@ -43,15 +43,15 @@
         <activity android:name=".ui.Setting.AppSetting"/>
         <activity android:name=".ui.manage.PostManageActivity"/>
         <activity android:name=".ui.message.MessageManagementActivity"/>
-        <activity android:name=".ui.Boards.LivingTip.Transaction.TransactionReadingActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionReadingActivity"/>
         <activity android:name=".ui.transaction.TransactionDeletePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.transaction.TransactionModifyPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.Boards.LivingTip.Transaction.TransactionModifyActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionModifyActivity"/>
         <activity android:name=".ui.transaction.TransactionMoreInfo"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.Boards.LivingTip.Transaction.TransactionCreateActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionCreateActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipModifyActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipCreateActivity"/>
     </application>

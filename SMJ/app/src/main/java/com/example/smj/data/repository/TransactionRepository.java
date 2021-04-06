@@ -8,36 +8,32 @@ import com.example.smj.data.datasource.SMJRemoteDataSource;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
-import com.example.smj.domain.usecase.LivingTipUseCase;
+import com.example.smj.domain.usecase.TransactionUseCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LivingTipApi {
-    private List<boardData> livingTipList = new ArrayList<>();
+public class TransactionRepository {
     private Entity_board entityBoard;
 
-    public void getData(String key, LivingTipUseCase livingTipUseCase){
+    public void getData(String key, TransactionUseCase transactionUseCase){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call <List<boardData>> call = entityBoard.getLivingTIp(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
             public void onResponse(Call<List<boardData>> call, Response<List<boardData>> response) {
                 if(response.isSuccessful()){
-                    Log.d("살림 팁 게시판 데이터 GET 성공","살림 팁 게시판 데이터 GET 성공");
-                    livingTipList = response.body();
-                    livingTipUseCase.onSuccess(livingTipList);
-                    Log.d("살림 팁 게시판 데이터 GET 성공",Integer.toString(livingTipList.size()));
+                    Log.d("거래 게시판 데이터 GET 성공","거래 게시판 데이터 GET 성공");
+                    transactionUseCase.onSuccess(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<boardData>> call, Throwable t) {
-                Log.d("살림 팁 게시판 데이터 GET 실패","살림 팁 게시판 데이터 GET 실패");
+                Log.d("거래 게시판 데이터 GET 실패","거래 팁 게시판 데이터 GET 실패");
             }
         });
     }
@@ -61,12 +57,12 @@ public class LivingTipApi {
 
     public void putData(boardPostData data, String key, int id, Context context){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
-        Call<boardData> call = entityBoard.putLivingTip(key, data, id);
+        Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
-                Toast.makeText(context,"게시글이 등록됐습니다.",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"게시글이 수정됐습니다.",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -76,7 +72,7 @@ public class LivingTipApi {
         });
     }
 
-    public void postData(boardPostData data, String key, Context context, LivingTipUseCase livingTipUseCase){
+    public void postData(boardPostData data, String key, Context context, TransactionUseCase transactionUseCase){
         entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {

@@ -1,4 +1,4 @@
-package com.example.smj.ui.Comments.LivingTip.Transaction;
+package com.example.smj.ui.Comments.Transaction;
 
 public class TransactionCommentData {
     String date;
