@@ -33,7 +33,7 @@
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.Alarms.ScheduleAlarmPageActivity"/>
         <activity android:name=".ui.Convenience.ConveniencePopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
         <activity android:name=".ui.Alarms.ScheduleAlarmModifiedPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.Alarms.ScheduleAlarmDeletePopupActivity"
@@ -44,13 +44,7 @@
         <activity android:name=".ui.manage.PostManageActivity"/>
         <activity android:name=".ui.message.MessageManagementActivity"/>
         <activity android:name=".ui.Boards.Transaction.TransactionReadingActivity"/>
-        <activity android:name=".ui.transaction.TransactionDeletePopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.transaction.TransactionModifyPopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.Boards.Transaction.TransactionModifyActivity"/>
-        <activity android:name=".ui.transaction.TransactionMoreInfo"
-            android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ui.Boards.Transaction.TransactionCreateActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipModifyActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipCreateActivity"/>

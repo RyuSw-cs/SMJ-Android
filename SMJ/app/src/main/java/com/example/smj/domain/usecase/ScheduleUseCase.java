@@ -45,4 +45,5 @@ public class ScheduleUseCase implements RetrofitOnSuccess {
             scheduleFragment.clickSuccess(list);
         }
     }
+
 }

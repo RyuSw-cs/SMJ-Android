@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:visibility="invisible"
             android:background="@color/white"
             android:layout_gravity="right|center"
             app:srcCompat="@drawable/baseline_more_horiz_black_18dp" />
@@ -68,6 +69,7 @@
         android:layout_marginEnd="32dp"
         android:text="거래합니다"
         android:textSize="18sp"
+        android:textColor="#555555"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/transaction_reading_post_category"
         app:layout_constraintTop_toBottomOf="@+id/transaction_reading_post_category" />

@@ -17,7 +17,7 @@ public class ConvenienceMarkerRepository {
     private ArrayList<Document>localList = new ArrayList<>();
 
     public void retrieveLocals(String local, double x, double y,  ConvenienceUseCase convenienceUseCase){
-        Entity_Convenience entityConvenience = KakaoRemoteDataSource.getInstance().create(Entity_Convenience.class);
+        Entity_Convenience entityConvenience = (Entity_Convenience) KakaoRemoteDataSource.getInstance(Entity_Convenience.class).apiService;
         Call<Category> call = entityConvenience.getSearchCategory("KakaoAK 92ae20dbb333f02658441075a9144490",local,y+"",x+"",1500);
         call.enqueue(new Callback<Category>() {
             @Override
