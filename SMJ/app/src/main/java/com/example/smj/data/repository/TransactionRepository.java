@@ -21,7 +21,7 @@ public class TransactionRepository {
     private Entity_board entityBoard;
 
     public void getData(String key, TransactionUseCase transactionUseCase){
-        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
         Call <List<boardData>> call = entityBoard.getLivingTIp(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
@@ -40,7 +40,7 @@ public class TransactionRepository {
     }
 
     public void deleteData(String key, int id, Context context){
-        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -57,14 +57,14 @@ public class TransactionRepository {
     }
 
     public void putData(boardPostData data, String key, int id, Context context, TransactionUseCase transactionUseCase){
-        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"게시글이 수정됐습니다.",Toast.LENGTH_LONG).show();
-                transactionUseCase.onSuccess();
+                transactionUseCase.updateSuccess();
             }
 
             @Override
@@ -75,13 +75,14 @@ public class TransactionRepository {
     }
 
     public void postData(boardPostData data, String key, Context context, TransactionUseCase transactionUseCase){
-        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {
             @Override
             public void onResponse(Call<boardData> call, Response<boardData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"게시글이 등록됐습니다.",Toast.LENGTH_LONG).show();
+                transactionUseCase.postSuccess();
             }
 
             @Override
@@ -91,14 +92,14 @@ public class TransactionRepository {
         });
     }
     public void getMyData(String key, TransactionUseCase transactionUseCase){
-        entityBoard = SMJRemoteDataSource.getInstance().create(Entity_board.class);
+        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
         Call <List<boardData>> call = entityBoard.getMyLivingTip(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
             public void onResponse(Call<List<boardData>> call, Response<List<boardData>> response) {
                 if(response.isSuccessful()){
                     Log.d("내 거래 게시판 데이터 GET 성공","거래 게시판 데이터 GET 성공");
-                    transactionUseCase.onSuccessData(response.body());
+                    transactionUseCase.retrieveSuccess(response.body());
                 }
             }
 

@@ -66,7 +66,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
         String []getDate = postData.get(position).getDate();
 
-        String date = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
+        String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
         //String profileImage = postData.get(position).getProfileImage();
 
         holder.category.setText(category);

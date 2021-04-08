@@ -55,21 +55,20 @@ public class TransactionCreateActivity extends AppCompatActivity{
         title = findViewById(R.id.trade_title);
         content = findViewById(R.id.trade_content);
 
-        transactionUseCase = new TransactionUseCase();
+        transactionUseCase = new TransactionUseCase(this);
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //카테고리의 값이 있어야함.
-                //제목, 글 내용이 있어야함.
                 if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    transactionUseCase.postData(new boardPostData(selectSpinner,"TRADE",title.getText().toString(),content.getText().toString()),
+                    //이미지를 어떻게?
+                    transactionUseCase.postData(new boardPostData
+                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                    finish();
                 }
             }
         });

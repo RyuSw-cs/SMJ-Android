@@ -87,16 +87,15 @@ public class TransactionModifyActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //카테고리의 값이 있어야함.
-                //제목, 글 내용이 있어야함.
                 if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
                     Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    transactionUseCase.putData(new boardPostData(selectSpinner+1,"TRADE",title.getText().toString(),content.getText().toString()),
+                    //이미지 전송 변경해야함.
+                    transactionUseCase.putData(new boardPostData
+                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),transactionPostData.getId(),getApplicationContext());
-                    //서버통신시간으로 인터페이스를 정의
                 }
             }
         });

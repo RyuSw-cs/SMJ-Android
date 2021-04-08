@@ -33,9 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center"
             android:background="@color/white"
-            android:text="글수정"
+            android:text="완료"
             tools:layout_editor_absoluteX="307dp"
-            tools:layout_editor_absoluteY="4dp" />
+            tools:layout_editor_absoluteY="4dp"
+            style="?attr/borderlessButtonStyle"/>
 
     </com.google.android.material.appbar.MaterialToolbar>
 

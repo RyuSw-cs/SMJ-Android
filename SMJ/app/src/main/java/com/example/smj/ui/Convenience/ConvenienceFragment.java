@@ -42,8 +42,6 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     private boolean checkLocationButton= false;
     private String[] getItemList;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         mapView = new MapView(getActivity());
@@ -130,7 +128,8 @@ public class ConvenienceFragment extends Fragment implements MapView.CurrentLoca
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
         Intent intent = new Intent(getContext(), ConveniencePopupActivity.class);
         //인텐트로 이름, 전화번호, 주소
-        for(int i = 0; i<getList.size();i++){
+        int getListSize = getList.size();
+        for(int i = 0; i<getListSize;i++){
             if(mapPOIItem.getItemName().equals(getList.get(i).getPlaceName())){
                 popupList = new PopupInfo(getList.get(i).getPlaceName(),getList.get(i).getPhone(),getList.get(i).getRoadAddressName());
             }

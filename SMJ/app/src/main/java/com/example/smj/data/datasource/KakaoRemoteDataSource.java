@@ -3,20 +3,24 @@ package com.example.smj.data.datasource;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/*
-레트로핏 객체를 생성해주는 곳
- */
-public class KakaoRemoteDataSource {
-    private static final String URL ="https://dapi.kakao.com/";
-    private static Retrofit retrofit;
+public class KakaoRemoteDataSource<T> {
 
-    public static Retrofit getInstance(){
-        if(retrofit == null){
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+    private static final String baseURL ="https://dapi.kakao.com/";
+    private Retrofit retrofit;
+    private static KakaoRemoteDataSource instance = null;
+    public T apiService;
+
+    private KakaoRemoteDataSource(Class<T> apiInterface){
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiService = apiInterface.cast(retrofit.create(apiInterface));
+    }
+    public static <T> KakaoRemoteDataSource getInstance(Class<T> apiInterface){
+        if(instance == null){
+            instance = new KakaoRemoteDataSource(apiInterface);
         }
-        return retrofit;
+        return instance;
     }
 }

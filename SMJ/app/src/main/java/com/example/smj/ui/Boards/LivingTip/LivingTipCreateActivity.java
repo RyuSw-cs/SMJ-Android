@@ -67,7 +67,7 @@ public class LivingTipCreateActivity extends AppCompatActivity {
                 }
                 else{
                     livingTipUseCase = new LivingTipUseCase();
-                    livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString()),
+                    livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),"123","123","123"),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
                     finish();
                 }

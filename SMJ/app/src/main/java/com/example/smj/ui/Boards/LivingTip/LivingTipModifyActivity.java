@@ -54,7 +54,7 @@ public class LivingTipModifyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 livingTipUseCase = new LivingTipUseCase();
                 Log.d("modifyLog",selectSpinner + titleView.getText().toString() + contentView.getText().toString());
-                livingTipUseCase.putData(new boardPostData(selectSpinner,"LIVE",titleView.getText().toString(),contentView.getText().toString()),
+                livingTipUseCase.putData(new boardPostData(selectSpinner,"LIVE",titleView.getText().toString(),contentView.getText().toString(),"123","123", "123"),
                         JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),id,getApplicationContext());
                 finish();
                 

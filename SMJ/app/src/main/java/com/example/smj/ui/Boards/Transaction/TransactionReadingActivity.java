@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
-import com.example.smj.callback.BoardIdGetData;
 import com.example.smj.domain.usecase.TransactionUseCase;
 
 import java.util.ArrayList;
@@ -113,8 +112,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
-
-    //내 게시글 데이터를 다 가져오고~
     public void onSuccessMyData(ArrayList<Integer> list) {
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
@@ -123,6 +120,11 @@ public class TransactionReadingActivity extends AppCompatActivity {
                 moreBtn.setEnabled(true);
             }
         }
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        moreView.dismiss();
     }
 }
 

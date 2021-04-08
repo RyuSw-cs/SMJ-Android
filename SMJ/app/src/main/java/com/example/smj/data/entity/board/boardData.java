@@ -1,16 +1,21 @@
 package com.example.smj.data.entity.board;
 
+import com.example.smj.data.entity.Member.MemberData;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.lang.reflect.Member;
 
 public class boardData implements Serializable {
 
     @SerializedName("id")
     private int id;
 
-    @SerializedName("writer")
-    private String writer;
+    @SerializedName("member")
+    private MemberData member;
+
+    @SerializedName("category")
+    private boardCategory category;
 
     @SerializedName("type")
     private String type;
@@ -21,19 +26,28 @@ public class boardData implements Serializable {
     @SerializedName("content")
     private String content;
 
-    @SerializedName("category")
-    private boardCategory category;
+    @SerializedName("imageOne")
+    private String imageOne;
+
+    @SerializedName("imageTwo")
+    private String imageTwo;
+
+    @SerializedName("imageThree")
+    private String imageThree;
 
     @SerializedName("createdAt")
     private String[] createdAt;
 
-    public boardData(int id, String writer, String type, String title, String content, boardCategory category, String[] createdAt) {
+    public boardData(int id, MemberData member, boardCategory category, String type, String title, String content, String imageOne, String imageTwo, String imageThree, String[] createdAt) {
         this.id = id;
-        this.writer = writer;
+        this.member = member;
+        this.category = category;
         this.type = type;
         this.title = title;
         this.content = content;
-        this.category = category;
+        this.imageOne = imageOne;
+        this.imageTwo = imageTwo;
+        this.imageThree = imageThree;
         this.createdAt = createdAt;
     }
 
@@ -45,12 +59,20 @@ public class boardData implements Serializable {
         this.id = id;
     }
 
-    public String getWriter() {
-        return writer;
+    public MemberData getMember() {
+        return member;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setMember(MemberData member) {
+        this.member = member;
+    }
+
+    public boardCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(boardCategory category) {
+        this.category = category;
     }
 
     public String getType() {
@@ -77,12 +99,28 @@ public class boardData implements Serializable {
         this.content = content;
     }
 
-    public boardCategory getCategory() {
-        return category;
+    public String getImageOne() {
+        return imageOne;
     }
 
-    public void setCategory(boardCategory category) {
-        this.category = category;
+    public void setImageOne(String imageOne) {
+        this.imageOne = imageOne;
+    }
+
+    public String getImageTwo() {
+        return imageTwo;
+    }
+
+    public void setImageTwo(String imageTwo) {
+        this.imageTwo = imageTwo;
+    }
+
+    public String getImageThree() {
+        return imageThree;
+    }
+
+    public void setImageThree(String imageThree) {
+        this.imageThree = imageThree;
     }
 
     public String[] getCreatedAt() {

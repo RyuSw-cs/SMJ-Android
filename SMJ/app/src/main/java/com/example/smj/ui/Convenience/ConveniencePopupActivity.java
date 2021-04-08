@@ -2,6 +2,8 @@ package com.example.smj.ui.Convenience;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +24,7 @@ public class ConveniencePopupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_convenience_popup);
 
