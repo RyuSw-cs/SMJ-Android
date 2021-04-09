@@ -21,6 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        android:textColor="#434343"
         android:text="제목제목제목"
         app:layout_constraintBottom_toBottomOf="@+id/post_item_category"
         app:layout_constraintStart_toEndOf="@+id/post_item_category"
@@ -31,6 +33,7 @@
         android:layout_width="240dp"
         android:layout_height="21dp"
         android:layout_marginTop="10dp"
+        android:textSize="14sp"
         android:text="글내용글내용글내용"
         app:layout_constraintStart_toStartOf="@+id/post_item_category"
         app:layout_constraintTop_toBottomOf="@+id/post_item_category" />
@@ -41,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="글쓴이"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/post_item_category"
         app:layout_constraintTop_toBottomOf="@+id/post_item_contents" />
 
@@ -50,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="2020-12-12 15:22"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/post_item_writer"
         app:layout_constraintTop_toTopOf="@+id/post_item_writer" />
 
@@ -75,4 +80,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_item_date" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#f1f1f1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
