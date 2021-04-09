@@ -52,20 +52,17 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //입력하기 전
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // 입력 시 변화가 있을 때
                 // 서버에서 받아온 값을 리스트에 이미 저장됨 -> 리사이클러뷰만 다시 설정
-                // 검색 된 키워드를 data에서 찾아옴 -> s의 값에 따라서 인가? -> list를 하나 더 생성함
+                // 검색 된 키워드를 data에서 찾아옴 -> list를 하나 더 생성함
                 searchList.clear();
                 int getListSize = data.size();
                 for(int i = 0; i<getListSize; i++) {
-                    if(data.get(i).getTitle().contains(s)){
-                        searchList.add(data.get(i));
-                    }
+                    if(data.get(i).getTitle().contains(s)){ searchList.add(data.get(i)); }
                 }
                 adapter = new TransactionPostAdapter(getActivity(), searchList, transactionUseCase);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -74,7 +71,6 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 //입력종료
             }
         });

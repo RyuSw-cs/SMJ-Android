@@ -2,16 +2,13 @@ package com.example.smj.data.repository;
 
 import android.util.Log;
 
-import com.example.smj.data.datasource.SMJRemoteDataSource;
+import com.example.smj.data.datasource.NetworkManager;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
-import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.domain.usecase.ScheduleUseCase;
-import com.example.smj.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +18,7 @@ public class ScheduleRepository {
     private List<Alarm> localList = new ArrayList<>();
     private Entity_Schedule entitySchedule;
     public void retrieveLocals(String key, ScheduleUseCase scheduleUseCase){
-        entitySchedule = (Entity_Schedule) SMJRemoteDataSource.getInstance(Entity_Schedule.class).apiService;
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
         Call <List<Alarm>> call = entitySchedule.getAlarm(key);
         call.enqueue(new Callback<List<Alarm>>() {
             @Override
@@ -41,7 +38,7 @@ public class ScheduleRepository {
     }
 
     public void deleteData(String key, String id){
-        entitySchedule = (Entity_Schedule) SMJRemoteDataSource.getInstance(Entity_Schedule.class).apiService;
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
         Call<Void>call = entitySchedule.deleteAlarm(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -57,7 +54,7 @@ public class ScheduleRepository {
     }
 
     public void putData(Alarm data, String key, String id){
-        entitySchedule = (Entity_Schedule) SMJRemoteDataSource.getInstance(Entity_Schedule.class).apiService;
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
         Call<Alarm>call = entitySchedule.putAlarm(key, data, id);
         call.enqueue(new Callback<Alarm>() {
             @Override
@@ -73,7 +70,7 @@ public class ScheduleRepository {
     }
 
     public void postData(Alarm data, String key){
-        entitySchedule = (Entity_Schedule) SMJRemoteDataSource.getInstance(Entity_Schedule.class).apiService;
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
         Call<Alarm>call = entitySchedule.postAlarm(key, data);
         call.enqueue(new Callback<Alarm>() {
             @Override

@@ -1,21 +1,21 @@
 package com.example.smj.ui.Comments.Transaction;
 
 public class TransactionCommentData {
-    String date;
-    String commenter;
-    String contents;
+    private String[] date;
+    private String commenter;
+    private String contents;
 
-    public TransactionCommentData(String date, String commenter, String contents) {
+    public TransactionCommentData(String[] date, String commenter, String contents) {
         this.date = date;
         this.commenter = commenter;
         this.contents = contents;
     }
 
-    public String getDate() {
+    public String[] getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String[] date) {
         this.date = date;
     }
 
