@@ -35,4 +35,9 @@ public interface Entity_Schedule {
             @Header("Authorization")String token,
             @Path("id")String id
     );
+    @GET("api/alarms/{startDate}")
+    Call<List<Alarm>> getDateAlarm(
+            @Header("Authorization")String token,
+            @Path("startDate")String startDate
+    );
 }

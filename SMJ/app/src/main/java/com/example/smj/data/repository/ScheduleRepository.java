@@ -2,6 +2,7 @@ package com.example.smj.data.repository;
 
 import android.util.Log;
 
+import com.example.smj.Manager.NetworkManager;
 import com.example.smj.data.datasource.SMJRemoteDataSource;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
@@ -21,7 +22,7 @@ public class ScheduleRepository {
     private List<Alarm> localList = new ArrayList<>();
     private Entity_Schedule entitySchedule;
     public void retrieveLocals(String key, ScheduleUseCase scheduleUseCase){
-        entitySchedule = (Entity_Schedule) SMJRemoteDataSource.getInstance(Entity_Schedule.class).apiService;
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
         Call <List<Alarm>> call = entitySchedule.getAlarm(key);
         call.enqueue(new Callback<List<Alarm>>() {
             @Override
@@ -84,6 +85,26 @@ public class ScheduleRepository {
             @Override
             public void onFailure(Call<Alarm> call, Throwable t) {
                 Log.d("데이터 전송 실패",";;");
+            }
+        });
+    }
+
+    public void retrieveDateLocals(String key,String startDate, ScheduleUseCase scheduleUseCase){
+        entitySchedule = (Entity_Schedule) NetworkManager.getInstance(Entity_Schedule.class).apiService;
+        Call <List<Alarm>> call = entitySchedule.getDateAlarm(key,startDate);
+        call.enqueue(new Callback<List<Alarm>>() {
+            @Override
+            public void onResponse(Call<List<Alarm>> call, Response<List<Alarm>> response) {
+                if(response.isSuccessful()){
+                    //알람 가져오기 성공
+                    localList = response.body();
+                    scheduleUseCase.onSuccess(localList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Alarm>> call, Throwable t) {
+
             }
         });
     }

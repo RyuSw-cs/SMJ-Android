@@ -2,6 +2,7 @@ package com.example.smj.ui.Alarms;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,6 +80,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 .setMaximumDate(CalendarDay.from(currentYear, currentMonth+11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
+
     }
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -100,7 +102,8 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
         ArrayList<CalendarDay> dayList = new ArrayList<>();
         for(Alarm a : alarmList){
             Calendar cal = new GregorianCalendar(); //그레고리력 달력 생성
-            String strArr[] =  a.getDay().split("-");
+            Log.d("받았니", a.getstartDate());
+            String strArr[] =  a.getstartDate().split("-");
             int i = 0;
             for(String s: strArr){
                 if(i == 0) cal.set(Calendar.YEAR,Integer.parseInt(s));

@@ -8,18 +8,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.Schedule.Alarm;
+import com.example.smj.domain.usecase.ScheduleUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarmListAdapter.MainHolder> {
     private List<Alarm> getList = new ArrayList<>();
+
     ScheduleAlarmListAdapter.MainHolder mainHolder;
 
     public ScheduleAlarmListAdapter(List<Alarm>data) {
+
         this.getList = data;
+
+
     }
 
     public static class MainHolder extends RecyclerView.ViewHolder {
@@ -42,7 +48,7 @@ public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarm
     @Override
     public void onBindViewHolder(@NonNull ScheduleAlarmListAdapter.MainHolder mainHolder, int i) {
         mainHolder.title.setText(getList.get(i).getTitle());
-        mainHolder.date.setText(getList.get(i).getDay());
+        mainHolder.date.setText(getList.get(i).getstartDate());
     }
 
     @Override
@@ -50,4 +56,8 @@ public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarm
     public int getItemCount() {
         return getList.size();
     }
+
+
+
+
 }
