@@ -20,6 +20,9 @@ public class NetworkManager<T> {
         if(instance == null){
             instance = new NetworkManager(apiInterface);
         }
+        else{
+            //instance = NetworkManager(apiInterface);
+        }
         return instance;
     }
 }

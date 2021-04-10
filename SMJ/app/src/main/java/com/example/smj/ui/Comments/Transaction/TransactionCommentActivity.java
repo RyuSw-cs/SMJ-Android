@@ -2,6 +2,8 @@ package com.example.smj.ui.Comments.Transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.Comments.CommentData;
+import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.domain.usecase.CommentsUseCase;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
     private CommentsUseCase commentsUseCase;
     private String token;
     private int boardId;
+    private Button upload;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
     private void init(){
 
         commentsUseCase = new CommentsUseCase(this);
+        upload = findViewById(R.id.transaction_comment_write_btn);
         Intent intent = getIntent();
         //defaultValue 변경해야함.
         boardId = intent.getIntExtra("id",9999);
@@ -41,7 +46,16 @@ public class TransactionCommentActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.transaction_comment_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        commentsUseCase.getData(token,boardId);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //작성
+                commentsUseCase.postData(new CommentsPostData("댓글 테스트"),token,boardId,getApplicationContext());
+            }
+        });
+
+        //댓글 데이터 받아오기
+        //commentsUseCase.getData(token,boardId);
 
     }
     public void onSuccess(List<CommentData>list){
@@ -52,5 +66,8 @@ public class TransactionCommentActivity extends AppCompatActivity {
         }
         adapter = new TransactionCommentAdapter(data);
         recyclerView.setAdapter(adapter);
+    }
+    private void checkId(){
+        //만약 현재 로그인 정보 중 id와 댓글 정보중 id가 같다면?
     }
 }

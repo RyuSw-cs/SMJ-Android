@@ -133,9 +133,12 @@ public class TransactionReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
+    //list는 게시글의 id값을 가져온것
     public void onSuccessMyData(ArrayList<Integer> list) {
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
+            //data는 게시글 정보임
+            //내 게시글의 정보와 읽으려는 게시글의 id가 같다면 수정,삭제 가능하게
             if(data.getId() == list.get(i)) {
                 moreBtn.setVisibility(View.VISIBLE);
                 moreBtn.setEnabled(true);
