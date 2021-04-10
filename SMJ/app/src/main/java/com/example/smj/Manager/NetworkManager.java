@@ -16,7 +16,7 @@ public class NetworkManager<T> {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        apiService = apiInterface.cast(retrofit.create(apiInterface));
+        apiService = retrofit.create(apiInterface);
     }
 
     public static <T> NetworkManager getInstance(Class<T> apiInterface){

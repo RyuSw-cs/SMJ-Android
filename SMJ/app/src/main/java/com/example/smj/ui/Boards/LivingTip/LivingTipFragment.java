@@ -46,7 +46,7 @@ public class LivingTipFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
         writeBtn = view.findViewById(R.id.write_btn);
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
-        search = view.findViewById(R.id.livingTip_search_text);
+        search = view.findViewById(R.id.trade_search_text);
 
         livingTipUseCase.getData(key);
 
@@ -88,9 +88,6 @@ public class LivingTipFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
         return view;
     }
 
@@ -105,6 +102,7 @@ public class LivingTipFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         adapter = new LivingTipPostAdapter(getActivity(), data);
+        adapter.adapterRefresh();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
