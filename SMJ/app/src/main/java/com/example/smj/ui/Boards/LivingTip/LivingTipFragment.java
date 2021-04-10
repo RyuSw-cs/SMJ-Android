@@ -2,11 +2,14 @@ package com.example.smj.ui.Boards.LivingTip;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +27,14 @@ import java.util.List;
 public class LivingTipFragment extends Fragment {
 
     ArrayList<LivingTipPostData> data = new ArrayList<>();
+    ArrayList<LivingTipPostData> searchData = new ArrayList<>();
     RecyclerView recyclerView;
     LivingTipPostAdapter adapter;
     Button writeBtn;
     LivingTipUseCase livingTipUseCase = new LivingTipUseCase(this);
     String key;
+    EditText search;
+    List<boardData> boardList;
 
     public LivingTipFragment(){
     }
@@ -40,10 +46,40 @@ public class LivingTipFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
         writeBtn = view.findViewById(R.id.write_btn);
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
+        search = view.findViewById(R.id.livingTip_search_text);
 
         livingTipUseCase.getData(key);
 
         Log.d("JWT",key);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchData.clear();
+
+                for(boardData board : boardList){
+                    Log.d("살림 팁 텍스트 와처","살림 팁 텍스트 와처");
+                    if(board.getTitle().contains(s) && board.getType().equals("LIVE")){
+                        searchData.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreatedAt(),"이미지"));
+                    }
+                }
+
+                recyclerView.setHasFixedSize(true);
+                adapter = new LivingTipPostAdapter(getActivity(), searchData);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         writeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,10 +89,13 @@ public class LivingTipFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 
     public void onSuccess(List<boardData> list) {
+        boardList = list;
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
             if(board.getType().equals("LIVE")){

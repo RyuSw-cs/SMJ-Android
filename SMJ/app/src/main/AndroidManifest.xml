@@ -48,5 +48,6 @@
         <activity android:name=".ui.Boards.Transaction.TransactionCreateActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipModifyActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipCreateActivity"/>
+        <activity android:name=".ui.Comments.Transaction.TransactionCommentActivity"/>
     </application>
 </manifest>

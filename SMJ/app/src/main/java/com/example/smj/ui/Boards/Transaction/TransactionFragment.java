@@ -26,6 +26,7 @@ import java.util.List;
 
 public class TransactionFragment extends Fragment implements TransactionGetData {
     private List<TransactionPostData> data = new ArrayList<>();
+    private List<TransactionPostData> searchList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TransactionPostAdapter adapter;
     private TransactionUseCase transactionUseCase;
@@ -45,21 +46,32 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
 
         recyclerView = (RecyclerView) view.findViewById(R.id.transaction_post_list);
         search = view.findViewById(R.id.search_text);
+        recyclerView.setHasFixedSize(true);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                //입력하기 전
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                // 입력 시 변화가 있을 때
+                // 서버에서 받아온 값을 리스트에 이미 저장됨 -> 리사이클러뷰만 다시 설정
+                // 검색 된 키워드를 data에서 찾아옴 -> list를 하나 더 생성함
+                searchList.clear();
+                int getListSize = data.size();
+                for(int i = 0; i<getListSize; i++) {
+                    if(data.get(i).getTitle().contains(s)){ searchList.add(data.get(i)); }
+                }
+                adapter = new TransactionPostAdapter(getActivity(), searchList, transactionUseCase);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                //입력종료
             }
         });
 
@@ -88,7 +100,6 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
                         list.get(i).getMember().getImage(),list.get(i).getImageOne(),list.get(i).getImageTwo(),list.get(i).getImageThree(),list.get(i).getId()));
             }
         }
-        recyclerView.setHasFixedSize(true);
         adapter = new TransactionPostAdapter(getActivity(), data, transactionUseCase);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -96,12 +107,6 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     @Override
     public void onResume(){
         super.onResume();
-        update();
-    }
-    public void update(){
         transactionUseCase.getData(token);
-        adapter = new TransactionPostAdapter(getActivity(), data,transactionUseCase);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
     }
 }

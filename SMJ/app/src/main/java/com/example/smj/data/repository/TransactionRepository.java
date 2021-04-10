@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.smj.data.datasource.SMJRemoteDataSource;
+import com.example.smj.data.datasource.NetworkManager;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
@@ -21,7 +21,7 @@ public class TransactionRepository {
     private Entity_board entityBoard;
 
     public void getData(String key, TransactionUseCase transactionUseCase){
-        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
+        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call <List<boardData>> call = entityBoard.getLivingTIp(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
@@ -40,7 +40,7 @@ public class TransactionRepository {
     }
 
     public void deleteData(String key, int id, Context context){
-        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
+        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -57,7 +57,7 @@ public class TransactionRepository {
     }
 
     public void putData(boardPostData data, String key, int id, Context context, TransactionUseCase transactionUseCase){
-        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
+        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<boardData>call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
@@ -75,7 +75,7 @@ public class TransactionRepository {
     }
 
     public void postData(boardPostData data, String key, Context context, TransactionUseCase transactionUseCase){
-        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
+        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {
             @Override
@@ -92,7 +92,7 @@ public class TransactionRepository {
         });
     }
     public void getMyData(String key, TransactionUseCase transactionUseCase){
-        entityBoard = (Entity_board) SMJRemoteDataSource.getInstance(Entity_board.class).apiService;
+        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call <List<boardData>> call = entityBoard.getMyLivingTip(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
