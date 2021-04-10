@@ -91,4 +91,8 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
     public int getItemCount() {
         return postData.size();
     }
+
+    public void adapterRefresh(){
+        notifyDataSetChanged();
+    }
 }

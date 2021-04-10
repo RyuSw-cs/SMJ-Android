@@ -1,4 +1,4 @@
-package com.example.smj.ui.Comments.Transaction;
+package com.example.smj.ui.Comments.Transaction.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.ui.Comments.Transaction.TransactionCommentData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionCommentAdapter.ViewHolder> {
@@ -25,7 +25,6 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
 
         ViewHolder(View itemView){
             super(itemView);
-
             date = itemView.findViewById(R.id.comment_date);
             commenter = itemView.findViewById(R.id.commenter);
             contents = itemView.findViewById(R.id.comment_contents);

@@ -95,4 +95,8 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
     public int getItemCount() {
         return postData.size();
     }
+
+    public void adapterRefresh(){
+        notifyDataSetChanged();
+    }
 }
