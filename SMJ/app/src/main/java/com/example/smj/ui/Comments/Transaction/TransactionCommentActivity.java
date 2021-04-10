@@ -15,6 +15,7 @@ import com.example.smj.R;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.domain.usecase.CommentsUseCase;
+import com.example.smj.ui.Comments.Transaction.Adapter.TransactionCommentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
         });
 
         //댓글 데이터 받아오기
-        //commentsUseCase.getData(token,boardId);
-
+        commentsUseCase.getData(token,boardId);
     }
     public void onSuccess(List<CommentData>list){
         //데이터 전처리

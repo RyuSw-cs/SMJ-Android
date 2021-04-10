@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.smj.data.datasource.NetworkManager;
+import com.example.smj.Manager.NetworkManager;
 import com.example.smj.data.entity.Comments.Entity_Comments;
 import com.example.smj.data.entity.Member.Entity_Member;
 import com.example.smj.data.entity.Member.MemberData;

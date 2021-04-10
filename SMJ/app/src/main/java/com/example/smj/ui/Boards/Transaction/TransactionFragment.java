@@ -45,7 +45,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         View view = inflater.inflate(R.layout.activity_transaction_main,container,false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.transaction_post_list);
-        search = view.findViewById(R.id.search_text);
+        search = view.findViewById(R.id.trade_search_text);
         recyclerView.setHasFixedSize(true);
 
         search.addTextChangedListener(new TextWatcher() {
@@ -101,6 +101,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
             }
         }
         adapter = new TransactionPostAdapter(getActivity(), data, transactionUseCase);
+        adapter.adapterRefresh();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
