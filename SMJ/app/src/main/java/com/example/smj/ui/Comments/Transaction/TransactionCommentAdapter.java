@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionCommentAdapter.ViewHolder> {
 
-    private ArrayList<TransactionCommentData> commentData = null;
+    private List<TransactionCommentData> commentData = null;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView date;
@@ -31,7 +32,7 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
         }
     }
 
-    public TransactionCommentAdapter(ArrayList<TransactionCommentData> data){
+    public TransactionCommentAdapter(List<TransactionCommentData> data){
         commentData = data;
     }
 
@@ -49,13 +50,15 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
 
     @Override
     public void onBindViewHolder(@NonNull TransactionCommentAdapter.ViewHolder holder, int position) {
-        String date = commentData.get(position).getDate();
-        String commenter = commentData.get(position).getCommenter();
-        String contents = commentData.get(position).getContents();
+        String[] getDate = commentData.get(position).getDate();
+        String getCommenter = commentData.get(position).getCommenter();
+        String getContents = commentData.get(position).getContents();
+
+        String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
 
         holder.date.setText(date);
-        holder.commenter.setText(commenter);
-        holder.contents.setText(contents);
+        holder.commenter.setText(getCommenter);
+        holder.contents.setText(getContents);
     }
 
     @Override

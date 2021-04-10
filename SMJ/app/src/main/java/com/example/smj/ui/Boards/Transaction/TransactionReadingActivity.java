@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
     private Button deleteBtn, modifyBtn;
     private String key;
     private Boolean check = false;
+    private ImageView message, comment;
     public static ArrayList<Activity>activityStack = new ArrayList<>();
 
     @Override
@@ -61,6 +64,8 @@ public class TransactionReadingActivity extends AppCompatActivity {
         writer = findViewById(R.id.transaction_reading_post_writer);
         date = findViewById(R.id.transaction_reading_post_date);
         content = findViewById(R.id.transaction_reading_post_content);
+        message = findViewById(R.id.transaction_reading_message_btn);
+        comment = findViewById(R.id.transaction_reading_comment_btn);
 
         moreView = new Dialog(TransactionReadingActivity.this);
         moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -80,6 +85,22 @@ public class TransactionReadingActivity extends AppCompatActivity {
         date.setText(dateInfo);
 
         content.setText(data.getContents());
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //메시지 액티비티 활성화
+            }
+        });
+
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TransactionCommentActivity.class);
+                intent.putExtra("id",data.getId());
+                startActivity(intent);
+            }
+        });
 
         moreBtn.setOnClickListener(v -> showMoreView());
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +133,12 @@ public class TransactionReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
+    //list는 게시글의 id값을 가져온것
     public void onSuccessMyData(ArrayList<Integer> list) {
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
+            //data는 게시글 정보임
+            //내 게시글의 정보와 읽으려는 게시글의 id가 같다면 수정,삭제 가능하게
             if(data.getId() == list.get(i)) {
                 moreBtn.setVisibility(View.VISIBLE);
                 moreBtn.setEnabled(true);
