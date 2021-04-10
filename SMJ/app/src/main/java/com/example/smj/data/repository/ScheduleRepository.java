@@ -2,17 +2,13 @@ package com.example.smj.data.repository;
 
 import android.util.Log;
 
-import com.example.smj.Manager.NetworkManager;
-import com.example.smj.data.datasource.SMJRemoteDataSource;
+import com.example.smj.data.datasource.NetworkManager;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
-import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.domain.usecase.ScheduleUseCase;
-import com.example.smj.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
