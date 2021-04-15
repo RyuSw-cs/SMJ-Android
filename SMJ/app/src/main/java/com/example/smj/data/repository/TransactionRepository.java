@@ -21,8 +21,8 @@ public class TransactionRepository {
 
     private Entity_board entityBoard;
 
-    public TransactionRepository(){
-        this.entityBoard  = (Entity_board) NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
+    public TransactionRepository() {
+        this.entityBoard = NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
     }
 
     public void getData(String key, TransactionUseCase transactionUseCase){

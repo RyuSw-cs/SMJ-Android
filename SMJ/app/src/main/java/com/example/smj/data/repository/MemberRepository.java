@@ -22,11 +22,11 @@ public class MemberRepository {
 
     private Entity_Member entityMember;
 
-    public MemberRepository(){
-        this.entityMember  = (Entity_Member) NetworkManager.getInstance().getRetrofit().create(Entity_Member.class);
+    public MemberRepository() {
+        this.entityMember = NetworkManager.getInstance().getRetrofit().create(Entity_Member.class);;
     }
 
-    public void retrieveData(String key,MemberUseCase memberUseCase){
+    public void retrieveData(String key, int id, MemberUseCase memberUseCase){
         Call <List<MemberData>> call = entityMember.getData(key);
         call.enqueue(new Callback<List<MemberData>>() {
             @Override

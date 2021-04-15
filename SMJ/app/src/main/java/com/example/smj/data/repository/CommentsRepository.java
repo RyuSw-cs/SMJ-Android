@@ -21,8 +21,8 @@ public class CommentsRepository {
 
     private Entity_Comments entityComments;
 
-    public CommentsRepository(){
-        this.entityComments  = (Entity_Comments) NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
+    public CommentsRepository() {
+       entityComments =  NetworkManager.getInstance().getRetrofit().create(Entity_Comments.class);
     }
 
     public void retrieveData(String key, int id, CommentsUseCase commentsUseCase){

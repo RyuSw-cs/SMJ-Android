@@ -25,7 +25,12 @@ public class NetworkManager {
         }
         return instance;
     }
+<<<<<<< HEAD
     public Retrofit getRetrofit(){
+=======
+
+    public Retrofit getRetrofit() {
+>>>>>>> develop
         return retrofit;
     }
 }

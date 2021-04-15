@@ -22,8 +22,8 @@ public class LivingTipRepository {
     private List<boardData> livingTipList = new ArrayList<>();
     private Entity_board entityBoard;
 
-    public LivingTipRepository(){
-        this.entityBoard  = (Entity_board) NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
+    public LivingTipRepository() {
+        this.entityBoard = NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
     }
 
     public void getData(String key, LivingTipUseCase livingTipUseCase){

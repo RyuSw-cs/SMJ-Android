@@ -16,11 +16,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ScheduleRepository {
+
     private List<Alarm> localList = new ArrayList<>();
     private Entity_Schedule entitySchedule;
 
-    public ScheduleRepository(){
-        this.entitySchedule  = (Entity_Schedule) NetworkManager.getInstance().getRetrofit().create(Entity_Schedule.class);
+    public ScheduleRepository() {
+        this.entitySchedule =  NetworkManager.getInstance().getRetrofit().create(Entity_Schedule.class);
     }
 
     public void retrieveLocals(String key, ScheduleUseCase scheduleUseCase){
