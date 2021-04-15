@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.smj.Manager.NetworkManager;
+import com.example.smj.data.entity.Comments.Entity_Comments;
 import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.data.entity.board.boardPostData;
@@ -21,8 +22,11 @@ public class LivingTipRepository {
     private List<boardData> livingTipList = new ArrayList<>();
     private Entity_board entityBoard;
 
+    public LivingTipRepository(){
+        this.entityBoard  = (Entity_board) NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
+    }
+
     public void getData(String key, LivingTipUseCase livingTipUseCase){
-        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call <List<boardData>> call = entityBoard.getLivingTIp(key);
         call.enqueue(new Callback<List<boardData>>() {
             @Override
@@ -43,7 +47,6 @@ public class LivingTipRepository {
     }
 
     public void deleteData(String key, int id, Context context){
-        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<Void> call = entityBoard.deleteLivingTip(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -60,7 +63,6 @@ public class LivingTipRepository {
     }
 
     public void putData(boardPostData data, String key, int id, Context context){
-        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<boardData> call = entityBoard.putLivingTip(key, data, id);
         call.enqueue(new Callback<boardData>() {
             @Override
@@ -77,7 +79,6 @@ public class LivingTipRepository {
     }
 
     public void postData(boardPostData data, String key, Context context, LivingTipUseCase livingTipUseCase){
-        entityBoard = (Entity_board) NetworkManager.getInstance(Entity_board.class).apiService;
         Call<boardData>call = entityBoard.postLivingTip(key, data);
         call.enqueue(new Callback<boardData>() {
             @Override

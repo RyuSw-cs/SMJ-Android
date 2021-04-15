@@ -9,6 +9,7 @@ import com.example.smj.data.entity.Comments.Entity_Comments;
 import com.example.smj.data.entity.Member.Entity_Member;
 import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.data.entity.Member.MemberPostData;
+import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.domain.usecase.MemberUseCase;
 
 import java.util.List;
@@ -21,9 +22,12 @@ public class MemberRepository {
 
     private Entity_Member entityMember;
 
-    public void retrieveData(String key, int id, MemberUseCase memberUseCase){
-        entityMember = (Entity_Member) NetworkManager.getInstance(Entity_Comments.class).apiService;
-        Call <List<MemberData>> call = entityMember.getData(key, id);
+    public MemberRepository(){
+        this.entityMember  = (Entity_Member) NetworkManager.getInstance().getRetrofit().create(Entity_Member.class);
+    }
+
+    public void retrieveData(String key,MemberUseCase memberUseCase){
+        Call <List<MemberData>> call = entityMember.getData(key);
         call.enqueue(new Callback<List<MemberData>>() {
             @Override
             public void onResponse(Call<List<MemberData>> call, Response<List<MemberData>> response) {
@@ -41,7 +45,6 @@ public class MemberRepository {
     }
 
     public void deleteData(String key, int id, Context context){
-        entityMember = (Entity_Member) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call<Void> call = entityMember.deleteData(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -58,7 +61,6 @@ public class MemberRepository {
     }
 
     public void updateData(MemberPostData data, String key, int id, Context context, MemberUseCase memberUseCase){
-        entityMember = (Entity_Member) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call<MemberData>call = entityMember.putData(key, data, id);
         call.enqueue(new Callback<MemberData>() {
             @Override

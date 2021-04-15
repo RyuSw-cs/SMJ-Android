@@ -15,6 +15,7 @@ import com.example.smj.R;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.domain.usecase.CommentsUseCase;
+import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.ui.Comments.Transaction.Adapter.TransactionCommentAdapter;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
     private List<TransactionCommentData> data = new ArrayList<>();
     private TransactionCommentAdapter adapter;
     private CommentsUseCase commentsUseCase;
+    private MemberUseCase memberUseCase;
     private String token;
     private int boardId;
     private Button upload;
@@ -39,6 +41,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
     private void init(){
 
         commentsUseCase = new CommentsUseCase(this);
+        memberUseCase = new MemberUseCase(this);
         upload = findViewById(R.id.transaction_comment_write_btn);
         Intent intent = getIntent();
         //defaultValue 변경해야함.
@@ -54,6 +57,9 @@ public class TransactionCommentActivity extends AppCompatActivity {
                 commentsUseCase.postData(new CommentsPostData("댓글 테스트"),token,boardId,getApplicationContext());
             }
         });
+
+        //멤버 데이터 받아오기
+        memberUseCase.getData(token);
 
         //댓글 데이터 받아오기
         commentsUseCase.getData(token,boardId);

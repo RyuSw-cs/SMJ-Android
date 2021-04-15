@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
 

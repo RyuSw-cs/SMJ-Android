@@ -8,6 +8,7 @@ import com.example.smj.Manager.NetworkManager;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.data.entity.Comments.Entity_Comments;
+import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.domain.usecase.CommentsUseCase;
 
 import java.util.List;
@@ -20,8 +21,11 @@ public class CommentsRepository {
 
     private Entity_Comments entityComments;
 
+    public CommentsRepository(){
+        this.entityComments  = (Entity_Comments) NetworkManager.getInstance().getRetrofit().create(Entity_board.class);
+    }
+
     public void retrieveData(String key, int id, CommentsUseCase commentsUseCase){
-        entityComments = (Entity_Comments) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call <List<CommentData>> call = entityComments.getComments(key, id);
         call.enqueue(new Callback<List<CommentData>>() {
             @Override
@@ -40,7 +44,6 @@ public class CommentsRepository {
     }
 
     public void deleteData(String key, int id, Context context){
-        entityComments = (Entity_Comments) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call<Void> call = entityComments.deleteComments(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -57,7 +60,6 @@ public class CommentsRepository {
     }
 
     public void updateData(CommentsPostData data, String key, int id, Context context, CommentsUseCase commentsUseCase){
-        entityComments = (Entity_Comments) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call<CommentData>call = entityComments.putComments(key, data, id);
         call.enqueue(new Callback<CommentData>() {
             @Override
@@ -75,7 +77,6 @@ public class CommentsRepository {
     }
 
     public void postData(CommentsPostData data, String key, int id, Context context, CommentsUseCase commentsUseCase){
-        entityComments = (Entity_Comments) NetworkManager.getInstance(Entity_Comments.class).apiService;
         Call<CommentData>call = entityComments.postComments(key, data, id);
         call.enqueue(new Callback<CommentData>() {
             @Override
