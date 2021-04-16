@@ -14,4 +14,11 @@
         <item>주차장</item>
         <item>음식점</item>
     </string-array>
+    <string-array name="transaction_category">
+        <item>주방</item>
+        <item>생활용품</item>
+        <item>운동기구</item>
+        <item>주방용품</item>
+        <item>기타</item>
+    </string-array>
 </resources>

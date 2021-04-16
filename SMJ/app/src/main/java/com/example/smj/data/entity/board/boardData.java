@@ -1,58 +1,54 @@
 package com.example.smj.data.entity.board;
 
+import com.example.smj.data.entity.Member.MemberData;
 import com.google.gson.annotations.SerializedName;
 
-public class boardData {
+import java.io.Serializable;
+import java.lang.reflect.Member;
 
-    @SerializedName("category")
-    private boardCategory category;
-
-    @SerializedName("content")
-    private String content;
-
-    @SerializedName("createAt")
-    private String createAt;
+public class boardData implements Serializable {
 
     @SerializedName("id")
     private int id;
 
-    @SerializedName("title")
-    private String title;
+    @SerializedName("member")
+    private MemberData member;
+
+    @SerializedName("category")
+    private boardCategory category;
 
     @SerializedName("type")
     private String type;
 
-    public boardData(boardCategory category, String content, String createAt, int id, String title, String type) {
-        this.category = category;
-        this.content = content;
-        this.createAt = createAt;
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("content")
+    private String content;
+
+    @SerializedName("imageOne")
+    private String imageOne;
+
+    @SerializedName("imageTwo")
+    private String imageTwo;
+
+    @SerializedName("imageThree")
+    private String imageThree;
+
+    @SerializedName("createdAt")
+    private String[] createdAt;
+
+    public boardData(int id, MemberData member, boardCategory category, String type, String title, String content, String imageOne, String imageTwo, String imageThree, String[] createdAt) {
         this.id = id;
-        this.title = title;
-        this.type = type;
-    }
-
-    public boardCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(boardCategory category) {
+        this.member = member;
         this.category = category;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+        this.type = type;
+        this.title = title;
         this.content = content;
-    }
-
-    public String getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+        this.imageOne = imageOne;
+        this.imageTwo = imageTwo;
+        this.imageThree = imageThree;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -63,12 +59,20 @@ public class boardData {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public MemberData getMember() {
+        return member;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMember(MemberData member) {
+        this.member = member;
+    }
+
+    public boardCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(boardCategory category) {
+        this.category = category;
     }
 
     public String getType() {
@@ -77,6 +81,54 @@ public class boardData {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getImageOne() {
+        return imageOne;
+    }
+
+    public void setImageOne(String imageOne) {
+        this.imageOne = imageOne;
+    }
+
+    public String getImageTwo() {
+        return imageTwo;
+    }
+
+    public void setImageTwo(String imageTwo) {
+        this.imageTwo = imageTwo;
+    }
+
+    public String getImageThree() {
+        return imageThree;
+    }
+
+    public void setImageThree(String imageThree) {
+        this.imageThree = imageThree;
+    }
+
+    public String[] getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String[] createdAt) {
+        this.createdAt = createdAt;
     }
 }
 

@@ -10,6 +10,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Entity_board {
 
@@ -21,20 +22,20 @@ public interface Entity_board {
     @POST("api/boards")
     Call<boardData> postLivingTip(
             @Header("Authorization") String token,
-            @Body boardData post
+            @Body boardPostData post
     );
 
-    @PUT("api/boards")
+    @PUT("api/boards/{id}")
     Call<boardData> putLivingTip(
             @Header("Authorization") String token,
-            @Body boardData put,
-            @Path("id") String id
+            @Body boardPostData put,
+            @Path("id") int id
     );
 
     @DELETE("api/boards/{id}")
     Call<Void> deleteLivingTip(
             @Header("Authorization")String token,
-            @Path("id")String id
+            @Path("id")int id
     );
 
     @GET("api/boards/my")

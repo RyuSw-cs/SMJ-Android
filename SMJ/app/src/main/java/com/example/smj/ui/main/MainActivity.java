@@ -8,11 +8,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -20,12 +18,11 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.JWTGetLocal;
 import com.example.smj.domain.usecase.JWTUseCase;
-import com.example.smj.ui.main.fragment.Convenience.ConvenienceFragment;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
-import com.example.smj.ui.main.fragment.MyPageFragment;
-import com.example.smj.ui.main.fragment.ScheduleFragment;
-import com.example.smj.ui.main.fragment.TransactionFragment;
-import com.example.smj.ui.main.fragment.ViewPagerAdapter;
+import com.example.smj.ui.Convenience.ConvenienceFragment;
+import com.example.smj.ui.Boards.LivingTip.LivingTipFragment;
+import com.example.smj.ui.Member.MyPageFragment;
+import com.example.smj.ui.Alarms.ScheduleFragment;
+import com.example.smj.ui.Boards.Transaction.TransactionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -56,6 +53,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         init_Fragment();
         init_List();
         jwtUseCase = new JWTUseCase(this);
+        /*다른 액티비티 갔다가 다시 메인으로 돌아올때 오류*/
         getJWT();
         mViewPager = findViewById(R.id.pager);
         pageAdapter = new ViewPagerAdapter(this,num_page);

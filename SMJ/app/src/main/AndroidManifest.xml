@@ -26,31 +26,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity"/>
-        <activity android:name=".ui.LivingTip.LivingTipReadingActivity"/>
-        <activity android:name=".ui.LivingTip.LivingTipCommentActivity"/>
+        <activity android:name=".ui.Boards.LivingTip.LivingTipReadingActivity"/>
+        <activity android:name=".ui.Comments.LivingTip.LivingTipCommentActivity"/>
         <activity android:name=".ui.message.MessageActivity"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmListPopupActivity"
+        <activity android:name=".ui.Alarms.ScheduleAlarmListPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmPageActivity"/>
-        <activity android:name=".ui.main.fragment.Convenience.ConveniencePopupActivity"
+        <activity android:name=".ui.Alarms.ScheduleAlarmPageActivity"/>
+        <activity android:name=".ui.Convenience.ConveniencePopupActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
+        <activity android:name=".ui.Alarms.ScheduleAlarmModifiedPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmModifiedPopupActivity"
+        <activity android:name=".ui.Alarms.ScheduleAlarmDeletePopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmDeletePopupActivity"
+        <activity android:name=".ui.Alarms.ScheduleAlarmIterPopupActivity"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.schedule.ScheduleAlarmIterPopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.main.fragment.mypage.AppSetting"/>
+        <activity android:name=".ui.Setting.AppSetting"/>
         <activity android:name=".ui.manage.PostManageActivity"/>
         <activity android:name=".ui.message.MessageManagementActivity"/>
-        <activity android:name=".ui.transaction.TransactionReadingActivity"/>
-        <activity android:name=".ui.transaction.TransactionDeletePopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.transaction.TransactionModifyPopupActivity"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.transaction.TransactionModifyActivity"/>
-        <activity android:name=".ui.transaction.TransactionMoreInfo"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".ui.create.CreateTradeActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionReadingActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionModifyActivity"/>
+        <activity android:name=".ui.Boards.Transaction.TransactionCreateActivity"/>
+        <activity android:name=".ui.Boards.LivingTip.LivingTipModifyActivity"/>
+        <activity android:name=".ui.Boards.LivingTip.LivingTipCreateActivity"/>
+        <activity android:name=".ui.Comments.Transaction.TransactionCommentActivity"/>
     </application>
 </manifest>

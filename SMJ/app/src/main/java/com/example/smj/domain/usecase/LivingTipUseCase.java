@@ -1,44 +1,48 @@
 package com.example.smj.domain.usecase;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.smj.callback.RetrofitOnSuccess;
-import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.board.boardData;
-import com.example.smj.data.repository.LivingTipApi;
-import com.example.smj.data.repository.ScheduleApi;
-import com.example.smj.ui.main.fragment.LivingTipFragment;
+import com.example.smj.data.entity.board.boardPostData;
+import com.example.smj.data.repository.LivingTipRepository;
+import com.example.smj.ui.Boards.LivingTip.LivingTipFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LivingTipUseCase implements RetrofitOnSuccess {
-    private LivingTipApi livingTipApi;
+    private LivingTipRepository livingTipRepository;
     private LivingTipFragment livingTipFragment;
     private List<boardData> list = new ArrayList<>();
 
     public LivingTipUseCase(LivingTipFragment livingTipFragment){
-        livingTipApi = new LivingTipApi();
+        livingTipRepository = new LivingTipRepository();
         this.livingTipFragment = livingTipFragment;
+    }
+
+    public LivingTipUseCase(){
+        livingTipRepository = new LivingTipRepository();
     }
 
     //GET
     public void getData(String key){
         Log.d("살림팁 getData", "살림팁 getData");
-        livingTipApi.getData(key, this);
+        livingTipRepository.getData(key, this);
     }
 
     //POST
-    public void postData(boardData data, String key){
-        livingTipApi.postData(data, key);
+    public void postData(boardPostData data, String key, Context context){
+        livingTipRepository.postData(data, key, context, this);
     }
 
     //PUT
-    public void putData(boardData data, String key, String id){ livingTipApi.putData(data, key, id); }
+    public void putData(boardPostData data, String key, int id, Context context){ livingTipRepository.putData(data, key, id, context); }
 
     //DELETE
-    public void deleteData(String key, String id){
-        livingTipApi.deleteData(key, id);
+    public void deleteData(String key, int id, Context context){
+        livingTipRepository.deleteData(key, id, context);
     }
 
     @Override
