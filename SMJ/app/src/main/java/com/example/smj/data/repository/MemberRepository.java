@@ -26,14 +26,14 @@ public class MemberRepository {
         this.entityMember = NetworkManager.getInstance().getRetrofit().create(Entity_Member.class);;
     }
 
-    public void retrieveData(String key, int id, MemberUseCase memberUseCase){
+    public void retrieveData(String key, MemberUseCase memberUseCase){
         Call <List<MemberData>> call = entityMember.getData(key);
         call.enqueue(new Callback<List<MemberData>>() {
             @Override
             public void onResponse(Call<List<MemberData>> call, Response<List<MemberData>> response) {
                 if(response.isSuccessful()){
                     Log.d("사용자 데이터 GET 성공","사용자 데이터 GET 성공");
-                    //commentsUseCase.onSuccess(response.body());
+                    memberUseCase.onSuccess(response.body());
                 }
             }
 
@@ -67,7 +67,6 @@ public class MemberRepository {
             public void onResponse(Call<MemberData> call, Response<MemberData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"사용자 정보가 수정됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.updateSuccess();
             }
 
             @Override

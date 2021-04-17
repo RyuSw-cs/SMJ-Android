@@ -104,6 +104,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
         });
 
         moreBtn.setOnClickListener(v -> showMoreView());
+        /* 코드 수정 필요함 */
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,9 +4,12 @@ import android.content.Context;
 
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
+import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.data.repository.CommentsRepository;
 import com.example.smj.data.repository.MemberRepository;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
+
+import java.util.List;
 
 
 public class MemberUseCase {
@@ -35,5 +38,9 @@ public class MemberUseCase {
     //DELETE
     public void deleteData(String key, int id, Context context){
         memberRepository.deleteData(key, id, context);
+    }
+
+    public void onSuccess(List<MemberData> body) {
+        transactionCommentActivity.onDataSuccess(body);
     }
 }
