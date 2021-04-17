@@ -89,7 +89,7 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmListPopupActivity.class);
 
                 int year = date.getYear();
-                int month = date.getMonth();
+                int month = date.getMonth()+1;
                 int day = date.getDay();
                 String checkDate = String.valueOf(year) + "년 " + String.valueOf(month) + "월 " + String.valueOf(day) + "일";
                 Log.d("날짜",checkDate);

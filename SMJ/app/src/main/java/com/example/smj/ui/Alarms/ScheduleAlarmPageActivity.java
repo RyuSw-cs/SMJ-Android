@@ -15,14 +15,16 @@ import com.example.smj.R;
 
 public class ScheduleAlarmPageActivity extends AppCompatActivity {
     private ViewGroup alarmDelete, alarmIter;
-    private TextView submitModified;
+    private TextView subject,submitModified;
     private EditText title, content;
     private Boolean checkFocus1 = true, checkFocus2 = true;
+    private String dateKey;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_schedule_alarmpage);
         init();
+        getData();
         submitModified.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmModifiedPopupActivity.class);
             intent.putExtra("data", "Test Popup");
@@ -44,6 +46,7 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
         alarmDelete = findViewById(R.id.schedule_allday_clicklayout);
         submitModified = findViewById(R.id.schedule_alarmpage_submit_modified);
         title = findViewById(R.id.schedule_alarmpage_alarmsubmit);
+        subject = findViewById(R.id.schedule_alarmpage_subject);
         title.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -64,5 +67,25 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
             }
         });
         submitModified.bringToFront();
+    }
+    protected void getData(){
+        Intent intent = getIntent();
+        String[] data = intent.getStringArrayExtra("data");
+        if(data[0].equals("0")){
+            subject.setText("알림 등록");
+        }
+        else{
+            subject.setText("알림 수정");
+        }
+        dateKey = data[1];
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+            }
+        }
     }
 }

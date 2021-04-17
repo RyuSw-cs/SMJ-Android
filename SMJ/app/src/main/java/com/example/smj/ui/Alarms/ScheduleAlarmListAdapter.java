@@ -1,14 +1,19 @@
 package com.example.smj.ui.Alarms;
 
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.Manager.JWTManager;
+import com.example.smj.Manager.SharedPreferenceManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.domain.usecase.ScheduleUseCase;
@@ -18,22 +23,22 @@ import java.util.List;
 
 public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarmListAdapter.MainHolder> {
     private List<Alarm> getList = new ArrayList<>();
-
     ScheduleAlarmListAdapter.MainHolder mainHolder;
-
-    public ScheduleAlarmListAdapter(List<Alarm>data) {
-
+    public ScheduleAlarmListAdapter(List<Alarm> data) {
         this.getList = data;
-
-
     }
 
     public static class MainHolder extends RecyclerView.ViewHolder {
         public TextView title, date;
+        public Switch onOff;
+        public View view;
         public MainHolder(View view) {
             super(view);
+            this.view = view;
             this.title = view.findViewById(R.id.schedule_alarmlist_popup_title);
             this.date = view.findViewById(R.id.schedule_alarmlist_popup_date);
+            this.onOff = view.findViewById(R.id.schedule_alarmlist_popup_switch);
+
         }
     }
 
@@ -48,7 +53,27 @@ public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarm
     @Override
     public void onBindViewHolder(@NonNull ScheduleAlarmListAdapter.MainHolder mainHolder, int i) {
         mainHolder.title.setText(getList.get(i).getTitle());
-        mainHolder.date.setText(getList.get(i).getstartDate());
+
+        String strArr[] =  getList.get(i).getStartTime().split(":");
+        StringBuilder sb = new StringBuilder();
+        if(Integer.parseInt(strArr[0]) < 12) sb.append("AM ");
+        else sb.append("PM ");
+        sb.append(strArr[0]).append(":").append(strArr[1]);
+        mainHolder.date.setText(sb);
+
+        mainHolder.onOff.setChecked(Boolean.parseBoolean(SharedPreferenceManager.getSharedPreference(mainHolder.view.getContext(),mainHolder.title.getText().toString())));
+        mainHolder.onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    SharedPreferenceManager.putSharedPreference(mainHolder.view.getContext(),mainHolder.title.getText().toString(),"true");
+
+                }
+                else {
+                    SharedPreferenceManager.putSharedPreference(mainHolder.view.getContext(),mainHolder.title.getText().toString(),"false");
+                }
+            }
+        });
     }
 
     @Override
