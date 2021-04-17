@@ -86,4 +86,23 @@ public class ScheduleRepository {
             }
         });
     }
+
+    public void retrieveDateLocals(String key,String startDate, ScheduleUseCase scheduleUseCase){
+        Call <List<Alarm>> call = entitySchedule.getDateAlarm(key,startDate);
+        call.enqueue(new Callback<List<Alarm>>() {
+            @Override
+            public void onResponse(Call<List<Alarm>> call, Response<List<Alarm>> response) {
+                if(response.isSuccessful()){
+                    //알람 가져오기 성공
+                    localList = response.body();
+                    scheduleUseCase.retrieveSuccess(localList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Alarm>> call, Throwable t) {
+                Log.d("데이터 전송 실패",";;");
+            }
+        });
+    }
 }

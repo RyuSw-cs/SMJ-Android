@@ -2,16 +2,16 @@ package com.example.smj.data.entity.Schedule;
 
 public class Alarm {
     private String content;
-    private String day;
+    private String startDate;
     private String endTime;
     private int id;
     private String repeat;
     private String startTime;
     private String title;
 
-    public Alarm(String content, String day, String endTime, int id, String repeat, String startTime, String title) {
+    public Alarm(String content, String startDate, String endTime, int id, String repeat, String startTime, String title) {
         this.content = content;
-        this.day = day;
+        this.startDate = startDate;
         this.endTime = endTime;
         this.id = id;
         this.repeat = repeat;
@@ -27,12 +27,12 @@ public class Alarm {
         this.content = content;
     }
 
-    public String getDay() {
-        return day;
+    public String getstartDate() {
+        return startDate;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setstartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getEndTime() {
