@@ -1,4 +1,4 @@
-package com.example.smj.ui.Boards.Transaction;
+package com.example.smj.ui.Boards.Transaction.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Boards.Transaction.CreatePhotoData;
+import com.example.smj.ui.Boards.Transaction.TransactionPostData;
+import com.example.smj.ui.Boards.Transaction.TransactionReadingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
             contents = itemView.findViewById(R.id.post_item_contents);
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
-            profileImage = itemView.findViewById(R.id.profileImage);
+            profileImage = itemView.findViewById(R.id.post_item_profile_image);
         }
     }
 
@@ -63,24 +66,27 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         String contents = postData.get(position).getContents();
         String writer = postData.get(position).getWriter();
 
-
         String []getDate = postData.get(position).getDate();
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
-        //String profileImage = postData.get(position).getProfileImage();
+        //보드 메인페이지 첫번째 사진 설정
+        String profileImage = postData.get(position).getProfileImage();
+
+        CreatePhotoData task = new CreatePhotoData(profileImage,holder.profileImage);
+        task.execute();
 
         holder.category.setText(category);
         holder.title.setText(title);
         holder.contents.setText(contents);
         holder.writer.setText(writer);
         holder.date.setText(date);
-        //holder.category.setText(profileImage);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //리사이클러뷰 해당 아이템의 값 전달
                 Context context = v.getContext();
-                Intent intent = new Intent(context,TransactionReadingActivity.class);
+                Intent intent = new Intent(context, TransactionReadingActivity.class);
                 intent.putExtra("data", postData.get(position));
                 context.startActivity(intent);
             }

@@ -17,8 +17,7 @@ import retrofit2.http.Path;
 public interface Entity_Member {
     @GET("api/member")
     Call<List<MemberData>> getData(
-            @Header("Authorization") String token,
-            @Path("board_id") int id
+            @Header("Authorization") String token
     );
 
     @PUT("api/member/{member_id}")

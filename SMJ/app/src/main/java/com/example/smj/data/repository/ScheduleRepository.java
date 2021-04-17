@@ -3,6 +3,7 @@ package com.example.smj.data.repository;
 import android.util.Log;
 
 import com.example.smj.Manager.NetworkManager;
+import com.example.smj.data.entity.Member.Entity_Member;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
 import com.example.smj.domain.usecase.ScheduleUseCase;

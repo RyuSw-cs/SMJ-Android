@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
 
@@ -103,6 +104,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
         });
 
         moreBtn.setOnClickListener(v -> showMoreView());
+        /* 코드 수정 필요함 */
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
