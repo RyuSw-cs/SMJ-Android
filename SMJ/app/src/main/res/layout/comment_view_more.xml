@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.widget.Button
-        android:id="@+id/modified_comment"
+        android:id="@+id/modify_comment"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
