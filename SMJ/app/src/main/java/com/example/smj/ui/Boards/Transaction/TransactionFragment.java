@@ -2,7 +2,6 @@ package com.example.smj.ui.Boards.Transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +20,7 @@ import com.example.smj.R;
 import com.example.smj.callback.TransactionGetData;
 import com.example.smj.data.entity.board.boardData;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Boards.Transaction.Adapter.TransactionPostAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     private Button writeButton;
     private String token;
     private EditText search;
+    private ImageView boardImage;
 
     public TransactionFragment(){
 

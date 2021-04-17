@@ -2,6 +2,7 @@ package com.example.smj.ui.Alarms;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,13 +28,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ScheduleFragment extends Fragment implements ScheduleGetData {
     private MaterialCalendarView calendarView;
-    private String spotColor;
-    private ArrayList<Alarm>getList = new ArrayList<>();
+    private final String spotColor = "#e86328";;
+    private ArrayList<Alarm> alarmList = new ArrayList<>();
     private ScheduleUseCase scheduleUseCase;
+
     SharedPreferences pref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -44,22 +47,23 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
         return view;
     }
 
-    protected void init(View view){
+    protected void init(View view)  {
 
         //여기에 서버통신 준비
-        getList.clear();
+        alarmList.clear();
         scheduleUseCase = new ScheduleUseCase(this);
+        scheduleUseCase.sendKey(JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT)));
         //이러면 현재 사용자의 알람 리스트들을 받아온것!
         /* jwt 값을 너무 늦게받음! 인터페이스 해줘야함 */
         /* 밑의 코드는 순서대로 GET, PUT, DELETE, POST */
-        //scheduleUseCase.sendKey(MainActivity.jwt);
+        //scheduleUseCase.sendKey(JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT)));
         //scheduleUseCase.changeData(new Alarm("테스트입니다","2021-03-12","13:00:00",0,"hourly","15:05:00","테스트"),
         //        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNTYxMDIyNSwiZXhwIjoxNjE1NjEyMDI1fQ.U3ksEMY3PFLnf8oNyeevV0X-XUZpkOD_M-2vPXQNEnY","3");
         //scheduleUseCase.deleteData("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNTYxMDIyNSwiZXhwIjoxNjE1NjEyMDI1fQ.U3ksEMY3PFLnf8oNyeevV0X-XUZpkOD_M-2vPXQNEnY","2");
         //scheduleUseCase.sendData(new Alarm("테스트입니다","2021-03-12","13:00:00",0,"hourly","15:05:00","테스트"),
         // "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyc3cxNDUyQG5hdmVyLmNvbSIsImlhdCI6MTYxNTYxMDIyNSwiZXhwIjoxNjE1NjEyMDI1fQ.U3ksEMY3PFLnf8oNyeevV0X-XUZpkOD_M-2vPXQNEnY");
 
-        spotColor = "#e86328";
+
         calendarView = view.findViewById(R.id.schedule_calendarView);
         calendarView.setSelectedDate(CalendarDay.today());
         Calendar startTimeCalendar = Calendar.getInstance();
@@ -76,49 +80,45 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 .setMaximumDate(CalendarDay.from(currentYear, currentMonth+11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        //받아온 리스트들을 점으로~
-        clickSuccess(getList);
+
     }
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmListPopupActivity.class);
-                String s = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
-                Log.d("ㅋㅋㅋ", s);
+
                 int year = date.getYear();
                 int month = date.getMonth()+1;
                 int day = date.getDay();
                 String checkDate = String.valueOf(year) + "년 " + String.valueOf(month) + "월 " + String.valueOf(day) + "일";
+                Log.d("날짜",checkDate);
                 intent.putExtra("data", checkDate);
                 startActivityForResult(intent, 1);
             }
         });
     }
+    public void setCalendarSpotSpread(){
+        ArrayList<CalendarDay> dayList = new ArrayList<>();
+        for(Alarm a : alarmList){
+            Calendar cal = new GregorianCalendar(); //그레고리력 달력 생성
+            Log.d("받았니", a.getstartDate());
+            String strArr[] =  a.getstartDate().split("-");
+            int i = 0;
+            for(String s: strArr){
+                if(i == 0) cal.set(Calendar.YEAR,Integer.parseInt(s));
+                else if(i == 1) cal.set(Calendar.MONTH,Integer.parseInt(s)-1);
+                else cal.set(Calendar.DATE,Integer.parseInt(s));
+                i++;
+            }
+            CalendarDay day = CalendarDay.from(cal);
+            dayList.add(day);
+        }
+        calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor),dayList));
+    }
     @Override
     public void clickSuccess(List<Alarm> list) {
-        //점찍기 코드
-        Calendar calendar = Calendar.getInstance();
-        /*
-        for(int i = 0; i <30; i++){
-            CalendarDay day = CalendarDay.from(calendar);
-            dayList.add(day);
-            calendar.add(Calendar.DATE,5);
-        }
-         */
-        //테스트 size 3
-        //getList.size() 으로 변경해주세요
-        for(int i = 0; i<3; i++){
-            //날짜만큼 해주세요
-            try {
-                //String date = getList.get(i).getDay();
-                String date = "2021-03-13";
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date to = simpleDateFormat.parse(date);
-                //calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor), ));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+        alarmList.addAll(list);
+        setCalendarSpotSpread();
     }
 }

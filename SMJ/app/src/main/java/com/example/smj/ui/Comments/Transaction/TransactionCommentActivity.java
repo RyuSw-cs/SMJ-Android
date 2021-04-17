@@ -2,6 +2,7 @@ package com.example.smj.ui.Comments.Transaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +15,9 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
+import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.domain.usecase.CommentsUseCase;
+import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.ui.Comments.Transaction.Adapter.TransactionCommentAdapter;
 
 import java.util.ArrayList;
@@ -22,9 +25,11 @@ import java.util.List;
 
 public class TransactionCommentActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private List<TransactionCommentData> data = new ArrayList<>();
+    private List<TransactionCommentData> commentData = new ArrayList<>();
+    private List<MemberData> memberData = new ArrayList<>();
     private TransactionCommentAdapter adapter;
     private CommentsUseCase commentsUseCase;
+    private MemberUseCase memberUseCase;
     private String token;
     private int boardId;
     private Button upload;
@@ -39,6 +44,7 @@ public class TransactionCommentActivity extends AppCompatActivity {
     private void init(){
 
         commentsUseCase = new CommentsUseCase(this);
+        memberUseCase = new MemberUseCase(this);
         upload = findViewById(R.id.transaction_comment_write_btn);
         Intent intent = getIntent();
         //defaultValue 변경해야함.
@@ -54,20 +60,23 @@ public class TransactionCommentActivity extends AppCompatActivity {
                 commentsUseCase.postData(new CommentsPostData("댓글 테스트"),token,boardId,getApplicationContext());
             }
         });
-
-        //댓글 데이터 받아오기
-        commentsUseCase.getData(token,boardId);
+        //멤버 데이터 받아오기
+        memberUseCase.getData(token);
     }
     public void onSuccess(List<CommentData>list){
         //데이터 전처리
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
-            data.add(new TransactionCommentData(list.get(i).getCreatedAt(),list.get(i).getMember().getNickName(),list.get(i).getContent()));
+            commentData.add(new TransactionCommentData(list.get(i).getCreatedAt(),list.get(i).getMember().getNickName(),list.get(i).getContent()));
         }
-        adapter = new TransactionCommentAdapter(data);
+        //어댑터에 사용자와
+        adapter = new TransactionCommentAdapter(commentData, memberData, this, commentsUseCase,token,boardId);
         recyclerView.setAdapter(adapter);
+        adapter.refreshAdapter();
     }
-    private void checkId(){
-        //만약 현재 로그인 정보 중 id와 댓글 정보중 id가 같다면?
+
+    public void onDataSuccess(List<MemberData> body){
+        memberData = body;
+        commentsUseCase.getData(token,boardId);
     }
 }

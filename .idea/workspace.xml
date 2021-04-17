@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62a5f7ca-5186-4a6a-87a3-1e72235f2c07" name="Default Changelist" comment="" />
+    <list default="true" id="62a5f7ca-5186-4a6a-87a3-1e72235f2c07" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/SMJ-Android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SMJ-Android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +28,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/SMJ" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="SvnConfiguration">
@@ -38,10 +47,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="781" y="303" key="FileChooserDialogImpl" timestamp="1609675714411">
+    <state x="422" y="98" key="#Project_Structure" timestamp="1616244356353">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="422" y="98" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1616244356353" />
+    <state x="781" y="303" key="FileChooserDialogImpl" timestamp="1616825179316">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="781" y="303" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609576023272" />
-    <state x="781" y="303" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1609675714411" />
+    <state x="781" y="303" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616825179316" />
+    <state width="880" height="236" key="GridCell.Tab.0.bottom" timestamp="1616244375270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="880" height="236" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1616244375270" />
+    <state width="880" height="236" key="GridCell.Tab.0.center" timestamp="1616244375269">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="880" height="236" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1616244375269" />
+    <state width="880" height="236" key="GridCell.Tab.0.left" timestamp="1616244375269">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="880" height="236" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1616244375269" />
+    <state width="880" height="236" key="GridCell.Tab.0.right" timestamp="1616244375270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="880" height="236" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1616244375270" />
   </component>
 </project>

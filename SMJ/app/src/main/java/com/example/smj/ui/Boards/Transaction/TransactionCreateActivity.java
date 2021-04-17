@@ -23,6 +23,7 @@ import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Boards.Transaction.Adapter.CreatePhotoAdapter;
 
 import java.util.ArrayList;
 
@@ -65,7 +66,8 @@ public class TransactionCreateActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    //이미지를 어떻게?
+                    //이미지 받아오기.
+                    //어댑터에서 데이터를 받아와야함 -> URL형식으로?
                     transactionUseCase.postData(new boardPostData
                                     (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());

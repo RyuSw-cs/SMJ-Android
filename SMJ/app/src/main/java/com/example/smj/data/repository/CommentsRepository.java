@@ -8,6 +8,7 @@ import com.example.smj.Manager.NetworkManager;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.data.entity.Comments.Entity_Comments;
+import com.example.smj.data.entity.board.Entity_board;
 import com.example.smj.domain.usecase.CommentsUseCase;
 
 import java.util.List;

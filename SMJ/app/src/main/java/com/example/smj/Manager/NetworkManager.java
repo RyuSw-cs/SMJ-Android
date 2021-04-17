@@ -1,9 +1,11 @@
 package com.example.smj.Manager;
 
+import com.example.smj.callback.RetrofitOnSuccess;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkManager<T> {
+public class NetworkManager {
 
     private static final String baseUrl = "https://smj-server-heroku.herokuapp.com";
     private static NetworkManager instance = null;
