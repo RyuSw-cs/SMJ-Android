@@ -4,11 +4,13 @@ public class TransactionCommentData {
     private String[] date;
     private String commenter;
     private String contents;
+    private int commentId;
 
-    public TransactionCommentData(String[] date, String commenter, String contents) {
+    public TransactionCommentData(String[] date, String commenter, String contents, int commentId) {
         this.date = date;
         this.commenter = commenter;
         this.contents = contents;
+        this.commentId = commentId;
     }
 
     public String[] getDate() {
@@ -33,5 +35,13 @@ public class TransactionCommentData {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 }

@@ -82,8 +82,8 @@ public class CommentsRepository {
             @Override
             public void onResponse(Call<CommentData> call, Response<CommentData> response) {
                 Log.d("데이터 전송 성공","성공");
+                commentsUseCase.updateSuccess();
                 Toast.makeText(context,"댓글이 등록됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.postSuccess();
             }
 
             @Override

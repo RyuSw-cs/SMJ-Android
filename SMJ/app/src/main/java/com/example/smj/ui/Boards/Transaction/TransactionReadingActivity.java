@@ -17,13 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.MyBoardOnSuccess;
 import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
 
 import java.util.ArrayList;
 
-public class TransactionReadingActivity extends AppCompatActivity {
+public class TransactionReadingActivity extends AppCompatActivity implements MyBoardOnSuccess {
 
     private ImageButton moreBtn;
     private TransactionPostData data;
@@ -32,7 +33,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
     private Dialog moreView;
     private Button deleteBtn, modifyBtn;
     private String key;
-    private Boolean check = false;
     private ImageView message, comment;
     public static ArrayList<Activity>activityStack = new ArrayList<>();
 
@@ -42,13 +42,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction_reading);
         activityStack.add(this);
         init();
-    }
-
-    private void check(){
-        if(check){
-            finish();
-            check = false;
-        }
     }
 
     private void init(){
@@ -109,14 +102,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
-                Handler mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        check = true;
-                        check();
-                    }
-                },500);
             }
         });
 
@@ -135,6 +120,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
+    @Override
     //list는 게시글의 id값을 가져온것
     public void onSuccessMyData(ArrayList<Integer> list) {
         int getListSize = list.size();
@@ -147,6 +133,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
