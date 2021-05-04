@@ -90,7 +90,6 @@ public class TransactionUseCase implements RetrofitOnSuccess, BoardOnSuccess {
             for(int i = 0; i<getListSize; i++){
                 idList.add(list.get(i).getId());
             }
-            transactionReadingActivity.onSuccessMyData(idList);
         }
     }
 

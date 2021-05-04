@@ -20,11 +20,14 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.usermgmt.response.model.Profile;
+import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.exception.KakaoException;
 
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
     private Button loginButton;
+    public static String myEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     accessToken = Session.getCurrentSession().getTokenInfo();
                     intent.putExtra("accessToken", accessToken.getAccessToken());
-
+                    requestMe();
                     startActivity(intent);
                     finish();
                 }
@@ -95,6 +98,20 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onSessionOpenFailed(KakaoException e) {
             Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        public void requestMe(){
+            UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                @Override
+                public void onSessionClosed(ErrorResult errorResult) {
+
+                }
+
+                @Override
+                public void onSuccess(MeV2Response result) {
+                    UserAccount kakao = result.getKakaoAccount();
+                    myEmail = kakao.getEmail();
+                }
+            });
         }
     }
 }

@@ -4,12 +4,14 @@ public class TransactionCommentData {
     private String[] date;
     private String commenter;
     private String contents;
+    private String email;
     private int commentId;
 
-    public TransactionCommentData(String[] date, String commenter, String contents, int commentId) {
+    public TransactionCommentData(String[] date, String commenter, String contents, String email, int commentId) {
         this.date = date;
         this.commenter = commenter;
         this.contents = contents;
+        this.email = email;
         this.commentId = commentId;
     }
 
@@ -35,6 +37,14 @@ public class TransactionCommentData {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getCommentId() {

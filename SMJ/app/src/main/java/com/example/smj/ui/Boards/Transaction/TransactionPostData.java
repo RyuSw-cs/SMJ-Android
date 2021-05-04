@@ -6,6 +6,7 @@ public class TransactionPostData implements Serializable {
     private String category;
     private String title;
     private String contents;
+    private String memberEmail;
     private String writer;
     private String[] date;
     private String profileImage;
@@ -14,10 +15,11 @@ public class TransactionPostData implements Serializable {
     private String imageThree;
     private int id;
 
-    public TransactionPostData(String category, String title, String contents, String writer, String[] date, String profileImage, String imageOne, String imageTwo, String imageThree, int id) {
+    public TransactionPostData(String category, String title, String contents, String memberEmail, String writer, String[] date, String profileImage, String imageOne, String imageTwo, String imageThree, int id) {
         this.category = category;
         this.title = title;
         this.contents = contents;
+        this.memberEmail = memberEmail;
         this.writer = writer;
         this.date = date;
         this.profileImage = profileImage;
@@ -49,6 +51,14 @@ public class TransactionPostData implements Serializable {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getMemberEmail() {
+        return memberEmail;
+    }
+
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
     public String getWriter() {

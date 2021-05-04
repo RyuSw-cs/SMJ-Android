@@ -19,6 +19,7 @@ import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.domain.usecase.CommentsUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentData;
+import com.example.smj.ui.login.LoginActivity;
 
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
         String[] getDate = commentData.get(position).getDate();
         String getCommenter = commentData.get(position).getCommenter();
         String getContents = commentData.get(position).getContents();
+        String email = commentData.get(position).getEmail();
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
 
@@ -97,18 +99,16 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
         holder.contents.setText(getContents);
         holder.moreBtn.setEnabled(false);
 
-        for(int i = 0; i<getListSize; i++){
-            if(getCommenter.equals(memberData.get(i).getNickName())){
-                holder.moreBtn.setVisibility(View.VISIBLE);
-                holder.moreBtn.setEnabled(true);
-                break;
-            }
+        if(email.equals(LoginActivity.myEmail)){
+            holder.moreBtn.setEnabled(true);
+            holder.moreBtn.setVisibility(View.VISIBLE);
         }
+
         holder.moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedItem = position;
                 moreView.show();
+                selectedItem = position;
             }
         });
 
@@ -118,6 +118,9 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
                 commentsUseCase.putData(new CommentsPostData(holder.updateData.getText().toString()),token, commentData.get(selectedItem).getCommentId(), context);
                 modifyView.cancel();
                 modifyView.dismiss();
+                moreView.cancel();
+                moreView.dismiss();
+                notifyDataSetChanged();
             }
         });
 
@@ -126,6 +129,7 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
             public void onClick(View v) {
                 //데이터 수정을 어떻게 처리할건지 나타내야함.
                 modifyView.show();
+                holder.updateData.setText(commentData.get(selectedItem).getContents());
             }
         });
 
@@ -136,6 +140,7 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
                 commentsUseCase.deleteData(token, commentData.get(selectedItem).getCommentId(), context);
                 moreView.cancel();
                 moreView.dismiss();
+                notifyDataSetChanged();
                 commentsUseCase.getData(token,boardId);
             }
         });

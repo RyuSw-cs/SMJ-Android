@@ -50,8 +50,6 @@ public class LivingTipFragment extends Fragment {
 
         livingTipUseCase.getData(key);
 
-        Log.d("JWT",key);
-
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,7 +110,6 @@ public class LivingTipFragment extends Fragment {
         super.onResume();
         data.clear();
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
-        Log.d("JWT",key);
         livingTipUseCase.getData(key);
     }
 

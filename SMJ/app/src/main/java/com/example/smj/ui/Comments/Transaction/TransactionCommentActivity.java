@@ -90,12 +90,11 @@ public class TransactionCommentActivity extends AppCompatActivity implements Com
         commentData.clear();
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++){
-            commentData.add(new TransactionCommentData(list.get(i).getCreatedAt(),list.get(i).getMember().getNickName(),list.get(i).getContent(),list.get(i).getId()));
+            commentData.add(new TransactionCommentData(list.get(i).getCreatedAt(),list.get(i).getMember().getNickName(),list.get(i).getContent(),list.get(i).getMember().getEmail(),list.get(i).getId()));
         }
-        //어댑터에 사용자와
         adapter = new TransactionCommentAdapter(commentData, memberData, this, commentsUseCase, token, boardId);
-        recyclerView.setAdapter(adapter);
         adapter.refreshAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
     //사용자 데이터 받기

@@ -1,11 +1,17 @@
 package com.example.smj.ui.Boards.Transaction;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -25,7 +31,16 @@ import com.example.smj.data.entity.board.boardPostData;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.Boards.Transaction.Adapter.CreatePhotoAdapter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TransactionCreateActivity extends AppCompatActivity{
 
@@ -33,7 +48,7 @@ public class TransactionCreateActivity extends AppCompatActivity{
     private ImageButton galleryBtn;
     private RecyclerView photoList;
     private ImageView image;
-    private ArrayList<Uri> photoData = new ArrayList<>();
+    private ArrayList<Uri> photoData = new ArrayList<>(3);
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
     private EditText title, content;
@@ -66,10 +81,26 @@ public class TransactionCreateActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
+                    String[] temp = {"", "", ""};
                     //이미지 받아오기.
-                    //어댑터에서 데이터를 받아와야함 -> URL형식으로?
+                    int getListSize = photoData.size();
+                    for(int i = 0; i<getListSize; i++){
+                        try {
+                            InputStream in = getContentResolver().openInputStream(photoData.get(i));
+                            Bitmap img = BitmapFactory.decodeStream(in);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            img.compress(Bitmap.CompressFormat.PNG,100,baos);
+                            byte[] bytes = baos.toByteArray();
+                            temp[i] = Base64.encodeToString(bytes, Base64.DEFAULT);
+                            in.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     transactionUseCase.postData(new boardPostData
-                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
+                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),temp[0],temp[1],temp[2]),
                             JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
                 }
             }
