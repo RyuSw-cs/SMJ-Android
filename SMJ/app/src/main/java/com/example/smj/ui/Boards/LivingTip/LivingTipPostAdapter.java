@@ -2,6 +2,8 @@ package com.example.smj.ui.Boards.LivingTip;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         private TextView contents;
         private TextView writer;
         private TextView date;
-        private ImageView profileImage;
+        private ImageView mainImage;
 
         ViewHolder(View itemView){
             super(itemView);
@@ -36,7 +38,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
             contents = itemView.findViewById(R.id.post_item_contents);
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
-            profileImage = itemView.findViewById(R.id.profileImage);
+            mainImage = itemView.findViewById(R.id.post_item_profile_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -50,6 +52,9 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
                         intent.putExtra("writer",postData.get(pos).getWriter());
                         intent.putExtra("date",postData.get(pos).getDate());
                         intent.putExtra("content",postData.get(pos).getContents());
+                        intent.putExtra("image1",postData.get(pos).getImageOne());
+                        intent.putExtra("image2",postData.get(pos).getImageTwo());
+                        intent.putExtra("image3",postData.get(pos).getImageThree());
                         context.startActivity(intent);
                     }
                 }
@@ -81,14 +86,19 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         String []getDate = postData.get(position).getDate();
 
         String date = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
-        //String profileImage = postData.get(position).getProfileImage();
+        Uri mainImage = Uri.parse(postData.get(position).getImageOne());
 
         holder.category.setText(category);
         holder.title.setText(title);
         holder.contents.setText(contents);
         holder.writer.setText(writer);
         holder.date.setText(date);
-        //holder.category.setText(profileImage);
+
+        Log.d("ImageUri",mainImage.toString());
+
+        if(mainImage != null){
+            holder.mainImage.setImageURI(mainImage);
+        }
     }
 
     @Override

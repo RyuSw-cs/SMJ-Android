@@ -130,9 +130,42 @@
         android:id="@+id/living_tip_reading_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/living_tip_reading_post_title"
-        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_contour" />
+        app:layout_constraintStart_toStartOf="@+id/living_tip_reading_post_main_view"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_image1" />
+
+    <ImageView
+        android:id="@+id/living_tip_image1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/living_tip_reading_contour"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/living_tip_image2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_image1"
+        app:layout_constraintStart_toEndOf="@+id/living_tip_image1"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_image1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/living_tip_image3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/living_tip_image2"
+        app:layout_constraintStart_toEndOf="@+id/living_tip_image2"
+        app:layout_constraintTop_toTopOf="@+id/living_tip_image2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
