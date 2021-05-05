@@ -1,6 +1,7 @@
 package com.example.smj.ui.Boards.LivingTip;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,6 +36,7 @@ public class LivingTipFragment extends Fragment {
     String key;
     EditText search;
     List<boardData> boardList;
+    Uri mainImage;
 
     public LivingTipFragment(){
     }
@@ -50,7 +52,7 @@ public class LivingTipFragment extends Fragment {
 
         livingTipUseCase.getData(key);
 
-        Log.d("JWT",key);
+        //Log.d("JWT",key);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,7 +67,8 @@ public class LivingTipFragment extends Fragment {
                 for(boardData board : boardList){
                     Log.d("살림 팁 텍스트 와처","살림 팁 텍스트 와처");
                     if(board.getTitle().contains(s) && board.getType().equals("LIVE")){
-                        searchData.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreatedAt(),"이미지"));
+                        searchData.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),board.getMember().getNickName(),
+                                board.getCreatedAt(),board.getImageOne(),board.getImageTwo(),board.getImageThree()));
                     }
                 }
 
@@ -96,7 +99,8 @@ public class LivingTipFragment extends Fragment {
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
             if(board.getType().equals("LIVE")){
-                data.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreatedAt(),"이미지"));
+                data.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),board.getMember().getNickName(),
+                        board.getCreatedAt(),board.getImageOne(),board.getImageTwo(),board.getImageThree()));
             }
         }
 

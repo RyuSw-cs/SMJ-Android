@@ -31,7 +31,7 @@ public class CreatePhotoAdapter extends RecyclerView.Adapter<CreatePhotoAdapter.
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //글쓰기 할때 이미지 리스트 나오게 하는 리사이클러뷰
-        View view = inflater.inflate(R.layout.activity_photolist_item,parent,false);
+        View view = inflater.inflate(R.layout.photolist_item,parent,false);
         CreatePhotoAdapter.ViewHolder vh = new CreatePhotoAdapter.ViewHolder(view);
 
         return vh;

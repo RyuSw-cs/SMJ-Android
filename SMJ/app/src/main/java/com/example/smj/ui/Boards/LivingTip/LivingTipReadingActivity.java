@@ -2,6 +2,7 @@ package com.example.smj.ui.Boards.LivingTip;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -36,6 +38,12 @@ public class LivingTipReadingActivity extends AppCompatActivity {
     TextView dateView;
     TextView contentView;
     private boolean check = false;
+    ImageView image1;
+    ImageView image2;
+    ImageView image3;
+    String imageUri1;
+    String imageUri2;
+    String imageUri3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +59,9 @@ public class LivingTipReadingActivity extends AppCompatActivity {
         moreView.setContentView(R.layout.reading_view_more);
         deleteBtn = (Button) moreView.findViewById(R.id.reading_delete);
         modifyBtn = (Button) moreView.findViewById(R.id.reading_modified);
+        image1 = findViewById(R.id.living_tip_image1);
+        image2 = findViewById(R.id.living_tip_image2);
+        image3 = findViewById(R.id.living_tip_image3);
 
         categoryView = findViewById(R.id.living_tip_reading_post_category);
         titleView = findViewById(R.id.living_tip_reading_post_title);
@@ -64,6 +75,15 @@ public class LivingTipReadingActivity extends AppCompatActivity {
         writer = getIntent.getExtras().getString("writer");
         date = getIntent.getExtras().getString("date");
         content = getIntent.getExtras().getString("content");
+        imageUri1 = getIntent.getExtras().getString("image1");
+        imageUri2 = getIntent.getExtras().getString("image2");
+        imageUri3 = getIntent.getExtras().getString("image3");
+
+        Log.d("Image1 URI",imageUri1);
+
+        image1.setImageURI(Uri.parse(imageUri1));
+        image2.setImageURI(Uri.parse(imageUri2));
+        image3.setImageURI(Uri.parse(imageUri3));
 
         categoryView.setText(category);
         titleView.setText(title);
@@ -83,6 +103,9 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                 intent.putExtra("category",category);
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
+                intent.putExtra("image1",imageUri1);
+                intent.putExtra("image2",imageUri2);
+                intent.putExtra("image3",imageUri3);
                 startActivity(intent);
                 finish();
             }
