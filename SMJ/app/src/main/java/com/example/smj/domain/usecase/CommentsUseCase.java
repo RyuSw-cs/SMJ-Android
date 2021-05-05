@@ -42,7 +42,7 @@ public class CommentsUseCase implements RetrofitOnSuccess{
 
     //DELETE
     public void deleteData(String key, int id, Context context){
-        commentsRepository.deleteData(key, id, context);
+        commentsRepository.deleteData(key, id, context, this);
     }
 
     @Override
@@ -54,6 +54,6 @@ public class CommentsUseCase implements RetrofitOnSuccess{
         }
     }
     public void updateSuccess(){
-        //transactionCommentActivity.onSuccess();
+        transactionCommentActivity.dataChangeSuccess();
     }
 }

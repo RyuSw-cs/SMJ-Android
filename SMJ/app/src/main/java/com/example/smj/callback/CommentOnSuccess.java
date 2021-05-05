@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CommentOnSuccess {
     void onSuccess(List<CommentData> list);
+    void dataChangeSuccess();
 }

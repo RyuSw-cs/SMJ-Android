@@ -71,7 +71,6 @@ public class TransactionCommentActivity extends AppCompatActivity implements Com
                 }
                 else{
                     commentsUseCase.postData(new CommentsPostData(content.getText().toString()),token,boardId,getApplicationContext());
-                    commentsUseCase.getData(token,boardId);
                     content.setText("");
                     content.clearFocus();
                     inputMethodManager.hideSoftInputFromWindow(upload.getWindowToken(),0);
@@ -95,6 +94,12 @@ public class TransactionCommentActivity extends AppCompatActivity implements Com
         adapter = new TransactionCommentAdapter(commentData, memberData, this, commentsUseCase, token, boardId);
         adapter.refreshAdapter();
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void dataChangeSuccess() {
+        commentsUseCase.getData(token,boardId);
+        adapter.refreshAdapter();
     }
 
     //사용자 데이터 받기
