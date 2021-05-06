@@ -57,6 +57,7 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
          fab.setOnClickListener((view) ->{
              Intent intent = new Intent(this, ScheduleAlarmPageActivity.class);
              String[] alarmCreateData = {"0",dateKey};
+             Log.d("머얌", dateKey);
              intent.putExtra("data", alarmCreateData);
              startActivityForResult(intent, 1);
          });
@@ -92,13 +93,11 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
     public void getDataFromServer(){
         StringBuilder sb = new StringBuilder();
         String str = (String)main.getText();
-        Log.d("d", str);
         String[] strArr = str.split(" ");
         sb.append(strArr[0].substring(0,strArr[0].length()-1)).append("-");
         convertDatetoServerFormat(strArr[1], sb);
         convertDatetoServerFormat(strArr[2], sb);
         dateKey = sb.substring(0,sb.length()-1);
-        Log.d("d",  dateKey);
         scheduleUseCase.sendKeyDate(JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)), dateKey);
     }
     @Override
@@ -113,5 +112,14 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
             FirstStr = FirstStr.concat(SecondStr);
             sb.append(FirstStr).append("-");
         }
+        else{
+            sb.append(SecondStr).append("-");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // getDataFromServer();
     }
 }
