@@ -97,7 +97,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         Log.d("ImageUri",mainImage.toString());
 
         if(mainImage != null){
-            holder.mainImage.setImageURI(mainImage);
+            //holder.mainImage.setImageURI(mainImage);
         }
     }
 

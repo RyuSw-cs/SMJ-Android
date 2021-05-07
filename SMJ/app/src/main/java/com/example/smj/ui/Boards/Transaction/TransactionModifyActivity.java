@@ -3,6 +3,7 @@ package com.example.smj.ui.Boards.Transaction;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private String spinnerItem;
     private String[] item;
     private int selectSpinner, getItemCount;
+    private Uri imageUri1, imageUri2, imageUri3, uri;
 
 
     private static int PICK_IMAGE_REQUEST = 7;
@@ -67,6 +69,23 @@ public class TransactionModifyActivity extends AppCompatActivity {
         transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
         spinnerItem = transactionPostData.getCategory();
 
+        imageUri1 = Uri.parse(transactionPostData.getImageOne());
+        imageUri2 = Uri.parse(transactionPostData.getImageTwo());
+        imageUri3 = Uri.parse(transactionPostData.getImageThree());
+
+        if(!imageUri1.toString().equals("0")){
+            photoData.add(imageUri1);
+            photoList.setVisibility(View.VISIBLE);
+        }
+        if(!imageUri2.toString().equals("0")){
+            photoData.add(imageUri2);
+            photoList.setVisibility(View.VISIBLE);
+        }
+        if(!imageUri2.toString().equals("0")){
+            photoData.add(imageUri3);
+            photoList.setVisibility(View.VISIBLE);
+        }
+
         title.setText(transactionPostData.getTitle());
         content.setText(transactionPostData.getContents());
 
@@ -91,10 +110,28 @@ public class TransactionModifyActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    //이미지 전송 변경해야함.
-                    transactionUseCase.putData(new boardPostData
-                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
-                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),transactionPostData.getId(),getApplicationContext());
+                    switch (photoData.size()){
+                        case 1:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),"0","0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        case 2:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),"0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        case 3:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),photoData.get(2).toString()),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        default:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"0","0","0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                    }
                 }
             }
         });
@@ -138,10 +175,19 @@ public class TransactionModifyActivity extends AppCompatActivity {
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                if(Build.VERSION.SDK_INT<19){
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                }
+                else{
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                }
             }
         });
     }

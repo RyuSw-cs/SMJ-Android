@@ -54,6 +54,7 @@ public class TransactionCreateActivity extends AppCompatActivity{
     private EditText title, content;
     private TransactionUseCase transactionUseCase;
     private int selectSpinner;
+    private Uri uri;
 
     private static int PICK_IMAGE_REQUEST = 7;
 
@@ -81,27 +82,28 @@ public class TransactionCreateActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    String[] temp = {"", "", ""};
-                    //이미지 받아오기.
-                    int getListSize = photoData.size();
-                    for(int i = 0; i<getListSize; i++){
-                        try {
-                            InputStream in = getContentResolver().openInputStream(photoData.get(i));
-                            Bitmap img = BitmapFactory.decodeStream(in);
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            img.compress(Bitmap.CompressFormat.PNG,100,baos);
-                            byte[] bytes = baos.toByteArray();
-                            temp[i] = Base64.encodeToString(bytes, Base64.DEFAULT);
-                            in.close();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    switch (photoData.size()){
+                        case 1:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),"0","0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        case 2:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),"0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        case 3:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),photoData.get(2).toString()),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                        default:
+                            transactionUseCase.postData(new boardPostData
+                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"0","0","0"),
+                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
                     }
-                    transactionUseCase.postData(new boardPostData
-                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),temp[0],temp[1],temp[2]),
-                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
                 }
             }
         });
@@ -155,18 +157,18 @@ public class TransactionCreateActivity extends AppCompatActivity{
                 Toast.makeText(this, "다중선택이 불가한 기기입니다.", Toast.LENGTH_LONG).show();
             } else {
                 //ClipData 또는 Uri를 가져온다
-                Uri uri = data.getData();
+                uri = data.getData();
                 ClipData clipData = data.getClipData();
 
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
-                if (clipData != null) {
+                if (clipData != null) {//다중선택
                     Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri urione = clipData.getItemAt(i).getUri();
                         photoData.add(urione);
                     }
                     photoList.setVisibility(View.VISIBLE);
-                } else if (uri != null) {
+                } else if (uri != null) {//단일선택
                     photoData.add(uri);
                     photoList.setVisibility(View.VISIBLE);
                 }

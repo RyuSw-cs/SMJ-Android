@@ -2,6 +2,8 @@ package com.example.smj.ui.Boards.Transaction.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         private TextView contents;
         private TextView writer;
         private TextView date;
-        private ImageView profileImage;
+        private ImageView mainImage;
 
         ViewHolder(View itemView){
             super(itemView);
@@ -41,7 +43,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
             contents = itemView.findViewById(R.id.post_item_contents);
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
-            profileImage = itemView.findViewById(R.id.post_item_profile_image);
+            mainImage = itemView.findViewById(R.id.post_item_profile_image);
         }
     }
 
@@ -66,20 +68,27 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         String contents = postData.get(position).getContents();
         String writer = postData.get(position).getWriter();
 
-        String []getDate = postData.get(position).getDate();
+        String []getDate = postData.get(position).getDate();`
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
         //보드 메인페이지 첫번째 사진 설정
-        String profileImage = postData.get(position).getProfileImage();
+        Uri mainImage = Uri.parse(postData.get(position).getImageOne());
 
-        CreatePhotoData task = new CreatePhotoData(profileImage,holder.profileImage);
+        /* url -> image */
+        /*
+        CreatePhotoData task = new CreatePhotoData(profileImage,holder.mainImage);
         task.execute();
+         */
 
         holder.category.setText(category);
         holder.title.setText(title);
         holder.contents.setText(contents);
         holder.writer.setText(writer);
         holder.date.setText(date);
+
+        if(holder.mainImage != null){
+            holder.mainImage.setImageURI(mainImage);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
