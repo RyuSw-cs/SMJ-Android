@@ -21,6 +21,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
 
     private Context context;
     private ArrayList<LivingTipPostData> postData = null;
+    int pos;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView category;
@@ -43,7 +44,7 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition() ;
+                    pos = getAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(context, LivingTipReadingActivity.class);
                         intent.putExtra("id",postData.get(pos).getId());
@@ -86,19 +87,12 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
         String []getDate = postData.get(position).getDate();
 
         String date = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
-        Uri mainImage = Uri.parse(postData.get(position).getImageOne());
 
         holder.category.setText(category);
         holder.title.setText(title);
         holder.contents.setText(contents);
         holder.writer.setText(writer);
         holder.date.setText(date);
-
-        Log.d("ImageUri",mainImage.toString());
-
-        if(mainImage != null){
-            holder.mainImage.setImageURI(mainImage);
-        }
     }
 
     @Override
