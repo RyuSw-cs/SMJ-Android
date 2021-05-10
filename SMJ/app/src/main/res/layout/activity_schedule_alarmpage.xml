@@ -456,5 +456,5 @@
         android:background="@color/linecolor"
         app:layout_constraintTop_toTopOf="@id/alarmpage_appBarLayout"
         tools:layout_editor_absoluteX="0dp" />
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
