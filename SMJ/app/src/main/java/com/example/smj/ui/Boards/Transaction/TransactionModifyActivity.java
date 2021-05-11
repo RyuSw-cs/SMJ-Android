@@ -33,7 +33,6 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
-    private ImageView image;
     private ArrayList<Uri> photoData = new ArrayList<>();
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
@@ -43,7 +42,6 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private String spinnerItem;
     private String[] item;
     private int selectSpinner, getItemCount;
-    private Uri imageUri1, imageUri2, imageUri3, uri;
 
 
     private static int PICK_IMAGE_REQUEST = 7;
@@ -59,32 +57,14 @@ public class TransactionModifyActivity extends AppCompatActivity {
         TransactionReadingActivity.activityStack.add(this);
 
         photoList = findViewById(R.id.trade_photo_recyclerView);
-        image = findViewById(R.id.photo);
         upload = findViewById(R.id.trade_modify_upload);
         title = findViewById(R.id.trade_title);
         content = findViewById(R.id.trade_content);
 
         Intent intent = getIntent();
         transactionUseCase = new TransactionUseCase(this);
-        transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
+        transactionPostData = (TransactionPostData) intent.getSerializableExtra("modifyData");
         spinnerItem = transactionPostData.getCategory();
-
-        imageUri1 = Uri.parse(transactionPostData.getImageOne());
-        imageUri2 = Uri.parse(transactionPostData.getImageTwo());
-        imageUri3 = Uri.parse(transactionPostData.getImageThree());
-
-        if(!imageUri1.toString().equals("0")){
-            photoData.add(imageUri1);
-            photoList.setVisibility(View.VISIBLE);
-        }
-        if(!imageUri2.toString().equals("0")){
-            photoData.add(imageUri2);
-            photoList.setVisibility(View.VISIBLE);
-        }
-        if(!imageUri2.toString().equals("0")){
-            photoData.add(imageUri3);
-            photoList.setVisibility(View.VISIBLE);
-        }
 
         title.setText(transactionPostData.getTitle());
         content.setText(transactionPostData.getContents());
@@ -93,8 +73,8 @@ public class TransactionModifyActivity extends AppCompatActivity {
 
         getItemCount = item.length;
 
-        for(int i = 0; i<getItemCount; i++){
-            if(item[i].contains(spinnerItem)){
+        for (int i = 0; i < getItemCount; i++) {
+            if (item[i].contains(spinnerItem)) {
                 selectSpinner = i;
                 break;
             }
@@ -105,33 +85,14 @@ public class TransactionModifyActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(title.getText().equals("")||content.getText().equals("")){
+                if (title.getText().equals("") || content.getText().equals("")) {
                     //임시 토스트
-                    Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    switch (photoData.size()){
-                        case 1:
-                            transactionUseCase.postData(new boardPostData
-                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),"0","0"),
-                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                            break;
-                        case 2:
-                            transactionUseCase.postData(new boardPostData
-                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),"0"),
-                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                            break;
-                        case 3:
-                            transactionUseCase.postData(new boardPostData
-                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),photoData.get(0).toString(),photoData.get(1).toString(),photoData.get(2).toString()),
-                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                            break;
-                        default:
-                            transactionUseCase.postData(new boardPostData
-                                            (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"0","0","0"),
-                                    JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
-                            break;
-                    }
+                    Toast.makeText(getApplicationContext(), "제목이나 내용,카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
+                } else {
+                    transactionUseCase.postData(new boardPostData
+                                    (selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "0", "0", "0"),
+                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)), getApplicationContext());
+
                 }
             }
         });
@@ -143,9 +104,9 @@ public class TransactionModifyActivity extends AppCompatActivity {
         photoList.setAdapter(adapter);
     }
 
-    public void modifySuccess(){
+    public void modifySuccess() {
         int getActivitySize = TransactionReadingActivity.activityStack.size();
-        for(int i = 0; i<getActivitySize; i++){
+        for (int i = 0; i < getActivitySize; i++) {
             TransactionReadingActivity.activityStack.get(i).finish();
         }
     }
@@ -175,13 +136,12 @@ public class TransactionModifyActivity extends AppCompatActivity {
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT<19){
+                if (Build.VERSION.SDK_INT < 19) {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-                }
-                else{
+                } else {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
                     intent.addCategory(Intent.CATEGORY_OPENABLE);

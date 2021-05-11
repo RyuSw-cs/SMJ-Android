@@ -37,8 +37,8 @@ public class TransactionReadingActivity extends AppCompatActivity{
     private Dialog moreView;
     private Button deleteBtn, modifyBtn;
     private String key;
-    private ImageView message, comment, image1, image2, image3;
-    private String imageUri1,imageUri2,imageUri3;
+    private ImageView message, comment;
+
     public static ArrayList<Activity>activityStack = new ArrayList<>();
 
     @Override
@@ -79,20 +79,6 @@ public class TransactionReadingActivity extends AppCompatActivity{
         title.setText(data.getTitle());
         writer.setText(data.getWriter());
         String []getDate = data.getDate();
-
-        imageUri1 = data.getImageOne();
-        imageUri2 = data.getImageTwo();
-        imageUri3 = data.getImageThree();
-
-        if(!imageUri1.equals("0")){
-            image1.setImageURI(Uri.parse(imageUri1));
-        }
-        if(!imageUri2.equals("0")){
-            image2.setImageURI(Uri.parse(imageUri2));
-        }
-        if(!imageUri3.equals("0")){
-            image3.setImageURI(Uri.parse(imageUri3));
-        }
 
         String dateInfo = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
 

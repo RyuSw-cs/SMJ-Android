@@ -2,6 +2,8 @@ package com.example.smj.ui.Boards.Transaction.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -15,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.domain.usecase.TransactionUseCase;
-import com.example.smj.ui.Boards.Transaction.CreatePhotoData;
 import com.example.smj.ui.Boards.Transaction.TransactionPostData;
 import com.example.smj.ui.Boards.Transaction.TransactionReadingActivity;
 
@@ -44,6 +45,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
             mainImage = itemView.findViewById(R.id.post_item_profile_image);
+
         }
     }
 
@@ -68,27 +70,20 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         String contents = postData.get(position).getContents();
         String writer = postData.get(position).getWriter();
 
-        String []getDate = postData.get(position).getDate();`
+        String []getDate = postData.get(position).getDate();
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
         //보드 메인페이지 첫번째 사진 설정
-        Uri mainImage = Uri.parse(postData.get(position).getImageOne());
-
-        /* url -> image */
-        /*
-        CreatePhotoData task = new CreatePhotoData(profileImage,holder.mainImage);
-        task.execute();
-         */
+        if(!postData.get(position).getImageOne().equals("")){
+            Bitmap mainImage = stringToBitmap(postData.get(position).getImageOne());
+            holder.mainImage.setImageBitmap(mainImage);
+        }
 
         holder.category.setText(category);
         holder.title.setText(title);
         holder.contents.setText(contents);
         holder.writer.setText(writer);
         holder.date.setText(date);
-
-        if(holder.mainImage != null){
-            holder.mainImage.setImageURI(mainImage);
-        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,5 +104,16 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
     public void adapterRefresh(){
         notifyDataSetChanged();
+    }
+
+    public Bitmap stringToBitmap(String data){
+        Bitmap bitmap = null;
+        try{
+            byte [] encodeByte= Base64.decode(data,Base64.DEFAULT);
+            bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }
