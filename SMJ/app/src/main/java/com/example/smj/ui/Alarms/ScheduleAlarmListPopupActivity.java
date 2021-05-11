@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.ScheduleGetData;
+import com.example.smj.callback.ScheduleOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.domain.usecase.ScheduleUseCase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,6 +57,7 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
          fab.setOnClickListener((view) ->{
              Intent intent = new Intent(this, ScheduleAlarmPageActivity.class);
              String[] alarmCreateData = {"0",dateKey};
+             Log.d("머얌", dateKey);
              intent.putExtra("data", alarmCreateData);
              startActivityForResult(intent, 1);
          });
@@ -93,22 +95,31 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
         String str = (String)main.getText();
         String[] strArr = str.split(" ");
         sb.append(strArr[0].substring(0,strArr[0].length()-1)).append("-");
-
-        String monthFirstStr = "0";
-        String monthSecondStr = strArr[1].substring(0,strArr[1].length()-1);
-        if(Integer.parseInt(monthSecondStr) <10) {
-            monthFirstStr = monthFirstStr.concat(monthSecondStr);
-            sb.append(monthFirstStr).append("-");
-        }
-        else sb.append(monthSecondStr).append("-");
-        sb.append(strArr[2].substring(0,strArr[2].length()-1));
-        Log.d("d", sb.toString());
-        dateKey = sb.toString();
-        scheduleUseCase.sendKeyDate(JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)),sb.toString());
+        convertDatetoServerFormat(strArr[1], sb);
+        convertDatetoServerFormat(strArr[2], sb);
+        dateKey = sb.substring(0,sb.length()-1);
+        scheduleUseCase.sendKeyDate(JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)), dateKey);
     }
     @Override
     public void clickSuccess(List<Alarm> list) {
         this.list.addAll(list);
         setRecyclerView();
+    }
+    public void convertDatetoServerFormat(String date, StringBuilder sb){
+        String FirstStr = "0";
+        String SecondStr = date.substring(0,date.length()-1);
+        if(Integer.parseInt(SecondStr) <10) {
+            FirstStr = FirstStr.concat(SecondStr);
+            sb.append(FirstStr).append("-");
+        }
+        else{
+            sb.append(SecondStr).append("-");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // getDataFromServer();
     }
 }
