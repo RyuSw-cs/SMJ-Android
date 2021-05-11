@@ -2,6 +2,7 @@ package com.example.smj.domain.usecase;
 
 import android.content.Context;
 
+import com.example.smj.callback.MemberOnSuccess;
 import com.example.smj.data.entity.Comments.CommentData;
 import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.data.entity.Member.MemberData;
@@ -12,7 +13,7 @@ import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
 import java.util.List;
 
 
-public class MemberUseCase {
+public class MemberUseCase implements MemberOnSuccess {
     private MemberRepository memberRepository;
     private TransactionCommentActivity transactionCommentActivity;
 
@@ -40,7 +41,8 @@ public class MemberUseCase {
         memberRepository.deleteData(key, id, context);
     }
 
-    public void onSuccess(List<MemberData> body) {
+    @Override
+    public void onDataSuccess(List<MemberData> body) {
         transactionCommentActivity.onDataSuccess(body);
     }
 }

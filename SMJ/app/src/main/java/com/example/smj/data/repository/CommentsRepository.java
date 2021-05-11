@@ -43,13 +43,15 @@ public class CommentsRepository {
         });
     }
 
-    public void deleteData(String key, int id, Context context){
+    public void deleteData(String key, int id, Context context,CommentsUseCase commentsUseCase){
         Call<Void> call = entityComments.deleteComments(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("데이터 전송 성공","성공");
+                commentsUseCase.updateSuccess();
                 Toast.makeText(context,"댓글이 삭제됐습니다.",Toast.LENGTH_LONG).show();
+
             }
 
             @Override
@@ -66,7 +68,7 @@ public class CommentsRepository {
             public void onResponse(Call<CommentData> call, Response<CommentData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"댓글이 수정됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.updateSuccess();
+                commentsUseCase.updateSuccess();
             }
 
             @Override
@@ -82,8 +84,8 @@ public class CommentsRepository {
             @Override
             public void onResponse(Call<CommentData> call, Response<CommentData> response) {
                 Log.d("데이터 전송 성공","성공");
+                commentsUseCase.updateSuccess();
                 Toast.makeText(context,"댓글이 등록됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.postSuccess();
             }
 
             @Override

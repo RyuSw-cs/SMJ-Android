@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.example.smj.data.entity.Comments.CommentsPostData;
 import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.domain.usecase.CommentsUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentData;
+import com.example.smj.ui.login.LoginActivity;
 
 import java.util.List;
 
@@ -25,17 +27,18 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
 
     private List<TransactionCommentData> commentData = null;
     private List<MemberData> memberData = null;
-    private Dialog moreView;
+    private Dialog moreView, modifyView;
     private Context context;
     private int getListSize;
     private CommentsUseCase commentsUseCase;
     private String token;
-    private int id;
+    private int boardId, selectedItem;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView date, commenter, contents;
         private ImageButton moreBtn;
-        private Button modifyBtn, deleteBtn;
+        private Button modifyBtn, deleteBtn, updateBtn;
+        private EditText updateData;
 
         ViewHolder(View itemView){
             super(itemView);
@@ -48,42 +51,26 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
             moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
             moreView.setContentView(R.layout.comment_view_more);
 
-            /* 코드 수정 필요! */
-            modifyBtn = (Button)moreBtn.findViewById(R.id.modify_comment);
-            deleteBtn = (Button)moreBtn.findViewById(R.id.delete_comment);
+            modifyBtn = moreView.findViewById(R.id.modify_comment);
+            deleteBtn = moreView.findViewById(R.id.delete_comment);
 
-            moreBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    moreView.show();
-                }
-            });
+            modifyView = new Dialog(context);
+            modifyView.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            modifyView.setContentView(R.layout.activity_transaction_modify_comment);
 
-            modifyBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    commentsUseCase.putData(new CommentsPostData("수정된 데이터"),token, id, context);
-                }
-            });
-
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //삭제 통신
-                    commentsUseCase.deleteData(token, id, context);
-                }
-            });
+            updateBtn = modifyView.findViewById(R.id.transaction_comment_update);
+            updateData = modifyView.findViewById(R.id.transaction_comment_update_data);
         }
     }
 
-    public TransactionCommentAdapter(List<TransactionCommentData> commentData, List<MemberData> memberData, Context context, CommentsUseCase commentsUseCase, String token, int id){
+    public TransactionCommentAdapter(List<TransactionCommentData> commentData, List<MemberData> memberData, Context context, CommentsUseCase commentsUseCase, String token, int boardId){
         this.commentData = commentData;
         this.memberData = memberData;
         this.context = context;
         this.commentsUseCase = commentsUseCase;
         this.getListSize = memberData.size();
         this.token = token;
-        this.id = id;
+        this.boardId = boardId;
     }
 
     @NonNull
@@ -103,20 +90,60 @@ public class TransactionCommentAdapter extends RecyclerView.Adapter<TransactionC
         String[] getDate = commentData.get(position).getDate();
         String getCommenter = commentData.get(position).getCommenter();
         String getContents = commentData.get(position).getContents();
+        String email = commentData.get(position).getEmail();
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
 
         holder.date.setText(date);
         holder.commenter.setText(getCommenter);
         holder.contents.setText(getContents);
+        holder.moreBtn.setEnabled(false);
 
-
-        for(int i = 0; i<getListSize; i++){
-            if(holder.commenter.getText().toString().equals(memberData.get(i).getNickName())){
-                holder.moreBtn.setVisibility(View.VISIBLE);
-                holder.moreBtn.setEnabled(true);
-            }
+        if(email.equals(LoginActivity.myEmail)){
+            holder.moreBtn.setEnabled(true);
+            holder.moreBtn.setVisibility(View.VISIBLE);
         }
+
+        holder.moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreView.show();
+                selectedItem = position;
+            }
+        });
+
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                commentsUseCase.putData(new CommentsPostData(holder.updateData.getText().toString()),token, commentData.get(selectedItem).getCommentId(), context);
+                modifyView.cancel();
+                modifyView.dismiss();
+                moreView.cancel();
+                moreView.dismiss();
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //데이터 수정을 어떻게 처리할건지 나타내야함.
+                modifyView.show();
+                holder.updateData.setText(commentData.get(selectedItem).getContents());
+            }
+        });
+
+        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //삭제 통신
+                commentsUseCase.deleteData(token, commentData.get(selectedItem).getCommentId(), context);
+                moreView.cancel();
+                moreView.dismiss();
+                notifyDataSetChanged();
+                commentsUseCase.getData(token,boardId);
+            }
+        });
     }
 
     @Override

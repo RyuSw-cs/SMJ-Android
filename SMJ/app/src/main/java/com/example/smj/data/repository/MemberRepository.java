@@ -33,7 +33,7 @@ public class MemberRepository {
             public void onResponse(Call<List<MemberData>> call, Response<List<MemberData>> response) {
                 if(response.isSuccessful()){
                     Log.d("사용자 데이터 GET 성공","사용자 데이터 GET 성공");
-                    memberUseCase.onSuccess(response.body());
+                    memberUseCase.onDataSuccess(response.body());
                 }
             }
 
