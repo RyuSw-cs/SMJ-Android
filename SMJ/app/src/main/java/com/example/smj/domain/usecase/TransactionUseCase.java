@@ -29,6 +29,7 @@ public class TransactionUseCase implements RetrofitOnSuccess, BoardOnSuccess {
         transactionRepository = new TransactionRepository();
         this.transactionFragment = transactionFragment;
     }
+
     public TransactionUseCase(TransactionCreateActivity transactionCreateActivity){
         this.transactionCreateActivity = transactionCreateActivity;
         transactionRepository = new TransactionRepository();
@@ -61,7 +62,7 @@ public class TransactionUseCase implements RetrofitOnSuccess, BoardOnSuccess {
 
     //DELETE
     public void deleteData(String key, int id, Context context){
-        transactionRepository.deleteData(key, id, context);
+        transactionRepository.deleteData(key, id, context, this);
     }
 
     //MY_DATA
@@ -89,7 +90,6 @@ public class TransactionUseCase implements RetrofitOnSuccess, BoardOnSuccess {
             for(int i = 0; i<getListSize; i++){
                 idList.add(list.get(i).getId());
             }
-            transactionReadingActivity.onSuccessMyData(idList);
         }
     }
 
@@ -103,5 +103,10 @@ public class TransactionUseCase implements RetrofitOnSuccess, BoardOnSuccess {
     public void postSuccess() {
         //글 작성완료 -> 액티비티 종료 -> 게시글 최신화
         transactionCreateActivity.finish();
+    }
+
+    @Override
+    public void deleteSuccess() {
+        transactionReadingActivity.finish();
     }
 }

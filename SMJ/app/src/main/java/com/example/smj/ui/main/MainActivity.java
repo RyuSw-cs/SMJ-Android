@@ -43,7 +43,9 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private JWTUseCase jwtUseCase;
     BottomNavigationView bottomNavigationView;
 
-    private String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
+    String[] permission_list = {
+            Manifest.permission.WRITE_CONTACTS
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         mViewPager.setUserInputEnabled(false);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.tab3);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -95,11 +98,11 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         //6.0미만시 권한체크가 필요없음 -> 메소드 종료
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return;
-        for(String permission:REQUIRED_PERMISSIONS){
+        for(String permission : permission_list){
             int check = checkCallingOrSelfPermission(permission);
             if(check == PackageManager.PERMISSION_DENIED){
                 //권한요청 메시지를 나오게함.
-                requestPermissions(REQUIRED_PERMISSIONS,0);
+                requestPermissions(permission_list,0);
             }
         }
     }
@@ -107,20 +110,8 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grandResults);
-        if(requestCode==0)
-        {
-            for(int i=0; i<grandResults.length; i++)
-            {
-                //허용됨
-                if(grandResults[i]==PackageManager.PERMISSION_GRANTED){
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"위치권한을 설정해주셔야 합니다.",Toast.LENGTH_LONG).show();
-                    finish();
-                }
-            }
-        }
     }
+
     private void init_Fragment() {
         convenienceFragment = new ConvenienceFragment();
         livingTipFragment = new LivingTipFragment();
@@ -128,6 +119,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         scheduleFragment = new ScheduleFragment();
         transactionFragment = new TransactionFragment();
     }
+
     private void init_List(){
         list.add(convenienceFragment);
         list.add(transactionFragment);

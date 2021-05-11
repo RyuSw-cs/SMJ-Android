@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,13 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.MyBoardOnSuccess;
 import com.example.smj.domain.usecase.MemberUseCase;
 import com.example.smj.domain.usecase.TransactionUseCase;
 import com.example.smj.ui.Comments.Transaction.TransactionCommentActivity;
+import com.example.smj.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 
-public class TransactionReadingActivity extends AppCompatActivity {
+public class TransactionReadingActivity extends AppCompatActivity{
 
     private ImageButton moreBtn;
     private TransactionPostData data;
@@ -32,7 +36,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
     private Dialog moreView;
     private Button deleteBtn, modifyBtn;
     private String key;
-    private Boolean check = false;
     private ImageView message, comment;
     public static ArrayList<Activity>activityStack = new ArrayList<>();
 
@@ -42,13 +45,7 @@ public class TransactionReadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction_reading);
         activityStack.add(this);
         init();
-    }
-
-    private void check(){
-        if(check){
-            finish();
-            check = false;
-        }
+        checkMyBoard();
     }
 
     private void init(){
@@ -109,14 +106,6 @@ public class TransactionReadingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
-                Handler mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        check = true;
-                        check();
-                    }
-                },500);
             }
         });
 
@@ -135,18 +124,13 @@ public class TransactionReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
-    //list는 게시글의 id값을 가져온것
-    public void onSuccessMyData(ArrayList<Integer> list) {
-        int getListSize = list.size();
-        for(int i = 0; i<getListSize; i++){
-            //data는 게시글 정보임
-            //내 게시글의 정보와 읽으려는 게시글의 id가 같다면 수정,삭제 가능하게
-            if(data.getId() == list.get(i)) {
-                moreBtn.setVisibility(View.VISIBLE);
-                moreBtn.setEnabled(true);
-            }
+    public void checkMyBoard(){
+        if(data.getMemberEmail().equals(LoginActivity.myEmail)){
+            moreBtn.setVisibility(View.VISIBLE);
+            moreBtn.setEnabled(true);
         }
     }
+
     @Override
     public void onDestroy(){
         super.onDestroy();

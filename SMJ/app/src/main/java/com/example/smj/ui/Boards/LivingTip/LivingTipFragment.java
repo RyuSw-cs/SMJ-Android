@@ -1,6 +1,7 @@
 package com.example.smj.ui.Boards.LivingTip;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,14 +43,13 @@ public class LivingTipFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.activity_living_tip_main,container,false);
-        LivingTipUseCase livingTipUseCase = new LivingTipUseCase(this);
+        livingTipUseCase = new LivingTipUseCase(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
         writeBtn = view.findViewById(R.id.write_btn);
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
         search = view.findViewById(R.id.trade_search_text);
 
         livingTipUseCase.getData(key);
-
         Log.d("JWT",key);
 
         search.addTextChangedListener(new TextWatcher() {
@@ -65,7 +65,8 @@ public class LivingTipFragment extends Fragment {
                 for(boardData board : boardList){
                     Log.d("살림 팁 텍스트 와처","살림 팁 텍스트 와처");
                     if(board.getTitle().contains(s) && board.getType().equals("LIVE")){
-                        searchData.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreatedAt(),"이미지"));
+                        searchData.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),board.getMember().getNickName(),
+                                board.getCreatedAt(),board.getImageOne(),board.getImageTwo(),board.getImageThree()));
                     }
                 }
 
@@ -96,7 +97,8 @@ public class LivingTipFragment extends Fragment {
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
             if(board.getType().equals("LIVE")){
-                data.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),"글쓴이",board.getCreatedAt(),"이미지"));
+                data.add(new LivingTipPostData(board.getId(), board.getCategory().getName(),board.getTitle(),board.getContent(),board.getMember().getNickName(),
+                        board.getCreatedAt(),board.getImageOne(),board.getImageTwo(),board.getImageThree()));
             }
         }
 
@@ -112,7 +114,6 @@ public class LivingTipFragment extends Fragment {
         super.onResume();
         data.clear();
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
-        Log.d("JWT",key);
         livingTipUseCase.getData(key);
     }
 

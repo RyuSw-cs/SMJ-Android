@@ -39,7 +39,7 @@ public class LivingTipCreateActivity extends AppCompatActivity {
     private Boolean checkSpinner = false;
     private LivingTipUseCase livingTipUseCase;
     int selectSpinner;
-
+    private Uri uri;
     private static int PICK_IMAGE_REQUEST = 7;
 
     @Override
@@ -67,8 +67,29 @@ public class LivingTipCreateActivity extends AppCompatActivity {
                 }
                 else{
                     livingTipUseCase = new LivingTipUseCase();
-                    livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),"123","123","123"),
-                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+
+                    switch (photoData.size()){
+                        case 0: livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),
+                                        "0","0","0"),
+                                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                        break;
+
+                        case 1: livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),
+                                        photoData.get(0).toString(),"0","0"),
+                                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+
+                        case 2: livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),
+                                        photoData.get(0).toString(), photoData.get(1).toString(),"0"),
+                                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+
+                        default: livingTipUseCase.postData(new boardPostData(selectSpinner,"LIVE",title.getText().toString(),content.getText().toString(),
+                                        photoData.get(0).toString(), photoData.get(1).toString(),photoData.get(2).toString()),
+                                JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
+                            break;
+                    }
+
                     finish();
                 }
             }
@@ -124,18 +145,18 @@ public class LivingTipCreateActivity extends AppCompatActivity {
                 Toast.makeText(this, "다중선택이 불가한 기기입니다.", Toast.LENGTH_LONG).show();
             } else {
                 //ClipData 또는 Uri를 가져온다
-                Uri uri = data.getData();
+                uri = data.getData();
                 ClipData clipData = data.getClipData();
 
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
-                if (clipData != null) {
+                if (clipData != null) { //여러개 선택
                     Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri urione = clipData.getItemAt(i).getUri();
                         photoData.add(urione);
                     }
                     photoList.setVisibility(View.VISIBLE);
-                } else if (uri != null) {
+                } else if (uri != null) { //1개씩 선택
                     photoData.add(uri);
                     photoList.setVisibility(View.VISIBLE);
                 }

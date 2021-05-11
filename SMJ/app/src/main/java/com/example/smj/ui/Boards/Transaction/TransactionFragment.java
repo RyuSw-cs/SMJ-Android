@@ -98,7 +98,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++) {
             if(list.get(i).getType().equals("TRADE")) {
-                data.add(new TransactionPostData(list.get(i).getCategory().getName(),list.get(i).getTitle(),list.get(i).getContent(),list.get(i).getMember().getNickName(),list.get(i).getCreatedAt(),
+                data.add(new TransactionPostData(list.get(i).getCategory().getName(),list.get(i).getTitle(),list.get(i).getContent(),list.get(i).getMember().getEmail(),list.get(i).getMember().getNickName(),list.get(i).getCreatedAt(),
                         list.get(i).getMember().getImage(),list.get(i).getImageOne(),list.get(i).getImageTwo(),list.get(i).getImageThree(),list.get(i).getId()));
             }
         }

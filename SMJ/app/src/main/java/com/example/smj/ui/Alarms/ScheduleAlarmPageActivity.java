@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -19,10 +20,12 @@ import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.domain.usecase.ScheduleUseCase;
 
 public class ScheduleAlarmPageActivity extends AppCompatActivity {
-    private ViewGroup alarmDelete, alarmIter;
-    private TextView subject,submitModified,today, startTime,finishTime, repeat;
+    private ViewGroup alarmDelete, alarmIter, timerClick1, timerClick2;
+    private TextView subject,submitModified;
+    private TextView today, startTime,finishTime, repeat;
     private EditText title, content;
-    private Boolean checkFocus1 = true, checkFocus2 = true;
+    private TimePicker timePicker,timePicker2;
+    private Boolean checkFocus1 = true, checkFocus2 = true, clickFlag = false ,clickFlag2 = false;
     private String dateKey;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +87,26 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
             }
         });
         submitModified.bringToFront();
-
+        timePicker = findViewById(R.id.timePicker);
+        timePicker2 = findViewById(R.id.timePicker2);
+        timerClick1 = findViewById(R.id.schedule_timer_click);
+        timerClick2 = findViewById(R.id.schedule_timer_click2);
+        timerClick1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!clickFlag) timePicker.setVisibility(View.VISIBLE);
+                else timePicker.setVisibility(View.GONE);
+                clickFlag = !clickFlag;
+            }
+        });
+        timerClick2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!clickFlag2) timePicker2.setVisibility(View.VISIBLE);
+                else timePicker2.setVisibility(View.GONE);
+                clickFlag2 = !clickFlag2;
+            }
+        });
     }
     protected void getData(){
         Intent intent = getIntent();

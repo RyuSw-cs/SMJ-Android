@@ -47,6 +47,7 @@ public class CreatePhotoData extends AsyncTask<Void, Void, Bitmap> {
     protected void onProgressUpdate(Void... values){
         super.onProgressUpdate(values);
     }
+
     @Override
     protected void onPostExecute(Bitmap bitmap){
         super.onPostExecute(bitmap);

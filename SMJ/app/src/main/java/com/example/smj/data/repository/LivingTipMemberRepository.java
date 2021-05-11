@@ -5,11 +5,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.smj.Manager.NetworkManager;
-import com.example.smj.data.entity.Comments.Entity_Comments;
 import com.example.smj.data.entity.Member.Entity_Member;
 import com.example.smj.data.entity.Member.MemberData;
 import com.example.smj.data.entity.Member.MemberPostData;
-import com.example.smj.data.entity.board.Entity_board;
+import com.example.smj.domain.usecase.LivingTipMemberUseCase;
 import com.example.smj.domain.usecase.MemberUseCase;
 
 import java.util.List;
@@ -18,22 +17,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MemberRepository {
+public class LivingTipMemberRepository {
 
     private Entity_Member entityMember;
 
-    public MemberRepository() {
+    public LivingTipMemberRepository() {
         this.entityMember = NetworkManager.getInstance().getRetrofit().create(Entity_Member.class);;
     }
 
-    public void retrieveData(String key, MemberUseCase memberUseCase){
+    public void retrieveData(String key, LivingTipMemberUseCase livingTipMemberUseCase){
         Call <List<MemberData>> call = entityMember.getData(key);
         call.enqueue(new Callback<List<MemberData>>() {
             @Override
             public void onResponse(Call<List<MemberData>> call, Response<List<MemberData>> response) {
                 if(response.isSuccessful()){
                     Log.d("사용자 데이터 GET 성공","사용자 데이터 GET 성공");
-                    memberUseCase.onDataSuccess(response.body());
+                    livingTipMemberUseCase.onDataSuccess(response.body());
                 }
             }
 
@@ -60,7 +59,7 @@ public class MemberRepository {
         });
     }
 
-    public void updateData(MemberPostData data, String key, int id, Context context, MemberUseCase memberUseCase){
+    public void updateData(MemberPostData data, String key, int id, Context context, LivingTipMemberUseCase livingTipMemberUseCase){
         Call<MemberData>call = entityMember.putData(key, data, id);
         call.enqueue(new Callback<MemberData>() {
             @Override
