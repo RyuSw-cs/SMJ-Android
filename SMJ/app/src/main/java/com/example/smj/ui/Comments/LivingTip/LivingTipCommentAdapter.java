@@ -64,9 +64,11 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
 
     @Override
     public void onBindViewHolder(@NonNull LivingTipCommentAdapter.ViewHolder holder, int position) {
-        String date = commentData.get(position).getDate();
+        String[] getDate = commentData.get(position).getDate();
         String commenter = commentData.get(position).getCommenter();
         String contents = commentData.get(position).getContents();
+
+        String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
 
         holder.date.setText(date);
         holder.commenter.setText(commenter);

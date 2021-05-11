@@ -124,6 +124,13 @@ public class LivingTipReadingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LivingTipCommentActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("category",category);
+                intent.putExtra("title",title);
+                intent.putExtra("content",content);
+                intent.putExtra("image1",imageUri1);
+                intent.putExtra("image2",imageUri2);
+                intent.putExtra("image3",imageUri3);
                 startActivity(intent);
                 finish();
             }

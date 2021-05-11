@@ -1,6 +1,7 @@
 package com.example.smj.domain.usecase;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.data.entity.Comments.CommentData;
@@ -30,6 +31,7 @@ public class LivingTipCommentsUseCase implements RetrofitOnSuccess {
 
     //POST
     public void postData(CommentsPostData data, String key, int id, Context context){
+        Log.d("댓글 post","post");
         livingTipCommentsRepository.postData(data, key, id, context,this);
     }
 
@@ -49,5 +51,9 @@ public class LivingTipCommentsUseCase implements RetrofitOnSuccess {
             list = (List<CommentData>)object;
             livingTipCommentActivity.onSuccess(list);
         }
+    }
+
+    public void updateSuccess(){
+        livingTipCommentActivity.dataChangeSuccess();
     }
 }

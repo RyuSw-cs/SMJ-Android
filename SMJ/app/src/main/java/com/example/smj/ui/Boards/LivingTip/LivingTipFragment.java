@@ -50,6 +50,7 @@ public class LivingTipFragment extends Fragment {
         search = view.findViewById(R.id.trade_search_text);
 
         livingTipUseCase.getData(key);
+        Log.d("JWT",key);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
