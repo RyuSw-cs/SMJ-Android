@@ -5,7 +5,7 @@ public class LivingTipCommentData {
     String commenter;
     String contents;
 
-    public LivingTipCommentData(String date, String commenter, String contents) {
+    public LivingTipCommentData(String[] date, String commenter, String contents) {
         this.date = date;
         this.commenter = commenter;
         this.contents = contents;

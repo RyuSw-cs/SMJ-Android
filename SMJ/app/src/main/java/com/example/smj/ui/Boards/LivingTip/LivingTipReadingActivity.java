@@ -19,31 +19,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.domain.usecase.LivingTipUseCase;
+import com.example.smj.ui.Comments.LivingTip.LivingTipCommentActivity;
 
 public class LivingTipReadingActivity extends AppCompatActivity {
 
     Dialog moreView;
     ImageButton moreBtn;
-    Button deleteBtn;
-    Button modifyBtn;
+    Button deleteBtn, modifyBtn;
     int id;
-    String category;
-    String title;
-    String writer;
-    String date;
-    String content;
-    TextView categoryView;
-    TextView titleView;
-    TextView writerView;
-    TextView dateView;
-    TextView contentView;
+    String category, title, writer, date, content;
+    TextView categoryView, titleView, writerView, dateView, contentView;
     private boolean check = false;
-    ImageView image1;
-    ImageView image2;
-    ImageView image3;
-    String imageUri1;
-    String imageUri2;
-    String imageUri3;
+    ImageView image1, image2, image3;
+    String imageUri1, imageUri2, imageUri3;
+    ImageView commentBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +57,7 @@ public class LivingTipReadingActivity extends AppCompatActivity {
         writerView = findViewById(R.id.living_tip_reading_post_writer);
         dateView = findViewById(R.id.living_tip_reading_post_date);
         contentView = findViewById(R.id.living_tip_reading_content);
+        commentBtn = findViewById(R.id.living_tip_reading_comment_btn);
 
         id = getIntent.getExtras().getInt("id");
         category = getIntent.getExtras().getString("category");
@@ -127,6 +117,15 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                         check();
                     }
                 },500);
+            }
+        });
+
+        commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LivingTipCommentActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
