@@ -66,7 +66,6 @@ public class LivingTipCommentsRepository {
             public void onResponse(Call<CommentData> call, Response<CommentData> response) {
                 Log.d("데이터 전송 성공","성공");
                 Toast.makeText(context,"댓글이 수정됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.updateSuccess(); living
             }
 
             @Override
@@ -77,13 +76,14 @@ public class LivingTipCommentsRepository {
     }
 
     public void postData(CommentsPostData data, String key, int id, Context context, LivingTipCommentsUseCase livingTipCommentsUseCase){
+        Log.d("댓글 postData","postData");
         Call<CommentData>call = entityComments.postComments(key, data, id);
         call.enqueue(new Callback<CommentData>() {
             @Override
             public void onResponse(Call<CommentData> call, Response<CommentData> response) {
                 Log.d("데이터 전송 성공","성공");
+                livingTipCommentsUseCase.updateSuccess();
                 Toast.makeText(context,"댓글이 등록됐습니다.",Toast.LENGTH_LONG).show();
-                //transactionUseCase.postSuccess(); living
             }
 
             @Override
