@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TransactionCreateActivity extends AppCompatActivity {
+public class TransactionCreateActivity extends AppCompatActivity{
 
     private Spinner spinner;
     private ImageButton galleryBtn;
@@ -55,8 +54,6 @@ public class TransactionCreateActivity extends AppCompatActivity {
     private EditText title, content;
     private TransactionUseCase transactionUseCase;
     private int selectSpinner;
-    private Uri uri;
-    private String[] bitmapData;
 
     private static int PICK_IMAGE_REQUEST = 7;
 
@@ -79,18 +76,32 @@ public class TransactionCreateActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (title.getText().equals("") || content.getText().equals("")) {
+                if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
-                    Toast.makeText(getApplicationContext(), "제목이나 내용, 카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        bitmapData = bitmapToString(photoData);
-                        transactionUseCase.postData(new boardPostData
-                                        (selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), bitmapData[0], bitmapData[1], bitmapData[2]),
-                                JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)), getApplicationContext());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"제목이나 내용, 카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    String[] temp = {"", "", ""};
+                    //이미지 받아오기.
+                    int getListSize = photoData.size();
+                    for(int i = 0; i<getListSize; i++){
+                        try {
+                            InputStream in = getContentResolver().openInputStream(photoData.get(i));
+                            Bitmap img = BitmapFactory.decodeStream(in);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            img.compress(Bitmap.CompressFormat.PNG,100,baos);
+                            byte[] bytes = baos.toByteArray();
+                            temp[i] = Base64.encodeToString(bytes, Base64.DEFAULT);
+                            in.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    transactionUseCase.postData(new boardPostData
+                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),temp[0],temp[1],temp[2]),
+                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),getApplicationContext());
                 }
             }
         });
@@ -112,7 +123,7 @@ public class TransactionCreateActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectSpinner = position + 1;
+                selectSpinner = position +1;
             }
 
             @Override
@@ -144,34 +155,22 @@ public class TransactionCreateActivity extends AppCompatActivity {
                 Toast.makeText(this, "다중선택이 불가한 기기입니다.", Toast.LENGTH_LONG).show();
             } else {
                 //ClipData 또는 Uri를 가져온다
-                uri = data.getData();
+                Uri uri = data.getData();
                 ClipData clipData = data.getClipData();
 
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
-                if (clipData != null) {//다중선택
+                if (clipData != null) {
                     Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri urione = clipData.getItemAt(i).getUri();
                         photoData.add(urione);
                     }
                     photoList.setVisibility(View.VISIBLE);
-                } else if (uri != null) {//단일선택
+                } else if (uri != null) {
                     photoData.add(uri);
                     photoList.setVisibility(View.VISIBLE);
                 }
             }
         }
-    }
-    public String[] bitmapToString(ArrayList<Uri>photoData) throws IOException {
-        String[] data = {"","",""};
-        int size = photoData.size();
-        for(int i = 0; i<size; i++){
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),photoData.get(i));
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
-            byte[] bytes = byteArrayOutputStream.toByteArray();
-            data[i] = Base64.encodeToString(bytes, Base64.DEFAULT);
-        }
-        return data;
     }
 }

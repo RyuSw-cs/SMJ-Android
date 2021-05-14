@@ -3,7 +3,6 @@ package com.example.smj.ui.Boards.Transaction;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +32,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
+    private ImageView image;
     private ArrayList<Uri> photoData = new ArrayList<>();
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
@@ -57,13 +57,14 @@ public class TransactionModifyActivity extends AppCompatActivity {
         TransactionReadingActivity.activityStack.add(this);
 
         photoList = findViewById(R.id.trade_photo_recyclerView);
+        image = findViewById(R.id.photo);
         upload = findViewById(R.id.trade_modify_upload);
         title = findViewById(R.id.trade_title);
         content = findViewById(R.id.trade_content);
 
         Intent intent = getIntent();
         transactionUseCase = new TransactionUseCase(this);
-        transactionPostData = (TransactionPostData) intent.getSerializableExtra("modifyData");
+        transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
         spinnerItem = transactionPostData.getCategory();
 
         title.setText(transactionPostData.getTitle());
@@ -73,8 +74,8 @@ public class TransactionModifyActivity extends AppCompatActivity {
 
         getItemCount = item.length;
 
-        for (int i = 0; i < getItemCount; i++) {
-            if (item[i].contains(spinnerItem)) {
+        for(int i = 0; i<getItemCount; i++){
+            if(item[i].contains(spinnerItem)){
                 selectSpinner = i;
                 break;
             }
@@ -85,14 +86,15 @@ public class TransactionModifyActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (title.getText().equals("") || content.getText().equals("")) {
+                if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
-                    Toast.makeText(getApplicationContext(), "제목이나 내용,카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
-                } else {
-                    transactionUseCase.postData(new boardPostData
-                                    (selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "0", "0", "0"),
-                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)), getApplicationContext());
-
+                    Toast.makeText(getApplicationContext(),"제목이나 내용,카테고리를 작성해주세요",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    //이미지 전송 변경해야함.
+                    transactionUseCase.putData(new boardPostData
+                                    (selectSpinner,"TRADE",title.getText().toString(),content.getText().toString(),"123","123","123"),
+                            JWTManager.getSharedPreference(getApplicationContext(),getString(R.string.saved_JWT)),transactionPostData.getId(),getApplicationContext());
                 }
             }
         });
@@ -104,9 +106,9 @@ public class TransactionModifyActivity extends AppCompatActivity {
         photoList.setAdapter(adapter);
     }
 
-    public void modifySuccess() {
+    public void modifySuccess(){
         int getActivitySize = TransactionReadingActivity.activityStack.size();
-        for (int i = 0; i < getActivitySize; i++) {
+        for(int i = 0; i<getActivitySize; i++){
             TransactionReadingActivity.activityStack.get(i).finish();
         }
     }
@@ -136,18 +138,10 @@ public class TransactionModifyActivity extends AppCompatActivity {
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < 19) {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-                } else {
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
             }
         });
     }
