@@ -7,6 +7,7 @@ import com.example.smj.data.entity.Member.Entity_Member;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.entity.Schedule.Entity_Schedule;
 import com.example.smj.domain.usecase.ScheduleUseCase;
+import com.example.smj.ui.Alarms.AlarmPostData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,12 +74,12 @@ public class ScheduleRepository {
         });
     }
 
-    public void postData(Alarm data, String key){
+    public void postData(AlarmPostData data, String key){
         Call<Alarm>call = entitySchedule.postAlarm(key, data);
         call.enqueue(new Callback<Alarm>() {
             @Override
             public void onResponse(Call<Alarm> call, Response<Alarm> response) {
-                Log.d("데이터 전송 성공","굿");
+                Log.d("알림 등록 데이터 전송 성공","굿");
             }
 
             @Override

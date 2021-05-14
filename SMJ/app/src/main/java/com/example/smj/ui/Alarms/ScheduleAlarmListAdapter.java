@@ -53,7 +53,6 @@ public class ScheduleAlarmListAdapter extends RecyclerView.Adapter<ScheduleAlarm
     @Override
     public void onBindViewHolder(@NonNull ScheduleAlarmListAdapter.MainHolder mainHolder, int i) {
         mainHolder.title.setText(getList.get(i).getTitle());
-
         String strArr[] =  getList.get(i).getStartTime().split(":");
         StringBuilder sb = new StringBuilder();
         if(Integer.parseInt(strArr[0]) < 12) sb.append("AM ");

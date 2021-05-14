@@ -6,8 +6,10 @@ import com.example.smj.callback.RetrofitOnSuccess;
 import com.example.smj.callback.ScheduleOnSuccess;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.data.repository.ScheduleRepository;
+import com.example.smj.ui.Alarms.AlarmPostData;
 import com.example.smj.ui.Alarms.ScheduleAlarmListAdapter;
 import com.example.smj.ui.Alarms.ScheduleAlarmListPopupActivity;
+import com.example.smj.ui.Alarms.ScheduleAlarmPageActivity;
 import com.example.smj.ui.Alarms.ScheduleFragment;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
     private ScheduleRepository scheduleRepository;
     private ScheduleFragment scheduleFragment;
     private ScheduleAlarmListPopupActivity scheduleAlarmListPopupActivity;
+    private ScheduleAlarmPageActivity scheduleAlarmPageActivity;
     private List<Alarm> list = new ArrayList<>();
 
     public ScheduleUseCase(ScheduleFragment scheduleFragment){
@@ -27,6 +30,10 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
         scheduleRepository = new ScheduleRepository();
         this.scheduleAlarmListPopupActivity = scheduleAlarmListPopupActivity;
     }
+    public ScheduleUseCase(ScheduleAlarmPageActivity scheduleAlarmPageActivity){
+        scheduleRepository = new ScheduleRepository();
+        this.scheduleAlarmPageActivity = scheduleAlarmPageActivity;
+    }
     /* GET으로 데이터 받아올때 키값 전달 */
     public void sendKey(String key){
         //키값 전달
@@ -34,7 +41,7 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
     }
 
     /* POST로 Alarm데이터 전송 */
-    public void sendData(Alarm alarm, String key){
+    public void sendData(AlarmPostData alarm, String key){
         scheduleRepository.postData(alarm, key);
     }
 
