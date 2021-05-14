@@ -93,6 +93,7 @@ public class LivingTipFragment extends Fragment {
     }
 
     public void onSuccess(List<boardData> list) {
+        data.clear();
         boardList = list;
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
@@ -112,7 +113,6 @@ public class LivingTipFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        data.clear();
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
         livingTipUseCase.getData(key);
     }
