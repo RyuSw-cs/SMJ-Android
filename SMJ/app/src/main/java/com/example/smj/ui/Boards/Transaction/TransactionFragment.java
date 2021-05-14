@@ -1,13 +1,9 @@
 package com.example.smj.ui.Boards.Transaction;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +34,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     private Button writeButton;
     private String token;
     private EditText search;
-    private Uri mainImage;
+    private ImageView boardImage;
 
     public TransactionFragment(){
 
@@ -68,9 +64,7 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
                 searchList.clear();
                 int getListSize = data.size();
                 for(int i = 0; i<getListSize; i++) {
-                    if(data.get(i).getTitle().contains(s)){
-                        searchList.add(data.get(i));
-                    }
+                    if(data.get(i).getTitle().contains(s)){ searchList.add(data.get(i)); }
                 }
                 adapter = new TransactionPostAdapter(getActivity(), searchList, transactionUseCase);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -104,18 +98,8 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
         int getListSize = list.size();
         for(int i = 0; i<getListSize; i++) {
             if(list.get(i).getType().equals("TRADE")) {
-                data.add(new TransactionPostData(
-                        list.get(i).getCategory().getName(),
-                        list.get(i).getTitle(),
-                        list.get(i).getContent(),
-                        list.get(i).getMember().getEmail(),
-                        list.get(i).getMember().getNickName(),
-                        list.get(i).getCreatedAt(),
-                        list.get(i).getMember().getImage(),
-                        list.get(i).getImageOne(),
-                        list.get(i).getImageTwo(),
-                        list.get(i).getImageThree(),
-                        list.get(i).getId()));
+                data.add(new TransactionPostData(list.get(i).getCategory().getName(),list.get(i).getTitle(),list.get(i).getContent(),list.get(i).getMember().getEmail(),list.get(i).getMember().getNickName(),list.get(i).getCreatedAt(),
+                        list.get(i).getMember().getImage(),list.get(i).getImageOne(),list.get(i).getImageTwo(),list.get(i).getImageThree(),list.get(i).getId()));
             }
         }
         adapter = new TransactionPostAdapter(getActivity(), data, transactionUseCase);

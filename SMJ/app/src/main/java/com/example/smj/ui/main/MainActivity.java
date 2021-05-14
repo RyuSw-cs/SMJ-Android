@@ -41,9 +41,9 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private ScheduleFragment scheduleFragment;
     private TransactionFragment transactionFragment;
     private JWTUseCase jwtUseCase;
-    private BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
 
-    private String[] permission_list = {
+    String[] permission_list = {
             Manifest.permission.WRITE_CONTACTS
     };
 

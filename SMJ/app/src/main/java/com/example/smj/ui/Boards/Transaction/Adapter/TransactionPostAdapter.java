@@ -2,10 +2,6 @@ package com.example.smj.ui.Boards.Transaction.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Boards.Transaction.CreatePhotoData;
 import com.example.smj.ui.Boards.Transaction.TransactionPostData;
 import com.example.smj.ui.Boards.Transaction.TransactionReadingActivity;
 
@@ -35,7 +32,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
         private TextView contents;
         private TextView writer;
         private TextView date;
-        private ImageView mainImage;
+        private ImageView profileImage;
 
         ViewHolder(View itemView){
             super(itemView);
@@ -44,8 +41,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
             contents = itemView.findViewById(R.id.post_item_contents);
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
-            mainImage = itemView.findViewById(R.id.post_item_profile_image);
-
+            profileImage = itemView.findViewById(R.id.post_item_profile_image);
         }
     }
 
@@ -74,10 +70,10 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
         //보드 메인페이지 첫번째 사진 설정
-        if(!postData.get(position).getImageOne().equals("")){
-            Bitmap mainImage = stringToBitmap(postData.get(position).getImageOne());
-            holder.mainImage.setImageBitmap(mainImage);
-        }
+        String profileImage = postData.get(position).getProfileImage();
+
+        CreatePhotoData task = new CreatePhotoData(profileImage,holder.profileImage);
+        task.execute();
 
         holder.category.setText(category);
         holder.title.setText(title);
@@ -104,16 +100,5 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
     public void adapterRefresh(){
         notifyDataSetChanged();
-    }
-
-    public Bitmap stringToBitmap(String data){
-        Bitmap bitmap = null;
-        try{
-            byte [] encodeByte= Base64.decode(data,Base64.DEFAULT);
-            bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return bitmap;
     }
 }
