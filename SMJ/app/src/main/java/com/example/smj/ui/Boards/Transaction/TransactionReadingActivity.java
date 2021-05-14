@@ -3,6 +3,7 @@ package com.example.smj.ui.Boards.Transaction;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
     private Button deleteBtn, modifyBtn;
     private String key;
     private ImageView message, comment;
+
     public static ArrayList<Activity>activityStack = new ArrayList<>();
 
     @Override

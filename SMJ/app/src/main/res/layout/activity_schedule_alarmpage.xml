@@ -442,7 +442,7 @@
         android:background="@color/linecolor"
         app:layout_constraintTop_toTopOf="@id/alarmpage_appBarLayout"
         tools:layout_editor_absoluteX="0dp" />
-
+  
     <TextView
         android:id="@+id/schedule_alarmpage_repeatcheck"
         android:layout_width="wrap_content"
@@ -476,5 +476,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePicker"></LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
