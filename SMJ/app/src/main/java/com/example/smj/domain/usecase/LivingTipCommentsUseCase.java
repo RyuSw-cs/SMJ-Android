@@ -24,6 +24,10 @@ public class LivingTipCommentsUseCase implements RetrofitOnSuccess {
         this.livingTipCommentActivity = livingTipCommentActivity;
     }
 
+    public LivingTipCommentsUseCase(){
+        livingTipCommentsRepository = new LivingTipCommentsRepository();
+    }
+
     //GET
     public void getData(String key, int id){
         livingTipCommentsRepository.retrieveData(key, id, this);
@@ -42,12 +46,13 @@ public class LivingTipCommentsUseCase implements RetrofitOnSuccess {
 
     //DELETE
     public void deleteData(String key, int id, Context context){
-        livingTipCommentsRepository.deleteData(key, id, context);
+        livingTipCommentsRepository.deleteData(key, id, context, this);
     }
 
     @Override
     public void onSuccess(Object object) {
         if(object != null){
+            list.clear();
             list = (List<CommentData>)object;
             livingTipCommentActivity.onSuccess(list);
         }
