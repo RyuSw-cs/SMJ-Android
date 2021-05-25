@@ -23,6 +23,7 @@ public class MessageUseCase implements MessageOnSuccess {
     }
     public MessageUseCase(MessageManagementActivity messageManagementActivity){
         this.messageManagementActivity = messageManagementActivity;
+        messageRepository = new MessageRepository();
     }
 
     //GET
