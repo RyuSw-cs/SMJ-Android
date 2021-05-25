@@ -4,15 +4,19 @@ import android.content.Context;
 
 import com.example.smj.callback.MessageOnSuccess;
 import com.example.smj.data.entity.Message.MessageData;
+import com.example.smj.data.entity.Message.MessageManageData;
 import com.example.smj.data.entity.Message.MessagePostData;
 import com.example.smj.data.repository.MessageRepository;
 import com.example.smj.ui.message.MessageManagementActivity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageUseCase implements MessageOnSuccess {
     private MessageRepository messageRepository;
     private MessageManagementActivity messageManagementActivity;
+    private List<MessageManageData> messageManageData = new ArrayList<>();
 
     public MessageUseCase(){
         messageRepository = new MessageRepository();
@@ -39,7 +43,16 @@ public class MessageUseCase implements MessageOnSuccess {
     @Override
     public void messageRetrieveSuccess(List<MessageData>messageData) {
         if(messageData != null){
-            //받아온 채팅 데이터가 존재
+            int getListSize = messageData.size();
+            for(int i = 0; i<getListSize; i++){
+                //표시할 데이터 전처리
+                messageManageData.add(new MessageManageData(
+                        messageData.get(i).getSender(),
+                        messageData.get(i).getCreateAt(),
+                        messageData.get(i).getContent(),
+                        messageData.get(i).isCheck()));
+            }
+            messageManagementActivity.onSuccess(messageManageData);
         }
     }
 

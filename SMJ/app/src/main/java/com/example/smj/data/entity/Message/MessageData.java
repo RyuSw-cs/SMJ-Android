@@ -2,15 +2,19 @@ package com.example.smj.data.entity.Message;
 
 public class MessageData {
     private int id;
-    private String email;
-    private String nickname;
-    private String createAt;
+    private String content;
+    private String sender;
+    private String receiver;
+    private String[] createAt;
+    private boolean check;
 
-    public MessageData(int id, String email, String nickname, String createAt) {
+    public MessageData(int id, String content, String sender, String receiver, String[] createAt, boolean check) {
         this.id = id;
-        this.email = email;
-        this.nickname = nickname;
+        this.content = content;
+        this.sender = sender;
+        this.receiver = receiver;
         this.createAt = createAt;
+        this.check = check;
     }
 
     public int getId() {
@@ -21,27 +25,43 @@ public class MessageData {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContent() {
+        return content;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getSender() {
+        return sender;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public String getCreateAt() {
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String[] getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(String[] createAt) {
         this.createAt = createAt;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 }

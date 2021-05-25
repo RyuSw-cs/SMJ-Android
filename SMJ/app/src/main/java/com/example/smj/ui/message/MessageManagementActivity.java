@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.callback.RetrofitOnSuccess;
+import com.example.smj.data.entity.Message.MessageManageData;
 import com.example.smj.domain.usecase.MessageUseCase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessageManagementActivity extends AppCompatActivity implements RetrofitOnSuccess {
 
@@ -21,6 +23,7 @@ public class MessageManagementActivity extends AppCompatActivity implements Retr
     private LinearLayoutManager layoutManager;
     private MessageUseCase messageUseCase;
     private String token;
+    private List<MessageManageData>dataList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,11 +40,12 @@ public class MessageManagementActivity extends AppCompatActivity implements Retr
         messageRecyclerView = findViewById(R.id.message_management_list);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         messageRecyclerView.setLayoutManager(layoutManager);
-        //messageRecyclerView.setAdapter(new MessageManagementAdapter(this, item));
+        messageRecyclerView.setAdapter(new MessageManagementAdapter(this, dataList));
     }
 
     @Override
     public void onSuccess(Object object) {
-
+        //서버에서 데이터 받아오기 성공
+        dataList = (List<MessageManageData>)object;
     }
 }
