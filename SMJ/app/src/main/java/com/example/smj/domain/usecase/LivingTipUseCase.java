@@ -38,7 +38,9 @@ public class LivingTipUseCase implements RetrofitOnSuccess {
     }
 
     //PUT
-    public void putData(boardPostData data, String key, int id, Context context){ livingTipRepository.putData(data, key, id, context); }
+    public void putData(boardPostData data, String key, int id, Context context){
+        livingTipRepository.putData(data, key, id, context);
+    }
 
     //DELETE
     public void deleteData(String key, int id, Context context){

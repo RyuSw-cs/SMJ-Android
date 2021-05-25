@@ -15,6 +15,7 @@
     <string name="cancel">취소</string>
     <string name="schedule_delete">알람을 삭제하시겠습니까?</string>
     <string name="schedule_modified">알람을 수정하시겠습니까?</string>
+    <string name="schedule_submit">알람을 등록하시겠습니까?</string>
     <string name="schedule_iter">반복</string>
     <string name="transaction_title">거래 게시판</string>
     <string name="saved_JWT">SMJJWT</string>

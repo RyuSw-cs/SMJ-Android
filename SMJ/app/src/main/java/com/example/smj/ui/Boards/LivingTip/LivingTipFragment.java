@@ -60,7 +60,7 @@ public class LivingTipFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchData.clear();
+                //searchData.clear();
 
                 for(boardData board : boardList){
                     Log.d("살림 팁 텍스트 와처","살림 팁 텍스트 와처");

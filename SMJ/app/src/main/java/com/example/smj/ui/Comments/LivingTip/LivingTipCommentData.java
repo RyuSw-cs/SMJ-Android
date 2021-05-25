@@ -1,6 +1,8 @@
 package com.example.smj.ui.Comments.LivingTip;
 
-public class LivingTipCommentData {
+import java.io.Serializable;
+
+public class LivingTipCommentData implements Serializable {
     private String[] date;
     private String commenter;
     private String contents;

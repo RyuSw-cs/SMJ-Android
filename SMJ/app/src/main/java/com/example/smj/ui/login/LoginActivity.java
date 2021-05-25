@@ -2,6 +2,7 @@ package com.example.smj.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -85,9 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(MeV2Response result) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
+                    UserAccount kakao = result.getKakaoAccount();
+                    myEmail = kakao.getEmail();
                     accessToken = Session.getCurrentSession().getTokenInfo();
                     intent.putExtra("accessToken", accessToken.getAccessToken());
+                    intent.putExtra("myEmail",myEmail);
                     requestMe();
                     startActivity(intent);
                     finish();
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(MeV2Response result) {
                     UserAccount kakao = result.getKakaoAccount();
                     myEmail = kakao.getEmail();
+                    Log.d("myEmail",myEmail);
                 }
             });
         }
