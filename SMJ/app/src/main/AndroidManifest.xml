@@ -51,5 +51,6 @@
         <activity android:name=".ui.Boards.LivingTip.LivingTipModifyActivity"/>
         <activity android:name=".ui.Boards.LivingTip.LivingTipCreateActivity"/>
         <activity android:name=".ui.Comments.Transaction.TransactionCommentActivity"/>
+        <activity android:name=".ui.Comments.LivingTip.LivingTipCommentModifyActivity"/>
     </application>
 </manifest>

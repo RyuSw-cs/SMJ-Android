@@ -43,12 +43,13 @@ public class LivingTipCommentsRepository {
         });
     }
 
-    public void deleteData(String key, int id, Context context){
+    public void deleteData(String key, int id, Context context, LivingTipCommentsUseCase livingTipCommentsUseCase){
         Call<Void> call = entityComments.deleteComments(key,id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("데이터 전송 성공","성공");
+                livingTipCommentsUseCase.updateSuccess();
                 Toast.makeText(context,"댓글이 삭제됐습니다.",Toast.LENGTH_LONG).show();
             }
 

@@ -85,7 +85,6 @@ public class LivingTipReadingActivity extends AppCompatActivity {
 
         //수정버튼 클릭
         modifyBtn.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LivingTipModifyActivity.class);
@@ -132,7 +131,6 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                 intent.putExtra("image2",imageUri2);
                 intent.putExtra("image3",imageUri3);
                 startActivity(intent);
-                finish();
             }
         });
     }

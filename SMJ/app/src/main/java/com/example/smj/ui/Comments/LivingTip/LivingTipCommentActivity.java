@@ -51,7 +51,6 @@ public class LivingTipCommentActivity extends AppCompatActivity implements Comme
         setContentView(R.layout.activity_living_tip_comment);
 
         init();
-
     }
 
     private void init(){
@@ -114,5 +113,11 @@ public class LivingTipCommentActivity extends AppCompatActivity implements Comme
     public void onDataSuccess(List<MemberData> body){
         memberData.clear();
         memberData = body;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        livingTipCommentsUseCase.getData(token,boardId);
     }
 }

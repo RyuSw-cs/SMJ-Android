@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
     private TransactionFragment transactionFragment;
     private JWTUseCase jwtUseCase;
     private BottomNavigationView bottomNavigationView;
+    private String myEmail;
 
     private String[] permission_list = {
             Manifest.permission.WRITE_CONTACTS
@@ -66,7 +68,13 @@ public class MainActivity extends FragmentActivity implements ActivityCompat.OnR
         mViewPager.setUserInputEnabled(false);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.tab3);
+        Intent intent = getIntent();
+        myEmail = intent.getExtras().getString("myEmail");
 
+        Bundle bundle = new Bundle();
+        bundle.putString("myEmail",myEmail);
+        myPageFragment.setArguments(bundle);
+        Log.d("myEmail2",myEmail);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

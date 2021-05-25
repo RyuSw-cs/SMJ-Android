@@ -1,21 +1,24 @@
 package com.example.smj.ui.Comments.LivingTip;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
 import com.example.smj.data.entity.Member.MemberData;
-import com.example.smj.domain.usecase.CommentsUseCase;
 import com.example.smj.domain.usecase.LivingTipCommentsUseCase;
-import com.example.smj.ui.Comments.Transaction.TransactionCommentData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipCommentAdapter.ViewHolder> {
@@ -23,9 +26,13 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
     private List<LivingTipCommentData> commentData = null;
     private List<MemberData> memberData = null;
     private Context context;
-    private LivingTipCommentsUseCase commentsUseCase;
+    private LivingTipCommentsUseCase livingTipCommentsUseCase;
     private String token;
     private int id;
+    private Dialog moreView;
+    private Button deleteBtn, modifyBtn;
+    private ImageButton moreBtn;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView date;
@@ -38,14 +45,20 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
             date = itemView.findViewById(R.id.comment_date);
             commenter = itemView.findViewById(R.id.commenter);
             contents = itemView.findViewById(R.id.comment_contents);
+            moreBtn = itemView.findViewById(R.id.comment_more_btn);
+            moreView = new Dialog(context);
+            moreView.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            moreView.setContentView(R.layout.comment_view_more);
+            deleteBtn = (Button) moreView.findViewById(R.id.delete_comment);
+            modifyBtn = (Button) moreView.findViewById(R.id.modify_comment);
         }
     }
 
-    public LivingTipCommentAdapter(List<LivingTipCommentData> commentData, List<MemberData> memberData, Context context, LivingTipCommentsUseCase commentsUseCase, String token, int id) {
+    public LivingTipCommentAdapter(List<LivingTipCommentData> commentData, List<MemberData> memberData, Context context, LivingTipCommentsUseCase livingTipCommentsUseCase, String token, int id) {
         this.commentData = commentData;
         this.memberData = memberData;
         this.context = context;
-        this.commentsUseCase = commentsUseCase;
+        this.livingTipCommentsUseCase = livingTipCommentsUseCase;
         this.token = token;
         this.id = id;
     }
@@ -73,6 +86,33 @@ public class LivingTipCommentAdapter extends RecyclerView.Adapter<LivingTipComme
         holder.date.setText(date);
         holder.commenter.setText(commenter);
         holder.contents.setText(contents);
+
+
+        moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreView.show();
+            }
+        });
+
+        modifyBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, LivingTipCommentModifyActivity.class);
+                intent.putExtra("Data", commentData.get(position));
+                context.startActivity(intent);
+                moreView.dismiss();
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                livingTipCommentsUseCase.deleteData(token,commentData.get(position).getCommentId(),context);
+                moreView.dismiss();
+                refreshAdapter();
+            }
+        });
     }
 
     @Override
