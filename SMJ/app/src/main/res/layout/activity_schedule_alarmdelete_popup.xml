@@ -46,7 +46,7 @@
         android:layout_width="140dp"
         android:layout_height="37dp"
         android:background="@drawable/button_alarm_popup_positive_click"
-        android:text="@string/modified"
+        android:text="삭제"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/schedule_alarmdelete_popup_cancel"
