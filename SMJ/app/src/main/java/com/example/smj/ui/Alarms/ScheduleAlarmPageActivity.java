@@ -3,6 +3,7 @@ package com.example.smj.ui.Alarms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Scene;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -39,17 +40,23 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
                 Toast.makeText(this,"제목과 세부 내용을 입력하여 주십시오.", Toast.LENGTH_SHORT);
                 return;
             }
-            AlarmPostData alarm = new AlarmPostData(subject.getText().toString(),content.getText().toString(),extractDate(),extractTime(startTime),extractTime(finishTime),extractRepeat());
+            AlarmPostData alarm = new AlarmPostData(title.getText().toString(),content.getText().toString(),extractDate(),extractTime(startTime),extractTime(finishTime),extractRepeat());
             ScheduleUseCase scheduleUseCase = new ScheduleUseCase(this);
-            scheduleUseCase.sendData(alarm, JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)));
+            //scheduleUseCase.sendData(alarm, JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)));
             Intent intent = new Intent(this, ScheduleAlarmModifiedPopupActivity.class);
-            intent.putExtra("data", "Test Popup");
+            Log.d("rtgtg", title.getText().toString());
+            if(title.getText().toString().equals("알림 등록")){
+                intent.putExtra("data", "1");
+            }
+            else{
+                intent.putExtra("data", "2");
+            }
             startActivityForResult(intent, 1);
         });
         alarmIter.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmIterPopupActivity.class);
             intent.putExtra("data", "Test Popup");
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, 4);
         });
         alarmDelete.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmDeletePopupActivity.class);
@@ -61,8 +68,9 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
         alarmIter = findViewById(R.id.schedule_allday_iterclicklayout);
         alarmDelete = findViewById(R.id.schedule_allday_clicklayout);
         submitModified = findViewById(R.id.schedule_alarmpage_submit_modified);
-        title = findViewById(R.id.schedule_alarmpage_alarmsubmit);
         subject = findViewById(R.id.schedule_alarmpage_subject);
+        title = findViewById(R.id.schedule_alarmpage_alarmsubmit);
+        content = findViewById(R.id.schedule_alarmpage_context);
         today = findViewById(R.id.schedule_alarmpage_today);
         startTime = findViewById(R.id.schedule_alarmpage_starttime);
         finishTime = findViewById(R.id.schedule_alarmpage_finishitime);
@@ -76,7 +84,7 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
                 }
             }
         });
-        content = findViewById(R.id.schedule_alarmpage_context);
+
         content.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -123,8 +131,26 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
+        if (requestCode == 4) {
+            if(resultCode == RESULT_OK){
+                int s = data.getIntExtra("iter",0);
+                switch (s){
+                    case 0:
+                        break;
+                    case 1:
+                        repeat.setText("매일 반복");
+                        break;
+                    case 2:
+                        repeat.setText("매주 반복");
+                        break;
+                    case 3:
+                        repeat.setText("매달 반복");
+                        break;
+                    case 4:
+                        repeat.setText("매년 반복");
+                        break;
+
+                }
             }
         }
     }
