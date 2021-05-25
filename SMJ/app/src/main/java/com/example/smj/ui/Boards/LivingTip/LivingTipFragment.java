@@ -95,6 +95,7 @@ public class LivingTipFragment extends Fragment {
     public void onSuccess(List<boardData> list) {
         data.clear();
         boardList = list;
+        data.clear();
         for(boardData board : list){
             Log.d("살림 팁 onSuccess","onSuccess");
             if(board.getType().equals("LIVE")){
@@ -102,12 +103,11 @@ public class LivingTipFragment extends Fragment {
                         board.getCreatedAt(),board.getImageOne(),board.getImageTwo(),board.getImageThree()));
             }
         }
-
         recyclerView.setHasFixedSize(true);
         adapter = new LivingTipPostAdapter(getActivity(), data);
-        adapter.adapterRefresh();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.adapterRefresh();
     }
 
     @Override
@@ -116,5 +116,4 @@ public class LivingTipFragment extends Fragment {
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
         livingTipUseCase.getData(key);
     }
-
 }

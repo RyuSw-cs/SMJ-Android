@@ -13,12 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
+import com.example.smj.data.entity.Message.MessageManageData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessageManagementAdapter extends RecyclerView.Adapter<MessageManagementAdapter.ViewHolder>{
 
-    private ArrayList<MessageManagementData> managementData = null;
+    private List<MessageManageData> managementData = null;
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,7 +49,7 @@ public class MessageManagementAdapter extends RecyclerView.Adapter<MessageManage
         }
     }
 
-    public MessageManagementAdapter(Context context, ArrayList<MessageManagementData> data){
+    public MessageManagementAdapter(Context context, List<MessageManageData> data){
         this.context = context;
         managementData = data;
     }
@@ -67,14 +69,15 @@ public class MessageManagementAdapter extends RecyclerView.Adapter<MessageManage
     @Override
     public void onBindViewHolder(@NonNull MessageManagementAdapter.ViewHolder holder, int position) {
         //String image = managementData.get(position).getImage();
-        String name = managementData.get(position).getName();
-        String message = managementData.get(position).getMessage();
-        String ago = managementData.get(position).getAgo();
-        int check = managementData.get(position).getCheck();
+        String name = managementData.get(position).getNickName();
+        String message = managementData.get(position).getContent();
+        String[] ago = managementData.get(position).getCreateAt();
+        boolean check = managementData.get(position).isCheck();
 
         //holder.image.set
         holder.name.setText(name);
         holder.message.setText(message);
+        /*
         holder.ago.setText(ago);
 
         if(check==1){
@@ -83,6 +86,8 @@ public class MessageManagementAdapter extends RecyclerView.Adapter<MessageManage
         else{
             holder.check.setText("안읽음");
         }
+
+         */
     }
 
     @Override

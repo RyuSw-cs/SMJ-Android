@@ -96,6 +96,7 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                 intent.putExtra("image2",imageUri2);
                 intent.putExtra("image3",imageUri3);
                 startActivity(intent);
+                moreView.dismiss();
                 finish();
             }
         });
@@ -107,15 +108,6 @@ public class LivingTipReadingActivity extends AppCompatActivity {
                 Log.d("확인","클릭 확인");
                 LivingTipUseCase livingTipUseCase = new LivingTipUseCase();
                 livingTipUseCase.deleteData(key,id,getApplicationContext());
-
-                Handler mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        check = true;
-                        check();
-                    }
-                },500);
             }
         });
 
@@ -139,11 +131,9 @@ public class LivingTipReadingActivity extends AppCompatActivity {
         moreView.show();
     }
 
-    private void check(){
-        if(check){
-            finish();
-            check = false;
-        }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        moreView.dismiss();
     }
-
 }
