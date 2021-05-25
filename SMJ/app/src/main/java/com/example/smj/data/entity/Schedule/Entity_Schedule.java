@@ -1,5 +1,7 @@
 package com.example.smj.data.entity.Schedule;
 
+import com.example.smj.ui.Alarms.AlarmPostData;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public interface Entity_Schedule {
     @POST("api/alarms")
     Call<Alarm> postAlarm(
             @Header("Authorization")String token,
-            @Body Alarm post
+            @Body AlarmPostData post
     );
     @PUT("api/alarms/{id}")
     Call<Alarm> putAlarm(

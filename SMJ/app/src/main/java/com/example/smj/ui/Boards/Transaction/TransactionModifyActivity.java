@@ -33,6 +33,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private Spinner spinner;
     private ImageButton galleryBtn;
     private RecyclerView photoList;
+    private ImageView image;
     private ArrayList<Uri> photoData = new ArrayList<>();
     private CreatePhotoAdapter adapter;
     private AppCompatButton upload;
@@ -42,7 +43,7 @@ public class TransactionModifyActivity extends AppCompatActivity {
     private String spinnerItem;
     private String[] item;
     private int selectSpinner, getItemCount;
-
+    private Uri imageUri1, imageUri2, imageUri3, uri;
 
     private static int PICK_IMAGE_REQUEST = 7;
 
@@ -63,8 +64,12 @@ public class TransactionModifyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         transactionUseCase = new TransactionUseCase(this);
-        transactionPostData = (TransactionPostData) intent.getSerializableExtra("modifyData");
+        transactionPostData = (TransactionPostData)intent.getSerializableExtra("modifyData");
         spinnerItem = transactionPostData.getCategory();
+
+        imageUri1 = Uri.parse(transactionPostData.getImageOne());
+        imageUri2 = Uri.parse(transactionPostData.getImageTwo());
+        imageUri3 = Uri.parse(transactionPostData.getImageThree());
 
         title.setText(transactionPostData.getTitle());
         content.setText(transactionPostData.getContents());
@@ -73,8 +78,8 @@ public class TransactionModifyActivity extends AppCompatActivity {
 
         getItemCount = item.length;
 
-        for (int i = 0; i < getItemCount; i++) {
-            if (item[i].contains(spinnerItem)) {
+        for(int i = 0; i<getItemCount; i++){
+            if(item[i].contains(spinnerItem)){
                 selectSpinner = i;
                 break;
             }
@@ -85,13 +90,13 @@ public class TransactionModifyActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (title.getText().equals("") || content.getText().equals("")) {
+                if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
                     Toast.makeText(getApplicationContext(), "제목이나 내용,카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
                 } else {
-                    Log.d("123",String.valueOf(transactionPostData.getId()));
-                    transactionUseCase.putData(new boardPostData(selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "", "", ""),
-                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)),transactionPostData.getId(), getApplicationContext());
+                    transactionUseCase.postData(new boardPostData
+                                    (selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "0", "0", "0"),
+                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)), getApplicationContext());
                 }
             }
         });
@@ -103,9 +108,9 @@ public class TransactionModifyActivity extends AppCompatActivity {
         photoList.setAdapter(adapter);
     }
 
-    public void modifySuccess() {
+    public void modifySuccess(){
         int getActivitySize = TransactionReadingActivity.activityStack.size();
-        for (int i = 0; i < getActivitySize; i++) {
+        for(int i = 0; i<getActivitySize; i++){
             TransactionReadingActivity.activityStack.get(i).finish();
         }
     }
@@ -135,12 +140,13 @@ public class TransactionModifyActivity extends AppCompatActivity {
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT < 19) {
+                if(Build.VERSION.SDK_INT<19){
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-                } else {
+                }
+                else {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
                     intent.addCategory(Intent.CATEGORY_OPENABLE);

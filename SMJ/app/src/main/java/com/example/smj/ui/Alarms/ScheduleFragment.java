@@ -33,26 +33,29 @@ import java.util.List;
 
 public class ScheduleFragment extends Fragment implements ScheduleGetData {
     private MaterialCalendarView calendarView;
-    private final String spotColor = "#e86328";;
+    private final String spotColor = "#e86328";
+    ;
     private ArrayList<Alarm> alarmList = new ArrayList<>();
     private ScheduleUseCase scheduleUseCase;
 
     SharedPreferences pref;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         //스케쥴 액티비티 나올 시 교체
-        View view = inflater.inflate(R.layout.activity_schedule,container,false);
+        View view = inflater.inflate(R.layout.activity_schedule, container, false);
         init(view);
         CalendarViewEvent(view);
         return view;
     }
 
-    protected void init(View view)  {
+    protected void init(View view) {
 
         //여기에 서버통신 준비
         alarmList.clear();
+
         scheduleUseCase = new ScheduleUseCase(this);
-        scheduleUseCase.sendKey(JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT)));
+        scheduleUseCase.sendKey(JWTManager.getSharedPreference(getActivity(), getString(R.string.saved_JWT)));
         //이러면 현재 사용자의 알람 리스트들을 받아온것!
         /* jwt 값을 너무 늦게받음! 인터페이스 해줘야함 */
         /* 밑의 코드는 순서대로 GET, PUT, DELETE, POST */
@@ -72,16 +75,17 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
         int currentYear = startTimeCalendar.get(Calendar.YEAR);
         int currentMonth = startTimeCalendar.get(Calendar.MONTH);
         int currentDate = startTimeCalendar.get(Calendar.DATE);
-        endTimeCalendar.set(Calendar.MONTH, currentMonth+3);
+        endTimeCalendar.set(Calendar.MONTH, currentMonth + 3);
 
         calendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
                 .setMinimumDate(CalendarDay.from(currentYear, currentMonth, 1))
-                .setMaximumDate(CalendarDay.from(currentYear, currentMonth+11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
+                .setMaximumDate(CalendarDay.from(currentYear, currentMonth + 11, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
 
     }
+
     protected void CalendarViewEvent(View v) {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -89,33 +93,35 @@ public class ScheduleFragment extends Fragment implements ScheduleGetData {
                 Intent intent = new Intent(getActivity(), ScheduleAlarmListPopupActivity.class);
 
                 int year = date.getYear();
-                int month = date.getMonth()+1;
+                int month = date.getMonth() + 1;
                 int day = date.getDay();
                 String checkDate = String.valueOf(year) + "년 " + String.valueOf(month) + "월 " + String.valueOf(day) + "일";
-                Log.d("날짜",checkDate);
+                Log.d("날짜", checkDate);
                 intent.putExtra("data", checkDate);
                 startActivityForResult(intent, 1);
             }
         });
     }
-    public void setCalendarSpotSpread(){
+
+    public void setCalendarSpotSpread() {
         ArrayList<CalendarDay> dayList = new ArrayList<>();
-        for(Alarm a : alarmList){
+        for (Alarm a : alarmList) {
             Calendar cal = new GregorianCalendar(); //그레고리력 달력 생성
             Log.d("받았니", a.getstartDate());
-            String strArr[] =  a.getstartDate().split("-");
+            String strArr[] = a.getstartDate().split("-");
             int i = 0;
-            for(String s: strArr){
-                if(i == 0) cal.set(Calendar.YEAR,Integer.parseInt(s));
-                else if(i == 1) cal.set(Calendar.MONTH,Integer.parseInt(s)-1);
-                else cal.set(Calendar.DATE,Integer.parseInt(s));
+            for (String s : strArr) {
+                if (i == 0) cal.set(Calendar.YEAR, Integer.parseInt(s));
+                else if (i == 1) cal.set(Calendar.MONTH, Integer.parseInt(s) - 1);
+                else cal.set(Calendar.DATE, Integer.parseInt(s));
                 i++;
             }
             CalendarDay day = CalendarDay.from(cal);
             dayList.add(day);
         }
-        calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor),dayList));
+        calendarView.addDecorator(new EventDecorator(Color.parseColor(spotColor), dayList));
     }
+
     @Override
     public void clickSuccess(List<Alarm> list) {
         alarmList.addAll(list);

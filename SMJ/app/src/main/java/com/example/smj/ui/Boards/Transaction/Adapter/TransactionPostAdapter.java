@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smj.R;
 import com.example.smj.domain.usecase.TransactionUseCase;
+import com.example.smj.ui.Boards.Transaction.CreatePhotoData;
 import com.example.smj.ui.Boards.Transaction.TransactionPostData;
 import com.example.smj.ui.Boards.Transaction.TransactionReadingActivity;
 
@@ -73,6 +74,7 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
 
         String date = getDate[0]+"-"+getDate[1]+"-"+getDate[2] + " " + getDate[3]+":"+getDate[4];
         //보드 메인페이지 첫번째 사진 설정
+
         if(!postData.get(position).getImageOne().equals("")){
             Bitmap mainImage = stringToBitmap(postData.get(position).getImageOne());
             holder.mainImage.setImageBitmap(mainImage);

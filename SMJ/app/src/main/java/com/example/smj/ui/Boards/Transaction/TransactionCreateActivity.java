@@ -43,7 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TransactionCreateActivity extends AppCompatActivity {
+public class TransactionCreateActivity extends AppCompatActivity{
 
     private Spinner spinner;
     private ImageButton galleryBtn;
@@ -56,9 +56,8 @@ public class TransactionCreateActivity extends AppCompatActivity {
     private TransactionUseCase transactionUseCase;
     private int selectSpinner;
     private Uri uri;
-    private String[] bitmapData;
-
     private static int PICK_IMAGE_REQUEST = 7;
+    private String[] bitmapData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +78,9 @@ public class TransactionCreateActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (title.getText().equals("") || content.getText().equals("")) {
+                if(title.getText().equals("")||content.getText().equals("")){
                     //임시 토스트
-                    Toast.makeText(getApplicationContext(), "제목이나 내용, 카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
-                } else {
+                    } else {
                     try {
                         bitmapData = bitmapToString(photoData);
                         transactionUseCase.postData(new boardPostData
@@ -148,20 +146,21 @@ public class TransactionCreateActivity extends AppCompatActivity {
                 ClipData clipData = data.getClipData();
 
                 //이미지 URI 를 이용하여 이미지뷰에 순서대로 세팅한다.
-                if (clipData != null) {//다중선택
+                if (clipData != null) { //다중
                     Log.d("getItemCount", Integer.toString(clipData.getItemCount()));
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri urione = clipData.getItemAt(i).getUri();
                         photoData.add(urione);
                     }
                     photoList.setVisibility(View.VISIBLE);
-                } else if (uri != null) {//단일선택
+                } else if (uri != null) { //단일
                     photoData.add(uri);
                     photoList.setVisibility(View.VISIBLE);
                 }
             }
         }
     }
+
     public String[] bitmapToString(ArrayList<Uri>photoData) throws IOException {
         String[] data = {"","",""};
         int size = photoData.size();

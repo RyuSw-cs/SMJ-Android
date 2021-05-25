@@ -36,7 +36,6 @@ public class LivingTipFragment extends Fragment {
     String key;
     EditText search;
     List<boardData> boardList;
-    Uri mainImage;
 
     public LivingTipFragment(){
     }
@@ -44,13 +43,14 @@ public class LivingTipFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
         View view = inflater.inflate(R.layout.activity_living_tip_main,container,false);
-        LivingTipUseCase livingTipUseCase = new LivingTipUseCase(this);
+        livingTipUseCase = new LivingTipUseCase(this);
         recyclerView = (RecyclerView) view.findViewById(R.id.living_tip_post_list);
         writeBtn = view.findViewById(R.id.write_btn);
         key = JWTManager.getSharedPreference(getActivity(),getString(R.string.saved_JWT));
         search = view.findViewById(R.id.trade_search_text);
 
         livingTipUseCase.getData(key);
+        Log.d("JWT",key);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +93,7 @@ public class LivingTipFragment extends Fragment {
     }
 
     public void onSuccess(List<boardData> list) {
+        data.clear();
         boardList = list;
         data.clear();
         for(boardData board : list){
