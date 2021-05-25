@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<LivingTipPostData> postData = null;
+    private ArrayList<LivingTipPostData> postData = new ArrayList<>();
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView category;
@@ -65,7 +65,6 @@ public class LivingTipPostAdapter extends RecyclerView.Adapter<LivingTipPostAdap
     public LivingTipPostAdapter(Context context, ArrayList<LivingTipPostData> data){
         this.context = context;
         postData = data;
-
     }
 
     @NonNull

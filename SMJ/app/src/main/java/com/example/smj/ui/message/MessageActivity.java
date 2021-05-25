@@ -26,8 +26,7 @@ public class MessageActivity extends AppCompatActivity {
 
         RecyclerView messageRecyclerView = findViewById(R.id.message_recycler_view);
 
-        LinearLayoutManager manager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
         messageRecyclerView.setLayoutManager(manager);
         messageRecyclerView.setAdapter(new MessageItemAdapter(item));

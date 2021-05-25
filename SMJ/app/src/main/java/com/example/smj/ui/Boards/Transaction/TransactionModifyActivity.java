@@ -89,10 +89,9 @@ public class TransactionModifyActivity extends AppCompatActivity {
                     //임시 토스트
                     Toast.makeText(getApplicationContext(), "제목이나 내용,카테고리를 작성해주세요", Toast.LENGTH_LONG).show();
                 } else {
-                    transactionUseCase.postData(new boardPostData
-                                    (selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "0", "0", "0"),
-                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)), getApplicationContext());
-
+                    Log.d("123",String.valueOf(transactionPostData.getId()));
+                    transactionUseCase.putData(new boardPostData(selectSpinner, "TRADE", title.getText().toString(), content.getText().toString(), "", "", ""),
+                            JWTManager.getSharedPreference(getApplicationContext(), getString(R.string.saved_JWT)),transactionPostData.getId(), getApplicationContext());
                 }
             }
         });

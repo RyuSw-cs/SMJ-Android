@@ -8,28 +8,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.RetrofitOnSuccess;
+import com.example.smj.domain.usecase.MessageUseCase;
 
 import java.util.ArrayList;
 
-public class MessageManagementActivity extends AppCompatActivity {
+public class MessageManagementActivity extends AppCompatActivity implements RetrofitOnSuccess {
 
-    ArrayList<MessageManagementData> item = new ArrayList<>();
+    private RecyclerView messageRecyclerView;
+    private LinearLayoutManager layoutManager;
+    private MessageUseCase messageUseCase;
+    private String token;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_management);
+        init();
+    }
 
-        item.add(new MessageManagementData("image","미당미당님","내일 점심","2시간전",1));
-        item.add(new MessageManagementData("image","미당미당님2","내일 점심2","3시간전",2));
-        RecyclerView messageRecyclerView = findViewById(R.id.message_management_list);
+    private void init(){
+        messageUseCase = new MessageUseCase(this);
+        token =  JWTManager.getSharedPreference(this,getString(R.string.saved_JWT));
+        messageUseCase.getData(token);
 
-        LinearLayoutManager manager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        messageRecyclerView = findViewById(R.id.message_management_list);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        messageRecyclerView.setLayoutManager(layoutManager);
+        //messageRecyclerView.setAdapter(new MessageManagementAdapter(this, item));
+    }
 
-        messageRecyclerView.setLayoutManager(manager);
-        messageRecyclerView.setAdapter(new MessageManagementAdapter(this, item));
+    @Override
+    public void onSuccess(Object object) {
 
     }
 }

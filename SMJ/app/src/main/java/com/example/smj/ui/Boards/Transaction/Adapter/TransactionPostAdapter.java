@@ -45,7 +45,6 @@ public class TransactionPostAdapter extends RecyclerView.Adapter<TransactionPost
             writer = itemView.findViewById(R.id.post_item_writer);
             date = itemView.findViewById(R.id.post_item_date);
             mainImage = itemView.findViewById(R.id.post_item_profile_image);
-
         }
     }
 

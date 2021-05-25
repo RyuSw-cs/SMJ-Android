@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +32,7 @@ import com.example.smj.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 
-public class TransactionReadingActivity extends AppCompatActivity{
+public class TransactionReadingActivity extends AppCompatActivity {
 
     private ImageButton moreBtn;
     private TransactionPostData data;
@@ -39,7 +43,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
     private String key;
     private ImageView message, comment;
 
-    public static ArrayList<Activity>activityStack = new ArrayList<>();
+    public static ArrayList<Activity> activityStack = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
         checkMyBoard();
     }
 
-    private void init(){
+    private void init() {
 
         Intent intent = getIntent();
 
@@ -74,13 +78,13 @@ public class TransactionReadingActivity extends AppCompatActivity{
         modifyBtn = (Button) moreView.findViewById(R.id.reading_modified);
 
         //표시할 값 객체로 받기
-        data = (TransactionPostData)intent.getSerializableExtra("data");
+        data = (TransactionPostData) intent.getSerializableExtra("data");
         category.setText(data.getCategory());
         title.setText(data.getTitle());
         writer.setText(data.getWriter());
-        String []getDate = data.getDate();
+        String[] getDate = data.getDate();
 
-        String dateInfo = getDate[0]+"년 "+getDate[1]+"월 "+getDate[2] + "일";
+        String dateInfo = getDate[0] + "년 " + getDate[1] + "월 " + getDate[2] + "일";
 
         date.setText(dateInfo);
 
@@ -97,7 +101,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TransactionCommentActivity.class);
-                intent.putExtra("id",data.getId());
+                intent.putExtra("id", data.getId());
                 startActivity(intent);
             }
         });
@@ -107,7 +111,7 @@ public class TransactionReadingActivity extends AppCompatActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transactionUseCase.deleteData(key, data.getId(),getApplicationContext());
+                transactionUseCase.deleteData(key, data.getId(), getApplicationContext());
             }
         });
 
@@ -115,26 +119,26 @@ public class TransactionReadingActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TransactionModifyActivity.class);
-                intent.putExtra("modifyData",data);
+                intent.putExtra("modifyData", data);
                 startActivity(intent);
             }
         });
         transactionUseCase.getMyData(key);
     }
 
-    public void showMoreView(){
+    public void showMoreView() {
         moreView.show();
     }
 
-    public void checkMyBoard(){
-        if(data.getMemberEmail().equals(LoginActivity.myEmail)){
+    public void checkMyBoard() {
+        if (data.getMemberEmail().equals(LoginActivity.myEmail)) {
             moreBtn.setVisibility(View.VISIBLE);
             moreBtn.setEnabled(true);
         }
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         moreView.dismiss();
     }

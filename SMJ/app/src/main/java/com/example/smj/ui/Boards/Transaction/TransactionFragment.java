@@ -98,30 +98,31 @@ public class TransactionFragment extends Fragment implements TransactionGetData 
     }
 
     @Override
-    public void onSuccess(List<boardData> list) {
+    public void onSuccess(List<boardData> getList) {
         data.clear();
         //list를 받았을때 값을 add, 리사이클러뷰에 뿌림
-        int getListSize = list.size();
+        int getListSize = getList.size();
         for(int i = 0; i<getListSize; i++) {
-            if(list.get(i).getType().equals("TRADE")) {
+            //유즈케이스에서 할것
+            if(getList.get(i).getType().equals("TRADE")) {
                 data.add(new TransactionPostData(
-                        list.get(i).getCategory().getName(),
-                        list.get(i).getTitle(),
-                        list.get(i).getContent(),
-                        list.get(i).getMember().getEmail(),
-                        list.get(i).getMember().getNickName(),
-                        list.get(i).getCreatedAt(),
-                        list.get(i).getMember().getImage(),
-                        list.get(i).getImageOne(),
-                        list.get(i).getImageTwo(),
-                        list.get(i).getImageThree(),
-                        list.get(i).getId()));
+                        getList.get(i).getCategory().getName(),
+                        getList.get(i).getTitle(),
+                        getList.get(i).getContent(),
+                        getList.get(i).getMember().getEmail(),
+                        getList.get(i).getMember().getNickName(),
+                        getList.get(i).getCreatedAt(),
+                        getList.get(i).getMember().getImage(),
+                        getList.get(i).getImageOne(),
+                        getList.get(i).getImageTwo(),
+                        getList.get(i).getImageThree(),
+                        getList.get(i).getId()));
             }
         }
         adapter = new TransactionPostAdapter(getActivity(), data, transactionUseCase);
-        adapter.adapterRefresh();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        adapter.adapterRefresh();
     }
     @Override
     public void onResume(){

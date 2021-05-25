@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MessageManagementAdapter extends RecyclerView.Adapter<MessageManagementAdapter.ViewHolder>{
 
-    private ArrayList<MessageManagementData> managementData = null;
+    //private ArrayList<MessageManagementData> managementData = null;
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
