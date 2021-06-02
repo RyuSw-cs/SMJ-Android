@@ -22,10 +22,12 @@ public class CommentsRepository {
     private Entity_Comments entityComments;
 
     public CommentsRepository() {
+        //레트로핏 객체 생성(서버통신을 할 준비)
        entityComments =  NetworkManager.getInstance().getRetrofit().create(Entity_Comments.class);
     }
 
     public void retrieveData(String key, int id, CommentsUseCase commentsUseCase){
+        //서버통신을 시작 ->
         Call <List<CommentData>> call = entityComments.getComments(key, id);
         call.enqueue(new Callback<List<CommentData>>() {
             @Override
