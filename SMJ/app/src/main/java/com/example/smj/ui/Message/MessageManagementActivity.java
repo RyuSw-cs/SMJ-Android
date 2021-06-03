@@ -26,6 +26,8 @@ public class MessageManagementActivity extends AppCompatActivity implements Retr
     private String token;
     private List<MessageData>dataList = new ArrayList<>();
 
+    private String[] test = {"333","33"};
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,9 @@ public class MessageManagementActivity extends AppCompatActivity implements Retr
     }
 
     private void init(){
+        //test
+        dataList.add(new MessageData(1,"123","22","33",test,true));
+
         messageUseCase = new MessageUseCase(this);
         token =  JWTManager.getSharedPreference(this,getString(R.string.saved_JWT));
         messageUseCase.getData(token);
@@ -41,6 +46,9 @@ public class MessageManagementActivity extends AppCompatActivity implements Retr
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         messageRecyclerView.setLayoutManager(layoutManager);
 
+        //test2
+        messageManagementAdapter = new MessageManagementAdapter(this, dataList);
+        messageRecyclerView.setAdapter(messageManagementAdapter);
     }
 
     @Override
