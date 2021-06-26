@@ -40,12 +40,8 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
                 Toast.makeText(this,"제목과 세부 내용을 입력하여 주십시오.", Toast.LENGTH_SHORT);
                 return;
             }
-            AlarmPostData alarm = new AlarmPostData(title.getText().toString(),content.getText().toString(),extractDate(),extractTime(startTime),extractTime(finishTime),extractRepeat());
-            ScheduleUseCase scheduleUseCase = new ScheduleUseCase(this);
-            //scheduleUseCase.sendData(alarm, JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)));
             Intent intent = new Intent(this, ScheduleAlarmModifiedPopupActivity.class);
-            Log.d("rtgtg", title.getText().toString());
-            if(title.getText().toString().equals("알림 등록")){
+            if(subject.getText().toString().equals("알림 등록")){
                 intent.putExtra("data", "1");
             }
             else{
@@ -61,7 +57,7 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
         alarmDelete.setOnClickListener((view) ->{
             Intent intent = new Intent(this, ScheduleAlarmDeletePopupActivity.class);
             intent.putExtra("data", "Test Popup");
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, 2);
         });
     }
     protected void init(){
@@ -131,7 +127,14 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 4) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                AlarmPostData alarm = new AlarmPostData(title.getText().toString(),content.getText().toString(),extractDate(),extractTime(startTime),extractTime(finishTime),extractRepeat());
+                ScheduleUseCase scheduleUseCase = new ScheduleUseCase(this);
+                scheduleUseCase.sendData(alarm, JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)));
+            }
+        }
+        else if (requestCode == 4) {
             if(resultCode == RESULT_OK){
                 int s = data.getIntExtra("iter",0);
                 switch (s){

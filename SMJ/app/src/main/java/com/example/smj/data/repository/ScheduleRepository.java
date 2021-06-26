@@ -97,6 +97,7 @@ public class ScheduleRepository {
                 if(response.isSuccessful()){
                     //알람 가져오기 성공
                     localList = response.body();
+                    Log.d("알람 가져오기 성공", "onResponse: ");
                     scheduleUseCase.retrieveSuccess(localList);
                 }
             }

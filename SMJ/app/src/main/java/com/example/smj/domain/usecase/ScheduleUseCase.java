@@ -76,4 +76,5 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
             scheduleAlarmListPopupActivity.clickSuccess(list);
         }
     }
+
 }

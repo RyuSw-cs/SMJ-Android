@@ -44,7 +44,6 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
         init();
         clickEvent();
         getData();
-        getDataFromServer();
 
     }
     protected void init(){
@@ -99,10 +98,12 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
         convertDatetoServerFormat(strArr[2], sb);
         dateKey = sb.substring(0,sb.length()-1);
         scheduleUseCase.sendKeyDate(JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)), dateKey);
+
     }
     @Override
     public void clickSuccess(List<Alarm> list) {
         this.list.addAll(list);
+        Log.d("리스ㅡㅌ", this.list.get(0).getTitle());
         setRecyclerView();
     }
     public void convertDatetoServerFormat(String date, StringBuilder sb){
@@ -120,6 +121,6 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
     @Override
     protected void onResume() {
         super.onResume();
-       // getDataFromServer();
+        getDataFromServer();
     }
 }
