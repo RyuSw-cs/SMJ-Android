@@ -44,7 +44,7 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
         init();
         clickEvent();
         getData();
-
+        getDataFromServer();
     }
     protected void init(){
         fab = findViewById(R.id.schedule_popup_fab);
@@ -56,7 +56,6 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
          fab.setOnClickListener((view) ->{
              Intent intent = new Intent(this, ScheduleAlarmPageActivity.class);
              String[] alarmCreateData = {"0",dateKey};
-             Log.d("머얌", dateKey);
              intent.putExtra("data", alarmCreateData);
              startActivityForResult(intent, 1);
          });
@@ -103,7 +102,6 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
     @Override
     public void clickSuccess(List<Alarm> list) {
         this.list.addAll(list);
-        Log.d("리스ㅡㅌ", this.list.get(0).getTitle());
         setRecyclerView();
     }
     public void convertDatetoServerFormat(String date, StringBuilder sb){
@@ -121,6 +119,6 @@ public class ScheduleAlarmListPopupActivity extends Activity implements Schedule
     @Override
     protected void onResume() {
         super.onResume();
-        getDataFromServer();
+
     }
 }

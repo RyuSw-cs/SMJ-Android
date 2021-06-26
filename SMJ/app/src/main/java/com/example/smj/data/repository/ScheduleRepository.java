@@ -49,7 +49,7 @@ public class ScheduleRepository {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("데이터 전송 성공","굿");
+                Log.d("삭제 성공","굿");
             }
 
             @Override
@@ -59,7 +59,7 @@ public class ScheduleRepository {
         });
     }
 
-    public void putData(Alarm data, String key, String id){
+    public void putData(AlarmPostData data, String key, String id){
         Call<Alarm>call = entitySchedule.putAlarm(key, data, id);
         call.enqueue(new Callback<Alarm>() {
             @Override
@@ -97,7 +97,6 @@ public class ScheduleRepository {
                 if(response.isSuccessful()){
                     //알람 가져오기 성공
                     localList = response.body();
-                    Log.d("알람 가져오기 성공", "onResponse: ");
                     scheduleUseCase.retrieveSuccess(localList);
                 }
             }
@@ -108,4 +107,5 @@ public class ScheduleRepository {
             }
         });
     }
+
 }
