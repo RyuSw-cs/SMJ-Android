@@ -21,6 +21,7 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
     private ScheduleAlarmListPopupActivity scheduleAlarmListPopupActivity;
     private ScheduleAlarmPageActivity scheduleAlarmPageActivity;
     private List<Alarm> list = new ArrayList<>();
+    private Alarm alarm;
 
     public ScheduleUseCase(ScheduleFragment scheduleFragment){
         scheduleRepository = new ScheduleRepository();
@@ -60,6 +61,10 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
         //키값 전달
         scheduleRepository.retrieveDateLocals(key, startDate,this);
     }
+    public void sendIdDate(String key,String id){
+        //키값 전달
+        scheduleRepository.retrieveIdLocals(key,id,this);
+    }
 
     @Override
     public void onSuccess(Object object) {
@@ -77,4 +82,11 @@ public class ScheduleUseCase implements RetrofitOnSuccess, ScheduleOnSuccess {
         }
     }
 
+    @Override
+    public void retrieveIdSuccess(Object object) {
+        if(object != null){
+            scheduleAlarmPageActivity.retrieveSuccess((Alarm)object);
+
+        }
+    }
 }

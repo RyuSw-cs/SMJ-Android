@@ -17,10 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smj.Manager.JWTManager;
 import com.example.smj.R;
+import com.example.smj.callback.SchedulePageGetData;
 import com.example.smj.data.entity.Schedule.Alarm;
 import com.example.smj.domain.usecase.ScheduleUseCase;
 
-public class ScheduleAlarmPageActivity extends AppCompatActivity {
+public class ScheduleAlarmPageActivity extends AppCompatActivity implements SchedulePageGetData {
     private ViewGroup alarmDelete, alarmIter, timerClick1, timerClick2;
     private TextView subject,submitModified;
     private TextView today, startTime,finishTime, repeat,delete;
@@ -125,13 +126,12 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
             subject.setText("알림 수정");
             submitModified.setText("수정");
             id = data[2];
-
-
-
-
+            ScheduleUseCase scheduleUseCase = new ScheduleUseCase(this);
+            scheduleUseCase.sendIdDate(JWTManager.getSharedPreference(this,getString(R.string.saved_JWT)),id);
         }
         dateKey = data[1];
         today.setText(dateKey.replace("-","."));
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -209,5 +209,37 @@ public class ScheduleAlarmPageActivity extends AppCompatActivity {
                 break;
         }
         return rString;
+    }
+    public String transformRepeat(String s){
+        String rString = "";
+        switch (s){
+            case "DAILY":
+                rString = "매일 반복";
+                break;
+            case "MONTHLY":
+                rString = "매달 반복";
+                break;
+            case "YEARLY":
+                rString = "매년 반복";
+                break;
+        }
+        return rString;
+    }
+    public  StringBuilder transformTime(String s){
+        String strArr[] = s.split(":");
+        StringBuilder sb = new StringBuilder();
+        if (Integer.parseInt(strArr[0]) < 12) sb.append("AM ");
+        else sb.append("PM ");
+        sb.append(strArr[0]).append(":").append(strArr[1]);
+        return sb;
+    }
+    @Override
+    public void retrieveSuccess(Alarm alarm) {
+          title.setText(alarm.getTitle());
+          content.setText(alarm.getContent());
+          today.setText(alarm.getstartDate().replace("-","."));
+          startTime.setText(transformTime(alarm.getStartTime()));
+          finishTime.setText(transformTime(alarm.getEndTime()));
+          repeat.setText(transformRepeat(alarm.getRepeat()));
     }
 }

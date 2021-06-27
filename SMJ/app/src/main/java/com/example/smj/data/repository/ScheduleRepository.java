@@ -107,5 +107,21 @@ public class ScheduleRepository {
             }
         });
     }
+    public void retrieveIdLocals(String key, String id, ScheduleUseCase scheduleUseCase){
+        Call <Alarm> call = entitySchedule.getIdAlarm(key,id);
+        call.enqueue(new Callback<Alarm>() {
+            @Override
+            public void onResponse(Call<Alarm> call, Response<Alarm> response) {
+                if(response.isSuccessful()){
+                        scheduleUseCase.retrieveIdSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Alarm> call, Throwable t) {
+                Log.d("데이터 전송 실패",";;");
+            }
+        });
+    }
 
 }
